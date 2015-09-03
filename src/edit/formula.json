@@ -1,0 +1,91 @@
+{
+  "fieldsets": [
+    {
+      "title": "Expedition",
+      "fields": [
+        {
+          "id": "title"
+        },
+        "progress",
+        "draft",
+        "licences",
+        "released"
+      ]
+    },
+    {
+      "title": "Texts",
+      "fields": [
+        {
+          "id": "summary",
+          "type": "textarea"
+        },
+        "rights",
+        "restrictions",
+        "quality",
+        "citation",
+        "comment"
+      ]
+    },
+    {
+      "title": "Links",
+      "fields": [
+        {
+          "id": "links"
+        }
+      ]
+    },
+    {
+      "title": "Classification",
+      "fields": [
+        "sets",
+        {
+          "id": "topicis"
+        },
+        "iso_topics",
+        "tags"
+      ]
+    },
+    {
+      "title": "Coverage",
+      "fields": [
+        "activity",
+        "coverage",
+        "placenames"
+      ]
+    },
+    {
+      "title": "People",
+      "fields": [
+        {
+          "id": "people"
+        }
+      ]
+    },
+    {
+      "title": "Organisations",
+      "fields": [
+        {
+          "id": "organisations"
+        }
+      ]
+    },
+    {
+      "title": "GCMD",
+      "fields": [
+        {
+          "id": "gcmd"
+        }
+      ]
+    },
+    {
+      "title": "Edits",
+      "fields": [
+        "created",
+        "created_by",
+        "updated",
+        "updated_by",
+        "changes"
+      ]
+    }
+  ]
+}
