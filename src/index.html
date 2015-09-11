@@ -7,16 +7,20 @@
 	<title>Expedition</title>
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://rawgit.com/npolar/npdc-material/master/dist/npdc-ui.css" rel="stylesheet">
-	<link href="assets/formula/dist/formula.min.css " rel="stylesheet">
-	
+  <link href="/assets/npdc-common-master-latest.css" rel="stylesheet">
+
 	<script>var VERSION = '<!-- @echo VERSION -->'; console.log("npdc-expedition version:", VERSION)</script>
-	
+
 </head>
 <body>
-	<npdc:top></npdc:top>
-  <div ng-view layout-padding></div>
+	<div class="np-page-container">
+		<npdc:top class="np-header"></npdc:top>
+		<div class="np-content">
+			<npdc:crumbs></npdc:crumbs>
+  		<div ng-view></div>
+		</div>
+	</div>
 	<script src="app.js"></script>
-	
+
 </body>
 </html>

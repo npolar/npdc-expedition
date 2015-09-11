@@ -38,6 +38,6 @@ npdcExpeditionApp.config($httpProvider => {
 // Inject npolarApiConfig and run
 npdcExpeditionApp.run(npolarApiConfig => {
   var autoconfig = new AutoConfig(environment);
-  angular.extend(npolarApiConfig, autoconfig, { resources, formula : { template : 'default' } });
+  angular.extend(npolarApiConfig, autoconfig, { resources, formula : { template : 'material' } });
   console.log("npolarApiConfig", npolarApiConfig);
 });
