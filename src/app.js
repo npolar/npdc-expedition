@@ -1,6 +1,5 @@
 'use strict';
 
-var environment = require('../environment');
 var npdcCommon = require('npdc-common');
 var AutoConfig = npdcCommon.AutoConfig;
 
@@ -36,8 +35,13 @@ npdcExpeditionApp.config($httpProvider => {
 });
 
 // Inject npolarApiConfig and run
-npdcExpeditionApp.run(npolarApiConfig => {
+npdcExpeditionApp.run(function(npolarApiConfig, npdcAppConfig){
+  var environment = "production";
   var autoconfig = new AutoConfig(environment);
-  angular.extend(npolarApiConfig, autoconfig, { resources, formula : { template : 'material' } });
+  angular.extend(npolarApiConfig, autoconfig);
+
+  npdcAppConfig.cardTitle = '';
+  npdcAppConfig.toolbarTitle = 'Expedition Archive';
+
   console.log("npolarApiConfig", npolarApiConfig);
 });
