@@ -16,7 +16,7 @@ var ExpeditionSearchController = function ($scope, $location, $controller, Exped
     return angular.extend(defaults, $location.search(), invariants);
   };
 
-  npdcAppConfig.cardTitle = "Expeditions";
+  npdcAppConfig.cardTitle = "Expedition Archive";
   $scope.search(query());
 
   npdcAppConfig.search.results = {
