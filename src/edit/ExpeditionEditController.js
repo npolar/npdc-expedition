@@ -13,8 +13,8 @@ var ExpeditionEditController = function ($scope, $controller, $routeParams, Expe
 
   // Formula ($scope.formula is set by parent)
   $scope.formula.schema = '//api.npolar.no/schema/expedition';
-  //$scope.formula.form = 'edit/formula.json';
-  
+  $scope.formula.form = 'edit/formula.json';
+
   // edit (or new) action
   $scope.edit();
 
