@@ -1,27 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="npdcExpeditionApp" ng-cloak>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<base href="/expedition/"/>
-	<title>Expedition</title>
+<html lang="en" ng-app="npdcExpeditionApp" ng-cloak ng-strict-di>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/expedition/"/>
+    <title>Expedition</title>
 
-	<link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="/assets/npdc-common-master-latest.css" rel="stylesheet">
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/assets/npdc-common-master-latest.css" rel="stylesheet">
 
-	<script>var VERSION = '<!-- @echo VERSION -->'; console.log("npdc-expedition version:", VERSION)</script>
+    <script>var VERSION = '<!-- @echo VERSION -->'; console.log("npdc-expedition version:", VERSION)</script>
 
-</head>
-<body>
-	<div class="np-page-container">
-		<npdc:top class="np-header"></npdc:top>
-		<div class="np-content">
-			<npdc:crumbs></npdc:crumbs>
-  		<div ng-view></div>
-		</div>
-	</div>
-	<script src="app.js"></script>
-
-</body>
+  </head>
+  <body>
+    <npdc:app></npdc:app>
+    <script src="app.js"></script>
+  </body>
 </html>
