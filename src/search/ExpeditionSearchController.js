@@ -19,7 +19,7 @@ var ExpeditionSearchController = function ($scope, $location, $controller, Exped
   npdcAppConfig.cardTitle = "Expedition Archive";
   $scope.search(query());
 
-  npdcAppConfig.search.results = {
+  npdcAppConfig.search.local.results = {
     subtitle: "type"
   };
 
