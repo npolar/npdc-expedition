@@ -13,8 +13,9 @@ var router = function ($routeProvider, $locationProvider) {
     template: '<npdc:formula></npdc:formula>',
     controller: 'ExpeditionEditController'
   }).when('/', {
-    template: '<npdc:search></npdc:search>',
-    controller: 'ExpeditionSearchController'
+    template: '<npdc:search-input feed="feed"></npdc:search-input><npdc:search feed="feed"></npdc:search>',
+    controller: 'ExpeditionSearchController',
+    reloadOnSearch: false
   });
 };
 
