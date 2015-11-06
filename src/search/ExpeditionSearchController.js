@@ -1,5 +1,4 @@
 'use strict';
-var angular = require('angular');
 /**
  * @ngInject
  */
@@ -27,7 +26,7 @@ var ExpeditionSearchController = function ($scope, $location, $controller, Exped
     let defaults = { limit: "all", sort: "-updated", fields: 'code,id,updated,type,activity.departed',
       'date-year': 'activity.departed', facets: 'tags,people.email,updated,locations.area' };
     let invariants = $scope.security.isAuthenticated() ? {} : {} ;
-    return angular.extend(defaults, $location.search(), invariants);
+    return Object.assign({}, defaults, $location.search(), invariants);
   };
 
   $scope.search(query());
