@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <npdc:edit-button class="np-primary-control"></npdc:edit-button>
+<npdc:loader ng-if="!document"></npdc:loader>
 
-<div class="np-padding">
+<div ng-if="document" class="np-padding">
   <npdc-document:meta></npdc-document:meta>
 
   <h3>Abstract</h3>
