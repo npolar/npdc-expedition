@@ -4,11 +4,8 @@ var npdcCommon = require('npdc-common');
 var AutoConfig = npdcCommon.AutoConfig;
 
 var angular = require('angular');
-require('formula');
-require('angular-route');
-require('angular-npolar');
 
-var npdcExpeditionApp = angular.module('npdcExpeditionApp', ['ngRoute', 'formula', 'npolarApi', 'npolarUi', 'npdcUi', 'templates']);
+var npdcExpeditionApp = angular.module('npdcExpeditionApp', ['npdcUi']);
 
 npdcExpeditionApp.controller('ExpeditionShowController', require('./show/ExpeditionShowController'));
 npdcExpeditionApp.controller('ExpeditionSearchController', require('./search/ExpeditionSearchController'));
