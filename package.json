@@ -11,19 +11,11 @@
   "private": true,
   "repository": "https://github.com/npolar/npdc-expedition",
   "dependencies": {
-    "angular": "1.4.5",
-    "angular-npolar": "npolar/angular-npolar",
-    "angular-route": "1.4.5",
-    "formula": "npolar/formula",
-    "lodash": "^3.10.0",
-    "npdc-common": "npolar/npdc-common",
-    "purecss": "^0.6.0",
-    "chronopic": "npolar/chronopic.js",
-    "tv4": "^1.1.12"
+    "angular": "1.4.7",
+    "npdc-common": "npolar/npdc-common"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
-    "gulp-debug": "^2.0.1",
     "should": "^7.0.2",
     "npdc-gulp": "npolar/npdc-gulp",
     "babelify": "^6.2.0",
