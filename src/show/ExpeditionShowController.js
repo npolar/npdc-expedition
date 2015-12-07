@@ -4,11 +4,10 @@
  *
  * @ngInject
  */
-var ExpeditionShowController = function ($scope, $controller, $routeParams, Expedition, NpolarApiSecurity, npdcAppConfig) {
+var ExpeditionShowController = function ($scope, $controller, Expedition, npdcAppConfig) {
 
   $controller('NpolarBaseController', {$scope: $scope});
   $scope.resource = Expedition;
-  $scope.security = NpolarApiSecurity;
   $scope.show();
 
   $scope.show().$promise.then(data => {

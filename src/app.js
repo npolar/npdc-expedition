@@ -5,7 +5,7 @@ var AutoConfig = npdcCommon.AutoConfig;
 
 var angular = require('angular');
 
-var npdcExpeditionApp = angular.module('npdcExpeditionApp', ['npdcUi']);
+var npdcExpeditionApp = angular.module('npdcExpeditionApp', ['npdcCommon']);
 
 npdcExpeditionApp.controller('ExpeditionShowController', require('./show/ExpeditionShowController'));
 npdcExpeditionApp.controller('ExpeditionSearchController', require('./search/ExpeditionSearchController'));
