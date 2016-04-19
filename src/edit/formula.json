@@ -3,88 +3,116 @@
     {
       "title": "Expedition",
       "fields": [
-        {
-          "id": "title"
+         {
+          "id": "code",
+          "title":"expedition name"
         },
+         {
+          "id": "type",
+          "title":"type of expedition"
+        },
+         {
+          "id": "research_type",
+          "title":"research or not"
+        },
+         "summary",
         "progress",
-        "draft",
-        "licences",
-        "released"
+         "platforms"
       ]
     },
-    {
-      "title": "Texts",
+     {
+      "title": "Research",
       "fields": [
-        {
-          "id": "summary",
-          "type": "textarea"
+          {
+          "id": "title",
+          "title":"project research title"
         },
-        "rights",
-        "restrictions",
-        "quality",
-        "citation",
-        "comment"
+         "topics"
       ]
     },
+     {
+    "title": "People",
+    "fields": [{
+      "id": "people",
+      "items": {
+        "fields": [
+          "!id",
+          "!required"
+        ]
+       }
+      }]
+    },
+     {
+    "title": "Activity",
+    "fields": [{
+      "id": "activity",
+      "items": {
+        "fields": [
+          "departure_placename",
+          "departure_country",
+          "departure_predefined_areas",
+          "return_placename",
+          "return_country",
+          "return_predefined_areas"
+        ]
+       }
+      }]
+    },
     {
+    "title": "Locations",
+    "fields": [{
+      "id": "locations",
+      "items": {
+        "fields": [
+          "field_camp",
+          "operation_area",
+          "hemisphere",
+          "area",
+          "country",
+          "placename",
+          "predefined_area"
+        ]
+       }
+      }]
+    },
+    {
+      "title": "Cruise",
+      "fields": [
+         "cruise_id",
+         "sponsor",
+         "ship_name",
+         "sailed_distance",
+         "fuel_main_engine",
+         "fuel_auxillary_engine",
+         "fuel_boiler"
+      ]
+    },
+     {
       "title": "Links",
       "fields": [
-        {
-          "id": "links"
-        }
-      ]
-    },
-    {
-      "title": "Classification",
-      "fields": [
-        "sets",
-        {
-          "id": "topicis"
+            {
+          "id": "rel",
+          "title":"type of link"
         },
-        "iso_topics",
-        "tags"
-      ]
-    },
-    {
-      "title": "Coverage",
-      "fields": [
-        "activity",
-        "coverage",
-        "placenames"
-      ]
-    },
-    {
-      "title": "People",
-      "fields": [
+         {
+          "id": "href",
+          "title":"the link including protocol"
+        },
         {
-          "id": "people"
-        }
-      ]
-    },
-    {
-      "title": "Organisations",
-      "fields": [
-        {
-          "id": "organisations"
-        }
-      ]
-    },
-    {
-      "title": "GCMD",
-      "fields": [
-        {
-          "id": "gcmd"
+          "id": "title",
+          "title":"link title"
         }
       ]
     },
     {
       "title": "Edits",
       "fields": [
+       "draft",
+       "comment",
         "created",
         "created_by",
         "updated",
-        "updated_by",
-        "changes"
+        "updated_by"
       ]
     }
   ]

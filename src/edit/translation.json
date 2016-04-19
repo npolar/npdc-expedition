@@ -3,37 +3,60 @@
 
 
 	"fields": {
-		"category": {
-			"title": "category",
-			"description": "category",
+		"topics": {
+			"title": "topics",
+			"description": "topics",
+				"values": [  "atmosphere",
+			          "biology",
+			          "biochemistry",
+			          "biodiversity",
+			          "chemistry",
+			          "climate",
+			          "conservation",
+			          "ecology",
+			          "ecotoxicology",
+			          "environment",
+			          "geology",
+			          "geophysics",
+			          "glaciology",
+			          "history",
+			          "human-dimension",
+			          "management",
+			          "marine",
+			          "marineecosystems",
+			          "maps",
+			          "oceanography",
+			          "other",
+			          "paleoclimate",
+			          "remote-sensing",
+			          "seaice",
+			          "snow",
+			          "terrestrial",
+			          "topography",
+			          "vegetation"
+						]
+					},
+	    "research_type": {
+			"title": "research or not?",
+			"description": "research or not",
 						"values": [
-						    "unknown",
-							"airstrip",
-							"building",
-							"contamination",
-							"cultural heritage",
-							"data collection",
-							"depot",
-							"field hut",
-							"heliport",
-							"operational activity",
-							"other",
 							"research monitoring",
 							"research project",
-							"research station"
+							"not research"
 						]
 					},
     "people": {
 			"title": "people",
-			"description": "contact persons",
 			"items": {
 				"fields": {
 					"role": {
-						"title": "role",
+						"title": "roles",
 						"values": [
-							"leader",
-							"participant",
-							"observer"
+							"expedition leader",
+							"field assistant",
+							"principal investigator",
+							"technitian",
+							"contact person"
 						]
 					}
               }

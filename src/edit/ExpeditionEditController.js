@@ -14,7 +14,7 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
   $scope.resource = Expedition;
 
   let formulaOptions = {
-    schema: '//api.npolar.no/schema/expedition',
+    schema: '//api.npolar.no/schema/expedition-1',
     form: 'edit/formula.json',
     templates: npdcAppConfig.formula.templates.concat([{
       match(field) {
