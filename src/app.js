@@ -33,7 +33,7 @@ npdcExpeditionApp.config($httpProvider => {
 
 // Inject npolarApiConfig and run
 npdcExpeditionApp.run(function(npolarApiConfig, npdcAppConfig){
-  var environment = "production";
+  var environment = "test";
   var autoconfig = new AutoConfig(environment);
   angular.extend(npolarApiConfig, autoconfig);
 

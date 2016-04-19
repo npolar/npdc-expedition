@@ -1,0 +1,82 @@
+{
+	"iso639-3": "eng",
+
+
+	"fields": {
+		"category": {
+			"title": "category",
+			"description": "category",
+						"values": [
+						    "unknown",
+							"airstrip",
+							"building",
+							"contamination",
+							"cultural heritage",
+							"data collection",
+							"depot",
+							"field hut",
+							"heliport",
+							"operational activity",
+							"other",
+							"research monitoring",
+							"research project",
+							"research station"
+						]
+					},
+    "people": {
+			"title": "people",
+			"description": "contact persons",
+			"items": {
+				"fields": {
+					"role": {
+						"title": "role",
+						"values": [
+							"leader",
+							"participant",
+							"observer"
+						]
+					}
+              }
+			}
+		},
+		"links": {
+			"title": "links",
+			"description": "links",
+			"items": {
+				"fields": {
+					"rel": {
+						"title": "relation to link",
+						"values": [
+							"service",
+							"project",
+							"publication",
+							"datacentre",
+							"parent"
+						]
+					}
+				}
+
+			}
+		},
+		"locations": {
+			"title": "locations",
+			"description": "locations descr",
+			"items": {
+				"fields": {
+					"gps": {
+						"title": "gps"
+					},
+					"place": {
+						"title": "place",
+						"values": [
+							"Troll",
+							"Tor",
+							"Shelf and traverse"
+						]
+					}
+				}
+
+			}
+		}
+	}
+}
