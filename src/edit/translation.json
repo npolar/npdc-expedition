@@ -49,7 +49,7 @@
 			"title": "people",
 			"items": {
 				"fields": {
-					"role": {
+					"roles": {
 						"title": "roles",
 						"values": [
 							"expedition leader",
@@ -75,26 +75,6 @@
 							"publication",
 							"datacentre",
 							"parent"
-						]
-					}
-				}
-
-			}
-		},
-		"locations": {
-			"title": "locations",
-			"description": "locations descr",
-			"items": {
-				"fields": {
-					"gps": {
-						"title": "gps"
-					},
-					"place": {
-						"title": "place",
-						"values": [
-							"Troll",
-							"Tor",
-							"Shelf and traverse"
 						]
 					}
 				}

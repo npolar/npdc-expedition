@@ -3,112 +3,126 @@
     {
       "title": "Expedition",
       "fields": [
-         {
+        {
           "id": "code",
-          "title":"expedition name"
+          "title": "expedition name"
         },
-         {
+        {
           "id": "type",
-          "title":"type of expedition"
+          "title": "type of expedition"
         },
-         {
+        {
           "id": "research_type",
-          "title":"research or not"
+          "title": "research or not"
         },
-         "summary",
+        "summary",
         "progress",
-         "platforms"
-      ]
-    },
-     {
+        {
+        "id": "platforms",
+        "items": {
+          "fields": [
+            "type",
+            {
+          "id": "name",
+          "title": "vessel name"
+        }
+          ]
+        }
+      }
+      ]},
+
+      {
       "title": "Research",
       "fields": [
-          {
-          "id": "title",
-          "title":"project research title"
+        {
+          "id": "research_title",
+          "title": "project research title"
         },
-         "topics"
+        "topics"
       ]
     },
-     {
-    "title": "People",
-    "fields": [{
-      "id": "people",
-      "items": {
-        "fields": [
-          "!id",
-          "!required"
-        ]
-       }
-      }]
-    },
-     {
-    "title": "Activity",
-    "fields": [{
-      "id": "activity",
-      "items": {
-        "fields": [
-          "departure_placename",
-          "departure_country",
-          "departure_predefined_areas",
-          "return_placename",
-          "return_country",
-          "return_predefined_areas"
-        ]
-       }
+    {
+      "title": "People",
+      "fields": [{
+        "id": "people",
+        "items": {
+          "fields": [
+            "!id",
+            "!required"
+          ]
+        }
       }]
     },
     {
-    "title": "Locations",
-    "fields": [{
-      "id": "locations",
-      "items": {
-        "fields": [
-          "field_camp",
-          "operation_area",
-          "hemisphere",
-          "area",
-          "country",
-          "placename",
-          "predefined_area"
-        ]
-       }
+      "title": "Activity",
+      "fields": [{
+        "id": "activity",
+        "items": {
+          "fields": [
+            "departure_placename",
+            "departure_country",
+            "departure_predefined_areas",
+            "return_placename",
+            "return_country",
+            "return_predefined_areas"
+          ]
+        }
+      }]
+    },
+    {
+      "title": "Locations",
+      "fields": [{
+        "id": "locations",
+        "items": {
+          "fields": [
+            "field_camp",
+            "operation_area",
+            "hemisphere",
+            "area",
+            "country",
+            "placename",
+            "predefined_area"
+          ]
+        }
       }]
     },
     {
       "title": "Cruise",
       "fields": [
-         "cruise_id",
-         "sponsor",
-         "ship_name",
-         "sailed_distance",
-         "fuel_main_engine",
-         "fuel_auxillary_engine",
-         "fuel_boiler"
+        {
+          "id": "cruise_id",
+          "title": "cruise identificator"
+        },
+        "sponsor",
+        "ship_name",
+        "sailed_distance",
+        "fuel_main_engine",
+        "fuel_auxillary_engine",
+        "fuel_boiler"
       ]
     },
-     {
+    {
       "title": "Links",
       "fields": [
-            {
+        {
           "id": "rel",
-          "title":"type of link"
+          "title": "type of link"
         },
-         {
+        {
           "id": "href",
-          "title":"the link including protocol"
+          "title": "the link including protocol"
         },
         {
           "id": "title",
-          "title":"link title"
+          "title": "link title"
         }
       ]
     },
     {
       "title": "Edits",
       "fields": [
-       "draft",
-       "comment",
+        "draft",
+        "comment",
         "created",
         "created_by",
         "updated",
