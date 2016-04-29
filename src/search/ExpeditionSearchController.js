@@ -2,14 +2,19 @@
 /**
  * @ngInject
  */
-var ExpeditionSearchController = function ($scope, $location, $controller, Expedition, npdcAppConfig) {
+var ExpeditionSearchController = function ($filter, $scope, $location, $controller, Expedition, npdcAppConfig) {
 
   $controller('NpolarBaseController', { $scope: $scope });
   $scope.resource = Expedition;
 
-  npdcAppConfig.search.local.results.detail = (e) => {
-    return "Activity start: " + e.activity[0].departed.split('T')[0];
-   };
+
+ npdcAppConfig.search.local.results.detail = (entry) => {
+    // let r = (entry.type).charAt(0).toUpperCase() +  (entry.type).slice(1) +
+     let r = "Last updated: ";
+     console.log(r);
+     return r+` ${$filter('date')(entry.updated)}`;
+ };
+
 
   npdcAppConfig.cardTitle = "Expedition Archive";
   npdcAppConfig.search.local.results.subtitle = "type";

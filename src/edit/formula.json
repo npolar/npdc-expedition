@@ -11,12 +11,7 @@
           "id": "type",
           "title": "type of expedition"
         },
-        {
-          "id": "research_type",
-          "title": "research or not"
-        },
         "summary",
-        "progress",
         {
         "id": "platforms",
         "items": {
@@ -29,31 +24,69 @@
           ]
         }
       }
-      ]},
-
-      {
-      "title": "Research",
-      "fields": [
-        {
-          "id": "research_title",
-          "title": "project research title"
-        },
-        "topics"
       ]
     },
     {
+      "title": "Research",
+      "fields": [{
+        "id": "research",
+        "items": {
+          "fields": [
+             {
+          "id": "research_title",
+          "title": "project research title"
+        },
+        {
+          "id": "research_type",
+          "title": "research or not"
+        },
+        "topics"
+          ]
+        }
+      }]
+    },
+     {
       "title": "People",
       "fields": [{
         "id": "people",
         "items": {
           "fields": [
-            "!id",
-            "!required"
+             "!id",
+             {
+          "id": "first_name",
+          "title": "first name"
+        },
+        {
+          "id": "last_name",
+          "title": "last name"
+        },
+        "organisation",
+        "country",
+        "roles",
+        {
+      "title": "expedition dates",
+      "fields": [{
+        "id": "expedition_dates",
+        "items": {
+          "fields": [
+               {
+          "id": "start_date",
+          "title": "start date"
+        },
+        {
+          "id": "end_date",
+          "title": "end date"
+        }
+
+          ]
+        }
+      }]
+    }
           ]
         }
       }]
     },
-    {
+     {
       "title": "Activity",
       "fields": [{
         "id": "activity",
@@ -69,7 +102,7 @@
         }
       }]
     },
-    {
+     {
       "title": "Locations",
       "fields": [{
         "id": "locations",
@@ -77,6 +110,7 @@
           "fields": [
             "field_camp",
             "operation_area",
+            "location_dates",
             "hemisphere",
             "area",
             "country",
@@ -84,7 +118,8 @@
             "predefined_area"
           ]
         }
-      }]
+      }
+      ]
     },
     {
       "title": "Cruise",
@@ -93,8 +128,10 @@
           "id": "cruise_id",
           "title": "cruise identificator"
         },
-        "sponsor",
-        "ship_name",
+        {
+          "id": "sponsor",
+          "title": "operator"
+        },
         "sailed_distance",
         "fuel_main_engine",
         "fuel_auxillary_engine",
@@ -103,11 +140,17 @@
     },
     {
       "title": "Links",
-      "fields": [
-        {
+      "fields": [{
+        "id": "links",
+        "items": {
+          "fields": [
+             {
           "id": "rel",
           "title": "type of link"
         },
+        "!hreflang",
+        "!type",
+        "!length",
         {
           "id": "href",
           "title": "the link including protocol"
@@ -116,7 +159,9 @@
           "id": "title",
           "title": "link title"
         }
-      ]
+          ]
+        }
+      }]
     },
     {
       "title": "Edits",

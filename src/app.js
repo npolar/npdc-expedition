@@ -13,7 +13,7 @@ npdcExpeditionApp.controller('ExpeditionEditController', require('./edit/Expedit
 
 // Bootstrap ngResource models using NpolarApiResource
 var resources = [
-  {'path': '/expedition', 'resource': 'Expedition'},
+  {'path': '/expedition', 'resource': 'Expedition'}
 ];
 
 resources.forEach(service => {
