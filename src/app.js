@@ -11,8 +11,15 @@ npdcExpeditionApp.controller('ExpeditionShowController', require('./show/Expedit
 npdcExpeditionApp.controller('ExpeditionSearchController', require('./search/ExpeditionSearchController'));
 npdcExpeditionApp.controller('ExpeditionEditController', require('./edit/ExpeditionEditController'));
 
+
 // Bootstrap ngResource models using NpolarApiResource
 var resources = [
+  {'path': '/', 'resource': 'NpolarApi'},
+  {'path': '/user', 'resource': 'User'},
+  {'path': '/dataset', 'resource': 'Dataset' },
+  {'path': '/publication', 'resource': 'Publication' },
+  {'path': '/project', 'resource': 'Project' },
+  {'path': '/inventory', 'resource': 'Inventory'},
   {'path': '/expedition', 'resource': 'Expedition'}
 ];
 

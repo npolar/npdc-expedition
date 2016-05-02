@@ -27,14 +27,14 @@
       ]
     },
     {
-      "title": "Research",
+      "title": "Activities",
       "fields": [{
         "id": "research",
         "items": {
           "fields": [
              {
           "id": "research_title",
-          "title": "project research title"
+          "title": "research title or activity description"
         },
         {
           "id": "research_type",
@@ -87,7 +87,7 @@
       }]
     },
      {
-      "title": "Activity",
+      "title": "Distances",
       "fields": [{
         "id": "activity",
         "items": {

@@ -5,12 +5,98 @@
 <div ng-if="document" class="np-padding">
   <npdc-document:meta></npdc-document:meta>
 
-  <h3>Abstract</h3>
+  <h3>Expedition</h3>
   <md-divider></md-divider>
 
-  <div style="white-space: pre-wrap;">
-    {{document.summary }}
-  </div>
+  <br /><p>Expedition title: {{document.code}}  <p />
+  <p>Type:  {{ (document.type) }} <p />
+  <p>Summary: {{document.summary}}<p />
+
+
+  <h3>Platforms</h3>
+  <md-divider></md-divider>
+
+  <ul>
+    <div ng-if="document.platforms" ng-repeat="platform in document.platforms">
+      <li>{{platform.type}}&nbsp;&nbsp;<span ng-if="platform.name">[{{platform.name}}]</span></li>
+    </div>
+  </ul>
+
+  <h3>Activities</h3>
+  <md-divider></md-divider>
+  <ul>
+    <div ng-if="document.research" ng-repeat="research in document.research">
+      <li>{{research.research_type}}:&nbsp;&nbsp;
+    <span ng-if="research.research_title">{{research.research_title}}</span>
+    [<span ng-repeat="topic in research.topics">{{topic}}<span ng-if="!$last">,&nbsp; </span></span>]</li>
+  <!-- <span ng-if="research.topics">[<span ng-repeat="topic in research.topics">&nbsp;{{topic}}&nbsp;</span>]</span> </li>  -->
+    </div>
+  </ul>
+
+
+
+  <section ng-if="document.people && document.people.length > 0">
+  <h3>People</h3>
+  <md-divider></md-divider>
+  <md-list>
+    <md-list-item class="md-2-line" ng-repeat="person in document.people">
+      <md-icon class="md-avatar-icon">person</md-icon>
+        <div class="md-list-item-text">
+          <h3> {{ person.first_name }} {{ person.last_name }} </h3>
+          <p ng-if="person.organisation">{{ person.organisation }},&nbsp;{{ person.country }}</p>
+          <p ng-if="person.roles"><span ng-repeat="r in person.roles">{{ r }}<span ng-if="!$last">, </span></span></p>
+          <p ng-if="person.expedition_dates"><span ng-repeat="t in person.expedition_dates">{{ (t.start_date).substr(0,10) }}&nbsp;-&nbsp;{{ (t.start_date).substr(0,10) }}</p>
+        </div>
+      </md-list-item>
+    </md-list>
+</section>
+
+
+
+
+  <h3>Distances</h3>
+  <md-divider></md-divider>
+
+  <ul>
+    <div ng-if="document.activity" ng-repeat="activity in document.activity">
+      <li>
+        Departed:&nbsp;{{activity.departure_return_dates.start_date.substr(0,10)}} &nbsp;&nbsp;{{activity.departure_placename}},&nbsp;{{activity.departure_country}}  ({{activity.departure_predefined_area}}) &nbsp;latitude:{{activity.departure_gps.latitude}},&nbsp;longitude:{{activity.departure_gps.longitude}} <br />
+        Arrived:&nbsp;{{activity.departure_return_dates.end_date.substr(0,10)}}&nbsp;&nbsp;{{activity.return_placename}}, &nbsp;{{activity.return_country}}&nbsp;({{activity.return_predefined_area}}) &nbsp;latitude:{{activity.return_gps.latitude}},&nbsp;longitude:{{activity.return_gps.longitude}}
+        <br /><br />
+
+      </li>
+    </div>
+  </ul>
+
+
+   <h3>Locations</h3>
+  <md-divider></md-divider>
+
+
+  <ul>
+    <div ng-if="document.locations" ng-repeat="location in document.locations">
+      <li>
+        Location:&nbsp;{{location.location_dates.start_date.substr(0,10)}} &nbsp;&nbsp;{{location.location_dates.end_date.substr(0,10)}}&nbsp;&nbsp; {{location.placename}},&nbsp;{{location.area}},&nbsp;{{location.country}}&nbsp;({{location.predefined_area}})
+        <div ng-if="location.field_camp">field camp</div>
+        <div ng-if="location.operation_area">operational area</div>
+        gps:&nbsp;&nbsp; {{location.gps.north}}&nbsp;&nbsp;{{location.gps.east}}&nbsp;&nbsp;{{location.gps.south}}&nbsp;&nbsp;{{location.gps.west}}
+        <br /><br />
+
+      </li>
+    </div>
+  </ul>
+
+  <h3>Cruise</h3>
+  <md-divider></md-divider>
+
+  <br /><p>Cruise id: {{document.cruise_id}}  <p />
+  <p>Operator: {{document.sponsor}}  <p />
+  <p>Sailed distance: {{document.sailed_distance}}<p />
+  <p>Fuel main engine: {{document.fuel_main_engine}}<p />
+  <p>Fuel auxillary engine: {{ (document.fuel_auxillary_engine) }} <p />
+  <p>Fuel boiler: {{document.fuel_boiler}}<p />
+
+
 
   <h3>Links</h3>
   <md-divider></md-divider>
@@ -21,29 +107,6 @@
         <a href="{{link.href}}">{{link.title}}</a>
       </li>
     </div>
-  </ul>
 
-  <h3>Platform</h3>
-  <md-divider></md-divider>
-
-  <ul>
-    <div ng-if="document.platforms" ng-repeat="platform in document.platforms">
-      <li><b>{{platform.name}}</b>&nbsp;<em>[{{platform.type}}]</em></li>
-    </div>
-  </ul>
-
-  <h3>Activity</h3>
-  <md-divider></md-divider>
-
-  <ul>
-    <div ng-if="document.activity" ng-repeat="activity in document.activity">
-      <li>
-        <b>Departed:&nbsp;</b>{{activity.departure_placename}}&nbsp;<em ng-if="activity.departed" style="font-size: .8em;">[{{activity.departed}}]</em> -
-        <b>Arrived:&nbsp;</b>{{activity.return_placename}}&nbsp;<em ng-if="activity.returned" style="font-size: .8em;">[{{activity.returned}}]</em>
-      </li>
-    </div>
-  </ul>
-
-  <npdc:persons></npdc:persons>
 
 </div>
