@@ -167,11 +167,15 @@
       "title": "Edits",
       "fields": [
         "draft",
-        "comment",
+         "tags",
         "created",
-        "created_by",
         "updated",
-        "updated_by"
+        "created_by",
+        "updated_by",
+         {
+          "id": "comment",
+          "title": "comment major changes to entry"
+        }
       ]
     }
   ]

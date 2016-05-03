@@ -51,7 +51,7 @@ var ExpeditionShowController = function ($scope, $controller, $q, $routeParams, 
 
       $scope.uri = uri(expedition);
 
-     let relatedDatasets = Dataset.array({
+   /*  let relatedDatasets = Dataset.array({
         q: Expedition.title,
         fields: 'id,title,collection',
         score: true,
@@ -76,7 +76,7 @@ var ExpeditionShowController = function ($scope, $controller, $q, $routeParams, 
 
       $q.all([relatedDatasets, relatedPublications, relatedProjects]).then(related => {
         $scope.related = related;
-      });
+      }); */
 
     });
 
