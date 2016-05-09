@@ -1,0 +1,279 @@
+{
+	"fieldsets" : [
+    "Ekspedisjon",
+    "Aktiviteter",
+    "Personer",
+    "Distanser",
+    "Lokasjoner",
+    "Cruise",
+    "Links",
+    "Edits"
+    ],
+	"fields": {
+		"code": {
+        "title": "tokt eller felt navn"
+         },
+         "type": {
+        "title": "type ekspedisjon",
+        "values": [
+			"tokt",
+		    "felt"
+		 ]
+         },
+         "summary": {
+         "title": "kort beskrivelse"
+         },
+          "sponsor": {
+         "title": "operator"
+         },
+          "sailed_distance": {
+         "title": "utseilt distanse"
+         },
+          "fuel_main_engine": {
+         "title": "brensel forbrukt hovedmotor"
+         },
+           "fuel_auxillary_engine": {
+         "title": "brensel forbrukt tilleggsmotor"
+         },
+
+
+
+		"platforms": {
+			"title": "platformer",
+			"description": "En liste med fartøy som er brukt",
+			"items": {
+				"fields": {
+					"type": {
+			          "title": "type",
+			          "description": "type fartøy",
+				      "values": [
+				        "skip",
+				        "båt",
+              			"helikopter",
+			            "snowscooter",
+			            "beltevogn",
+			            "luftputefartøy",
+			            "other"
+						]
+					},
+					"name": {
+        			"title": "navn på fartøy"
+         		}
+              }
+			}
+		},
+		"research": {
+			"title": "aktivitetskategorier",
+			"description": "forskning eller ikke?",
+			"items": {
+				"fields": {
+					"topics": {
+			          "title": "emner",
+			          "description": "emner",
+				      "values": [
+				       "forsuring",
+				        "atmosfære",
+				        "biologi",
+				        "biokjemi",
+				        "biodiversitet",
+				        "kjemi",
+				        "klima",
+				        "konservering",
+				        "økologi",
+				        "økotoksikologi",
+				        "miljø",
+				        "geologi",
+				        "geofysikk",
+				        "glasiologi",
+				        "historie",
+				        "menneskelige perspektiver",
+				        "ledelse",
+				        "marine",
+				        "marine økosystemer",
+				        "kart",
+				        "oseanografi",
+				        "annet",
+				        "paleoklima",
+				        "fjernmåling",
+				        "havis",
+				        "snø",
+				        "terrestrisk",
+				        "topografi",
+				        "vegetasjon"
+			          ]
+					},
+					"research_title": {
+        			"title": "tittel på forskningsprosjekt eller annen virskomhet"
+         		},
+	    "research_type": {
+			"title": "type aktivitet",
+						"values": [
+							"forskning",
+							"monitorering",
+							"kartlegging",
+							"formidling VIP",
+							"undervisning",
+							"logistikk operasjoner",
+							"annet"
+						]
+					}
+              }
+			}
+		},
+    "people": {
+			"title": "personer",
+			"items": {
+				"fields": {
+					"first_name": {
+        				"title": "fornavn"
+   					 },
+   					 "last_name": {
+        				"title": "etternavn"
+   					 },
+   					 "organisation":{
+        				"title": "organisasjon"
+   					 },
+   					 "country":{
+        				"title": "land"
+   					 },
+					"roles": {
+						"title": "roller",
+						"values": [
+							"ekspedisjonsleder",
+							"feltassistent",
+							"forsker",
+							"tekniker",
+							"kontaktperson"
+						]
+					},
+					 "expedition_dates":{
+        				"title": "ekspedisjonsdatoer",
+        				"items": {
+				         "fields": {
+				         	 "start_date":{
+        				"title": "ankomstdato"
+   					 },
+   					 "end_date":{
+        				"title": "avreisedato"
+   					 }
+				          }
+			             }
+   					 }
+              }
+			}
+		},
+		"activity": {
+			"title": "aktivitet",
+			"items": {
+				"fields": {
+					"departure_predefined_area": {
+						"title": "område",
+						"values": [
+							"Sverdrup forskningsstasjon",
+							"Zeppelin forskningsstasjon",
+							"Ny-Ålesund", "Svalbard", "Frans Josefs land",
+							"Bjørnøya",
+							"Jan Mayen",
+							"Hopen",
+							"Bouvet",
+							"Troll",
+							"Tor",
+                            "Dronning Maud Land",
+                            "Antarktis",
+                            "Framstredet",
+                            "Nordishavet",
+                            "Barentshavet, nord",
+                            "Sørishavet",
+                            "annet"
+						]
+					},
+					"return_predefined_area": {
+						"title": "departure predefined area",
+						"values": [
+						    "Sverdrup forskningsstasjon",
+							"Zeppelin forskningsstasjon",
+							"Ny-Ålesund", "Svalbard", "Frans Josefs land",
+							"Bjørnøya",
+							"Jan Mayen",
+							"Hopen",
+							"Bouvet",
+							"Troll",
+							"Tor",
+                            "Dronning Maud Land",
+                            "Antarktis",
+                            "Framstredet",
+                            "Nordishavet",
+                            "Barentshavet, nord",
+                            "Sørishavet",
+                            "annet"
+						]
+					}
+              }
+			}
+		},
+		"locations": {
+			"title": "lokasjoner",
+			"items": {
+				"fields": {
+					 "hemisphere": {
+						"title": "halvkule",
+						"values": [
+						    "nordlig",
+							"sørlig"
+						]
+					},
+					"predefined_area": {
+						"title": "predefined area",
+						"values": [
+						    "Sverdrup forskningsstasjon",
+							"Zeppelin forskningsstasjon",
+							"Ny-Ålesund", "Svalbard", "Frans Josefs land",
+							"Bjørnøya",
+							"Jan Mayen",
+							"Hopen",
+							"Bouvet",
+							"Troll",
+							"Tor",
+                            "Dronning Maud Land",
+                            "Antarktis",
+                            "Framstredet",
+                            "Nordishavet",
+                            "Barentshavet, nord",
+                            "Sørishavet",
+                            "annet"
+						]
+					}
+              }
+			}
+		},
+		"links": {
+			"title": "links",
+			"items": {
+				"fields": {
+					  "title": {
+                        "title": "tittel"
+                      },
+                      "href":{
+ 					     "title":"weblenke"
+                      },
+					 "rel": {
+						"title": "lenke type",
+						"values": [
+						     "ekspedisjon",
+						     "barn",
+							"datasett",
+							"forelder",
+				            "program",
+				            "prosjekt",
+				            "publikasjon",
+				            "referanse",
+				            "relatert",
+				            "stasjonsinformasjon",
+				            "rute"
+						]
+					}
+              }
+			}
+		}
+	}
+}

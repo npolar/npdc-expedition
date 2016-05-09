@@ -1,5 +1,4 @@
 {
-	"iso639-3": "eng",
 	"fields": {
 		"platforms": {
 			"title": "platforms",
@@ -17,27 +16,20 @@
 			            "hovercraft",
 			            "other"
 						]
-					},
-	    "research_type": {
-			"title": "research or not?",
-			"description": "research or not",
-						"values": [
-							"research monitoring",
-							"research project",
-							"not research"
-						]
 					}
               }
 			}
 		},
-		 "research": {
+		"research": {
 			"title": "research or not?",
 			"items": {
 				"fields": {
 					"topics": {
 			          "title": "topics",
 			          "description": "topics",
-				      "values": [  "atmosphere",
+				      "values": [
+				          "acidification",
+				          "atmosphere",
 				          "biology",
 				          "biochemistry",
 				          "biodiversity",
@@ -68,12 +60,16 @@
 						]
 					},
 	    "research_type": {
-			"title": "research or not?",
-			"description": "research or not",
+			"title": "type of activity",
+			"description": "research or not?",
 						"values": [
-							"research monitoring",
-							"research project",
-							"not research"
+							"research",
+							"monitoring",
+							"mapping",
+							"outreach VIP",
+							"education",
+							"logistic operations",
+							"other"
 						]
 					}
               }

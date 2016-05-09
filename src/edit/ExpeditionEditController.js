@@ -2,7 +2,8 @@
 'use strict';
 
 var ExpeditionEditController = function($scope, $controller, $routeParams, Expedition, formula,
-  formulaAutoCompleteService, npdcAppConfig, chronopicService, fileFunnelService) {
+  formulaAutoCompleteService, npdcAppConfig, chronopicService, fileFunnelService, NpolarLang,
+  npolarApiConfig, NpolarApiSecurity, NpolarMessage, npolarCountryService) {
   'ngInject';
 
   // EditController -> NpolarEditController
@@ -13,33 +14,47 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
   // Inventory -> npolarApiResource -> ngResource
   $scope.resource = Expedition;
 
-  let formulaOptions = {
-    schema: '//api.npolar.no/schema/expedition-1',
-    form: 'edit/formula.json',
-    templates: npdcAppConfig.formula.templates.concat([{
-      match(field) {
-        return ["alternate", "edit", "via"].includes(field.value.rel);
-      },
-      hidden: true
-    } ]),
-   languages: npdcAppConfig.formula.languages.concat([
+  let templates = [{
+      match: "people_item",
+      template: '<npdc:formula-person></npdc:formula-person>'
+    }, {
+      match: "placenames_item",
+      template: '<npdc:formula-placename></npdc:formula-placename>'
+    },
     {
-      map: require('./translation.json'),
-      code: 'en'
-    }]),
-   onsave: function (model) {
-    console.log(model);
-   }
-  };
+      match: "coverage_item",
+      template: "<inventory:coverage></inventory:coverage>"
+    }
+  ];
 
-  $scope.formula = formula.getInstance(formulaOptions);
- // formulaAutoCompleteService.autocompleteFacets(['organisations.name', 'organisations.email',
- //   'organisations.homepage', 'organisations.gcmd_short_name', 'links.type', 'sets', 'tags'], TrollBooking, $scope.formula);
+  let i18n = [{
+      map: require('./en.json'),
+      code: 'en'
+    },
+    {
+      map: require('./no.json'),
+      code: 'nb_NO',
+    }];
+
+
+    $scope.formula = formula.getInstance({
+       schema: '//api.npolar.no/schema/expedition-1',
+       form: 'edit/formula.json',
+       language: NpolarLang.getLang(),
+       templates:  npdcAppConfig.formula.templates.concat(templates),
+       languages: npdcAppConfig.formula.languages.concat(i18n)
+    });
+
+
+  formulaAutoCompleteService.autocompleteFacets(['people.first_name',
+    'people.last_name', 'links.type', 'tags'], Expedition, $scope.formula);
 
   chronopicService.defineOptions({ match: 'released', format: '{date}'});
   chronopicService.defineOptions({ match(field) {
     return field.path.match(/^#\/activity\/\d+\/.+/);
   }, format: '{date}'});
+
+
 
 
   /* let dataLinkSuccess = function (file) {
@@ -53,7 +68,7 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
     };
   }; */
 
-   let fileToValueMapper = function (file) {
+ /*  let fileToValueMapper = function (file) {
       return {
         rel: 'data',
         href: file.url,
@@ -84,7 +99,7 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
     fileToValueMapper, valueToFileMapper, fields: ['rel']}, $scope.formula);
 
 
-  /*fileFunnelService.fileUploader({
+  fileFunnelService.fileUploader({
     match(field) {
        return field.id === "links" && field.instance === "data";
     },
@@ -97,7 +112,33 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
   }, $scope.formula); */
 
 
-  $scope.edit();
+  function initFileUpload(formula) {
+
+    let server = `${NpolarApiSecurity.canonicalUri($scope.resource.path)}/:id/_file`;
+    fileFunnelService.fileUploader({
+      match(field) {
+        return field.id === "files";
+      },
+      server,
+      multiple: true,
+      progress: false,
+      restricted: function () {
+        return !formula.getModel().license;
+      },
+      fileToValueMapper: Expedition.fileObject,
+      valueToFileMapper: Expedition.hashiObject,
+      fields: [] // 'type', 'hash'
+    }, formula);
+  }
+
+
+  try {
+    initFileUpload($scope.formula);
+    // edit (or new) action
+    $scope.edit();
+  } catch (e) {
+    NpolarMessage.error(e);
+  }
 };
 
 module.exports = ExpeditionEditController;
