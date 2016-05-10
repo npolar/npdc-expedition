@@ -87,7 +87,7 @@
       }]
     },
      {
-      "title": "Distances",
+      "title": "Travels",
       "fields": [{
         "id": "activity",
         "items": {
@@ -112,10 +112,10 @@
             "operation_area",
             "location_dates",
             "hemisphere",
-            "area",
-            "country",
             "placename",
-            "predefined_area"
+            "predefined_area",
+            "area",
+            "country"
           ]
         }
       }

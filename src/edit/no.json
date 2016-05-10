@@ -3,11 +3,11 @@
     "Ekspedisjon",
     "Aktiviteter",
     "Personer",
-    "Distanser",
+    "Reiserute",
     "Lokasjoner",
-    "Cruise",
-    "Links",
-    "Edits"
+    "Tokt",
+    "Lenker",
+    "Endringer"
     ],
 	"fields": {
 		"code": {
@@ -24,7 +24,7 @@
          "title": "kort beskrivelse"
          },
           "sponsor": {
-         "title": "operator"
+         "title": "operatør"
          },
           "sailed_distance": {
          "title": "utseilt distanse"
@@ -35,9 +35,9 @@
            "fuel_auxillary_engine": {
          "title": "brensel forbrukt tilleggsmotor"
          },
-
-
-
+         "fuel_boiler": {
+         "title": "brensel kjele"
+         },
 		"platforms": {
 			"title": "platformer",
 			"description": "En liste med fartøy som er brukt",
@@ -64,7 +64,7 @@
 		},
 		"research": {
 			"title": "aktivitetskategorier",
-			"description": "forskning eller ikke?",
+			"description": "Oppgi type aktivitet",
 			"items": {
 				"fields": {
 					"topics": {
@@ -122,6 +122,7 @@
 		},
     "people": {
 			"title": "personer",
+			"description":"Liste med folk som deltar på ekspedisjonen",
 			"items": {
 				"fields": {
 					"first_name": {
@@ -151,10 +152,10 @@
         				"items": {
 				         "fields": {
 				         	 "start_date":{
-        				"title": "ankomstdato"
+        				"title": "avreisedato"
    					 },
    					 "end_date":{
-        				"title": "avreisedato"
+        				"title": "ankomstdato"
    					 }
 				          }
 			             }
@@ -163,11 +164,23 @@
 			}
 		},
 		"activity": {
-			"title": "aktivitet",
+			"title": "reiserute",
+			"description":"Liste over reiserute",
 			"items": {
 				"fields": {
+					 "departure_return_dates":{
+        				"title": "reisedatoer",
+				         "fields": {
+				         	"start_date":{
+        				        "title": "avreisedato"
+   					        },
+   					        "end_date":{
+        				        "title": "ankomstdato"
+   					        }
+				          }
+   					 },
 					"departure_predefined_area": {
-						"title": "område",
+						"title": "avreise forhåndsdefinert område",
 						"values": [
 							"Sverdrup forskningsstasjon",
 							"Zeppelin forskningsstasjon",
@@ -187,8 +200,42 @@
                             "annet"
 						]
 					},
+					"departure_placename": {
+						"title":"avreisested"
+					},
+					"departure_country": {
+						"title":"avreiseland"
+					},
+					"departure_gps": {
+						"title":"avreise gps",
+						 "fields": {
+				         "latitude":{
+        				   "title": "breddegrad"
+   					 },
+   					 "longitude":{
+        				 "title": "lengdegrad"
+   					 }
+				          }
+					},
+					"return_placename": {
+						"title":"ankomststed"
+					},
+					"return_country": {
+						"title":"ankomstland"
+					},
+					"return_gps": {
+						"title":"ankomst gps",
+						 "fields": {
+				         "latitude":{
+        				   "title": "breddegrad"
+   					     },
+   					     "longitude":{
+        				    "title": "lengdegrad"
+   					     }
+				       }
+					},
 					"return_predefined_area": {
-						"title": "departure predefined area",
+						"title": "ankomst forhåndsdefinert område",
 						"values": [
 						    "Sverdrup forskningsstasjon",
 							"Zeppelin forskningsstasjon",
@@ -213,17 +260,49 @@
 		},
 		"locations": {
 			"title": "lokasjoner",
+			"description": "Liste med lokasjoner som beskriver hvor feltarbeidet fant sted",
 			"items": {
 				"fields": {
-					 "hemisphere": {
+					"hemisphere": {
 						"title": "halvkule",
 						"values": [
 						    "nordlig",
 							"sørlig"
 						]
 					},
+					"location_dates": {
+						"title":"datoer på lokasjon",
+						 "fields": {
+				         "start_date":{
+        				   "title": "ankomstdato"
+   					     },
+   					     "end_date":{
+        				    "title": "avreisedato"
+   					     }
+				       }
+					},
+					"gps": {
+						"title":"gps",
+						 "items": {
+   					     }
+					},
+					"field_camp": {
+                       "title": "feltleir"
+                    },
+                     "operation_area": {
+                       "title": "operasjonsområde"
+                     },
+                      "placename": {
+                       "title": "stedsnavn"
+                     },
+                     "area": {
+                       "title": "område"
+                     },
+                     "country": {
+                       "title": "land"
+                     },
 					"predefined_area": {
-						"title": "predefined area",
+						"title": "forhåndsdefinert område",
 						"values": [
 						    "Sverdrup forskningsstasjon",
 							"Zeppelin forskningsstasjon",
@@ -246,22 +325,52 @@
               }
 			}
 		},
+		"draft": {
+	      "title": "skal registreringen holdes internt?",
+	      "values": [
+	         "ja",
+	         "nei"
+	      ]
+	    },
+	    "tags":{
+	    	"title":"nøkkelord",
+	    	"description": "En liste av ett eller flere nøkkelord som beskriver ekpedisjonen",
+	    	"items": {
+	    		"title":"oppgi et nøkkelord"
+	    	}
+	    },
+		"created": {
+	      "title": "opprettet"
+	    },
+	    "created_by": {
+	      "title": "opprettet av"
+	    },
+	    "updated": {
+	      "title": "oppdatert"
+	    },
+	    "updated_by": {
+	      "title": "oppdatert av"
+	    },
+	    "comment": {
+	      "title": "kommentar til større endringer i registreringen"
+	    },
 		"links": {
-			"title": "links",
+			"title": "lenker",
+			"description": "Lenker som har forbindelse til ekspedisjonen",
 			"items": {
 				"fields": {
 					  "title": {
                         "title": "tittel"
                       },
                       "href":{
- 					     "title":"weblenke"
+ 					     "title":"weblenke inkludert protokoll (f.eks. http://www.npolar.no)"
                       },
 					 "rel": {
-						"title": "lenke type",
+						"title": "lenke type (forbindelse mellom ekspedisjon og lenke)",
 						"values": [
-						     "ekspedisjon",
-						     "barn",
+						    "ekspedisjon",
 							"datasett",
+							"barn",
 							"forelder",
 				            "program",
 				            "prosjekt",

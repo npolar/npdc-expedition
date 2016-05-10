@@ -93,7 +93,7 @@
 			}
 		},
 		"activity": {
-			"title": "activity",
+			"title": "travel route",
 			"items": {
 				"fields": {
 					"departure_predefined_area": {
