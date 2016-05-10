@@ -27,6 +27,11 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
     }
   ];
 
+  $scope.$on("npolar-lang", function(o, n) {
+
+    console.log("LANG", o, n);
+  });
+
   let i18n = [{
       map: require('./en.json'),
       code: 'en'
