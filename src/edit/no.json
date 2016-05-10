@@ -359,16 +359,9 @@
 			"description": "Lenker som har forbindelse til ekspedisjonen",
 			"items": {
 				"fields": {
-					  "title": {
-                        "title": "tittel"
-                      },
-                      "href":{
- 					     "title":"weblenke inkludert protokoll (f.eks. http://www.npolar.no)"
-                      },
-					 "rel": {
-						"title": "lenke type (forbindelse mellom ekspedisjon og lenke)",
-						"values": [
-						    "ekspedisjon",
+					"rel": {
+            			"title": "lenke type (forbindelse mellom denne registreringen og lenke)",
+            			"values": ["ekspedisjon",
 							"datasett",
 							"barn",
 							"forelder",
@@ -378,9 +371,15 @@
 				            "referanse",
 				            "relatert",
 				            "stasjonsinformasjon",
-				            "rute"
-						]
-					}
+				            "track"
+				            ]
+				          },
+					 "href":{
+            "title":"weblenke inkludert protokoll (f.eks. http:// som i lenken http://www.npolar.no)"
+          },
+          "title": {
+            "title": "tittel"
+          }
               }
 			}
 		}
