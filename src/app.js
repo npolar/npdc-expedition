@@ -6,7 +6,7 @@ var AutoConfig = npdcCommon.AutoConfig;
 var angular = require('angular');
 require('npdc-common/src/wrappers/leaflet');
 
-var npdcExpeditionApp = angular.module('npdcExpeditionApp', ['npdcCommon']);
+var npdcExpeditionApp = angular.module('npdcExpeditionApp', ['npdcCommon', 'leaflet']);
 
 npdcExpeditionApp.controller('ExpeditionShowController', require('./show/ExpeditionShowController'));
 npdcExpeditionApp.controller('ExpeditionSearchController', require('./search/ExpeditionSearchController'));
@@ -56,19 +56,3 @@ npdcExpeditionApp.run(($http, npdcAppConfig, NpolarTranslate, NpolarLang) => {
 });
 
 
-// API HTTP interceptor
-/*npdcExpeditionApp.config($httpProvider => {
-  $httpProvider.interceptors.push('npolarApiInterceptor');
-});
-
-// Inject npolarApiConfig and run
-npdcExpeditionApp.run(function(npolarApiConfig, npdcAppConfig){
-  var environment = "test";
-  var autoconfig = new AutoConfig(environment);
-  angular.extend(npolarApiConfig, autoconfig);
-
-  npdcAppConfig.cardTitle = '';
-  npdcAppConfig.toolbarTitle = 'Expedition Archive';
-
-  console.log("npolarApiConfig", npolarApiConfig);
-});*/

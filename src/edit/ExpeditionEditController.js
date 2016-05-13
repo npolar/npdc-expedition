@@ -6,6 +6,8 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
   npolarApiConfig, NpolarApiSecurity, NpolarMessage, npolarCountryService) {
   'ngInject';
 
+  function init() {
+
   // EditController -> NpolarEditController
   $controller('NpolarEditController', {
     $scope: $scope
@@ -14,136 +16,85 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
   // Inventory -> npolarApiResource -> ngResource
   $scope.resource = Expedition;
 
-  let templates = [{
-      match: "people_item",
-      template: '<npdc:formula-person></npdc:formula-person>'
-    }, {
-      match: "placenames_item",
-      template: '<npdc:formula-placename></npdc:formula-placename>'
-    },
+   let formulaOptions = {
+      schema: '//api.npolar.no/schema/expedition-1',
+      form: 'edit/formula.json',
+      language: NpolarLang.getLang(),
+      templates: npdcAppConfig.formula.templates.concat([{
+        match(field) {
+          if (field.id === 'links_item') {
+            let match;
+
+          // Hide data links and system links for the ordinary links block (defined in formula as instance === 'links')
+            match = ["data", "alternate", "edit", "via"].includes(field.value.rel) && field.parents[field.parents.length-1].instance === 'links';
+            console.log(match, field.id, field.path, 'value', field.value, 'instance', field.parents[field.parents.length-1].instance);
+            return match;
+          }
+        },
+        hidden: true
+      },  {
+        match: "locations_item",
+        template: "<expedition:coverage></expedition:coverage>"
+      },
     {
-      match: "coverage_item",
-      template: "<inventory:coverage></inventory:coverage>"
-    }
-  ];
+        match: "placenames_item",
+        template: '<npdc:formula-placename></npdc:formula-placename>'
+      }
+    ]),
+      languages: npdcAppConfig.formula.languages.concat([{
+        map: require('./en.json'),
+        code: 'en'
+      }, {
+        map: require('./no.json'),
+        code: 'nb_NO',
+      }])
+    };
 
-  $scope.$on("npolar-lang", function(o, n) {
-
-    console.log("LANG", o, n);
-  });
-
-  let i18n = [{
-      map: require('./en.json'),
-      code: 'en'
-    },
-    {
-      map: require('./no.json'),
-      code: 'nb_NO',
-    }];
+  $scope.formula = formula.getInstance(formulaOptions);
 
 
-    $scope.formula = formula.getInstance({
-       schema: '//api.npolar.no/schema/expedition-1',
-       form: 'edit/formula.json',
-       language: NpolarLang.getLang(),
-       templates:  npdcAppConfig.formula.templates.concat(templates),
-       languages: npdcAppConfig.formula.languages.concat(i18n)
-    });
+  formulaAutoCompleteService.autocomplete({
+    match: "#/organisations/country",
+    querySource: npolarApiConfig.base + '/country',
+    label: 'name',
+    value: 'code'
+  }, $scope.formula);
 
 
   formulaAutoCompleteService.autocompleteFacets(['people.first_name',
-    'people.last_name', 'links.type', 'tags'], Expedition, $scope.formula);
+    'people.last_name', 'links.type', 'sponsor', 'tags'], Expedition, $scope.formula);
 
   chronopicService.defineOptions({ match: 'released', format: '{date}'});
   chronopicService.defineOptions({ match(field) {
     return field.path.match(/^#\/activity\/\d+\/.+/);
   }, format: '{date}'});
 
+}
 
-
-
-  /* let dataLinkSuccess = function (file) {
-    return {
-      rel: 'DATA',
-      href: file.url,
-      title: file.filename,
-      length: file.file_size,
-      hash: [file.md5sum],
-      type: file.content_type
-    };
-  }; */
-
- /*  let fileToValueMapper = function (file) {
-      return {
-        rel: 'data',
-        href: file.url,
-        title: file.filename,
-        length: file.file_size,
-        hash: [file.md5sum],
-        type: file.content_type
-      };
-    };
-
-    let valueToFileMapper = function (value) {
-      if (value.rel !== 'data') {
-        return null;
-      }
-      return {
-        filename: value.title,
-        file_size: value.length,
-        url: value.href
-      };
-    };
-
-  fileFunnelService.fileUploader({
-    match(field) {
-      return field.id === "links" && field.instance === "data";
-    },
-    multiple: true,
-    server: 'https://apptest.data.npolar.no:3000/inventory/:id/_file/',
-    fileToValueMapper, valueToFileMapper, fields: ['rel']}, $scope.formula);
-
-
-  fileFunnelService.fileUploader({
-    match(field) {
-       return field.id === "links" && field.instance === "data";
-    },
-    server: 'https://apptest.data.npolar.no:3000/inventory/:id/_file/',
-    successCallback: dataLinkSuccess,
-    filterValues: function (value) {
-      return value.rel.toUpperCase() === 'DATA';
-    },
-    restricted: false
-  }, $scope.formula); */
-
-
-  function initFileUpload(formula) {
+ function initFileUpload(formula) {
 
     let server = `${NpolarApiSecurity.canonicalUri($scope.resource.path)}/:id/_file`;
-    fileFunnelService.fileUploader({
-      match(field) {
-        return field.id === "files";
-      },
-      server,
-      multiple: true,
-      progress: false,
-      restricted: function () {
-        return !formula.getModel().license;
-      },
-      fileToValueMapper: Expedition.fileObject,
-      valueToFileMapper: Expedition.hashiObject,
-      fields: [] // 'type', 'hash'
-    }, formula);
+      fileFunnelService.fileUploader({
+        match(field) {
+          return field.id === "links" && field.instance === 'data';
+        },
+        server,
+        multiple: true,
+        restricted: false,
+        fileToValueMapper: Expedition.linkObject,
+        valueToFileMapper: Expedition.hashiObject,
+        fields: ['license', 'href', 'type']
+      }, formula);
   }
 
-
   try {
-    initFileUpload($scope.formula);
-    // edit (or new) action
-    $scope.edit();
+    init();
+     // edit (or new) action
+     $scope.edit();
   } catch (e) {
     NpolarMessage.error(e);
   }
+
 };
 
 module.exports = ExpeditionEditController;

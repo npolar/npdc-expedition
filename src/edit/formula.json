@@ -102,19 +102,19 @@
         }
       }]
     },
-     {
+    {
       "title": "Locations",
       "fields": [{
         "id": "locations",
         "items": {
           "fields": [
+            "north",
             "field_camp",
             "operation_area",
             "location_dates",
             "hemisphere",
             "placename",
             "predefined_area",
-            "area",
             "country"
           ]
         }

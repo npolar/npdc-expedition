@@ -22,10 +22,23 @@ var ExpeditionShowController = function ($scope, $controller, $q, $routeParams, 
     }
   };
 
-
+  $scope.mapOptions = {};
 
   let show = function() {
     $scope.show().$promise.then((expedition) => {
+
+
+      if (expedition.locations) {
+
+         let bounds = (expedition.locations).map((locations) => [[locations.south, locations.west], [locations.north, locations.east]]);
+         $scope.mapOptions.coverage = bounds;
+         $scope.mapOptions.geojson = "geojson";
+
+
+      }
+      $scope.mapOptions.geometries = expedition.links.filter(l => l.type === "application/vnd.geo+json").map(l => l.href);
+
+
 
       $scope.links = expedition.links.filter(l => (l.rel !== "alternate" && l.rel !== "edit") && l.rel !== "data");
 
@@ -50,6 +63,8 @@ var ExpeditionShowController = function ($scope, $controller, $q, $routeParams, 
 
 
       $scope.uri = uri(expedition);
+
+
 
    /*  let relatedDatasets = Dataset.array({
         q: Expedition.title,

@@ -2,6 +2,7 @@
 <npdc:edit-button class="np-primary-control"></npdc:edit-button>
 <npdc:loader ng-if="!document"></npdc:loader>
 
+<leaflet ng-if="document && mapOptions" options="mapOptions" class="coverage-map"></leaflet>
 <div ng-if="document" class="np-padding">
   <npdc-document:meta></npdc-document:meta>
 
