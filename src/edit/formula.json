@@ -12,6 +12,7 @@
           "title": "type of expedition"
         },
         "summary",
+        "tags",
         {
         "id": "platforms",
         "items": {
@@ -20,6 +21,10 @@
             {
           "id": "name",
           "title": "vessel name"
+        },
+        {
+          "id": "sponsor",
+          "title": "operator ('Kronprins Haakon' only)"
         }
           ]
         }
@@ -122,19 +127,6 @@
       ]
     },
     {
-      "title": "Cruise",
-      "fields": [
-        {
-          "id": "sponsor",
-          "title": "operator"
-        },
-        "sailed_distance",
-        "fuel_main_engine",
-        "fuel_auxillary_engine",
-        "fuel_boiler"
-      ]
-    },
-    {
       "title": "Links",
       "fields": [{
         "id": "links",
@@ -157,6 +149,11 @@
         }
       }]
   },
+  {
+      "title": "Files",
+      "fields": [
+      ]
+    },
     {
       "title": "Edits",
       "fields": [
@@ -164,7 +161,6 @@
           "id": "draft",
           "title": "draft (not visible to Internet users)"
         },
-         "tags",
         "created",
         "updated",
         "created_by",

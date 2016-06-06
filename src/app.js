@@ -54,5 +54,3 @@ npdcExpeditionApp.run(($http, npdcAppConfig, NpolarTranslate, NpolarLang) => {
   NpolarTranslate.loadBundles('npdc-expedition');
   npdcAppConfig.toolbarTitle = 'Expedition';
 });
-
-

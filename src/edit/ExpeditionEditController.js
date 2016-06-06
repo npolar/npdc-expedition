@@ -54,8 +54,6 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
 
 
 
-
-
   formulaAutoCompleteService.autocomplete({
     match: "#/organisations/country",
     querySource: npolarApiConfig.base + '/country',

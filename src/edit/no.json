@@ -5,7 +5,6 @@
     "Personer",
     "Reiserute",
     "Lokasjoner",
-    "Tokt",
     "Lenker",
     "Filer",
     "Endringer"
@@ -23,21 +22,6 @@
          },
          "summary": {
          "title": "kort beskrivelse"
-         },
-          "sponsor": {
-         "title": "operatør"
-         },
-          "sailed_distance": {
-         "title": "utseilt distanse"
-         },
-          "fuel_main_engine": {
-         "title": "brensel forbrukt hovedmotor"
-         },
-           "fuel_auxillary_engine": {
-         "title": "brensel forbrukt tilleggsmotor"
-         },
-         "fuel_boiler": {
-         "title": "brensel kjele"
          },
 		"platforms": {
 			"title": "platformer",
@@ -59,6 +43,9 @@
 					},
 					"name": {
         			"title": "navn på fartøy"
+         		},
+         		 "sponsor": {
+         			"title": "operatør (kun for 'Kronprins Haakon')"
          		}
               }
 			}
@@ -143,9 +130,11 @@
 						"values": [
 							"ekspedisjonsleder",
 							"feltassistent",
+							"gjest",
 							"forsker",
-							"tekniker",
-							"kontaktperson"
+							"annet",
+							"forskningsleder",
+							"tekniker"
 						]
 					},
 					 "expedition_dates":{
@@ -327,7 +316,7 @@
 			}
 		},
 		"draft": {
-	      "title": "skal registreringen holdes internt?",
+	      "title": "Kladd (registrering holdes internt)",
 	      "values": [
 	         "ja",
 	         "nei"

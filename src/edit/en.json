@@ -82,11 +82,13 @@
 					"roles": {
 						"title": "roles",
 						"values": [
-							"expedition leader",
+							"expedition/cruise leader",
 							"field assistant",
+							"guest",
+							"investigator",
+							"other",
 							"principal investigator",
-							"technitian",
-							"contact person"
+							"technitian"
 						]
 					}
               }

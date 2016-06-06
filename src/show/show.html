@@ -7,28 +7,29 @@
   <npdc-document:meta></npdc-document:meta>
 
 <section>
-  <h3>Expedition</h3>
+  <h3>{{'Expedition' | t }}</h3>
   <md-divider></md-divider>
 
-  <br /><p>Expedition title: {{document.code}}  <p />
-  <p>Type:  {{ (document.type) }} <p />
-  <p>Summary: {{document.summary}}<p />
+  <br /><p>{{'Title' | t }}: {{document.code}}  <p />
+  <p>{{'Type' | t}}:  {{ (document.type) }} <p />
+  <p>{{'Summary' | t}}: {{document.summary}}<p />
 </section>
 
 
 <section>
-  <h3>Platforms</h3>
+  <h3>{{'Platforms' | t }}</h3>
   <md-divider></md-divider>
 
   <ul>
     <div ng-if="document.platforms" ng-repeat="platform in document.platforms">
-      <li>{{platform.type}}&nbsp;&nbsp;<span ng-if="platform.name">[{{platform.name}}]</span></li>
+      <li>{{platform.type}}&nbsp;&nbsp;<span ng-if="platform.name">[{{platform.name}}&nbsp;{{platform.sponsor}}]
+        </span></li>
     </div>
   </ul>
 </section>
 
 <section>
-  <h3>Activities</h3>
+  <h3>{{ 'Activities' | t }}</h3>
   <md-divider></md-divider>
   <ul>
     <div ng-if="document.research" ng-repeat="research in document.research">
@@ -43,7 +44,7 @@
 
 
   <section ng-if="document.people && document.people.length > 0">
-  <h3>People</h3>
+  <h3>{{ 'People' | t }}</h3>
   <md-divider></md-divider>
   <md-list>
     <md-list-item class="md-2-line" ng-repeat="person in document.people">
@@ -60,14 +61,14 @@
 
 
 <section ng-if="document.activity && document.activity.length > 0">
-  <h3>Distances</h3>
+  <h3>{{ 'Travel' | t}}</h3>
   <md-divider></md-divider>
 
   <ul>
     <div  ng-repeat="activity in document.activity">
       <li>
-        Departed:&nbsp;{{activity.departure_return_dates.start_date.substr(0,10)}} &nbsp;&nbsp;{{activity.departure_placename}},&nbsp;{{activity.departure_country}}  ({{activity.departure_predefined_area}}) &nbsp;latitude:{{activity.departure_gps.latitude}},&nbsp;longitude:{{activity.departure_gps.longitude}} <br />
-        Arrived:&nbsp;{{activity.departure_return_dates.end_date.substr(0,10)}}&nbsp;&nbsp;{{activity.return_placename}}, &nbsp;{{activity.return_country}}&nbsp;({{activity.return_predefined_area}}) &nbsp;latitude:{{activity.return_gps.latitude}},&nbsp;longitude:{{activity.return_gps.longitude}}
+        {{'Departure' | t}}:&nbsp;{{activity.departure_return_dates.start_date.substr(0,10)}} &nbsp;&nbsp;{{activity.departure_placename}},&nbsp;{{activity.departure_country}}  ({{activity.departure_predefined_area}}) &nbsp;latitude:{{activity.departure_gps.latitude}},&nbsp;longitude:{{activity.departure_gps.longitude}} <br />
+        {{ 'Arrival' | t }}:&nbsp;{{activity.departure_return_dates.end_date.substr(0,10)}}&nbsp;&nbsp;{{activity.return_placename}}, &nbsp;{{activity.return_country}}&nbsp;({{activity.return_predefined_area}}) &nbsp;latitude:{{activity.return_gps.latitude}},&nbsp;longitude:{{activity.return_gps.longitude}}
         <br /><br />
 
       </li>
@@ -76,13 +77,13 @@
 </section>
 
 <section>
-   <h3>Locations</h3>
+   <h3>{{ 'Locations' | t }}</h3>
     <md-divider></md-divider>
 
   <ul>
     <div ng-if="document.locations" ng-repeat="location in document.locations">
       <li>
-        Location:&nbsp;{{location.location_dates.start_date.substr(0,10)}} &nbsp;&nbsp;{{location.location_dates.end_date.substr(0,10)}}&nbsp;&nbsp; {{location.placename}},&nbsp;{{location.area}},&nbsp;{{location.country}}&nbsp;({{location.predefined_area}})
+        {{ 'Location' | t }}:&nbsp;{{location.location_dates.start_date.substr(0,10)}} &nbsp;&nbsp;{{location.location_dates.end_date.substr(0,10)}}&nbsp;&nbsp; {{location.placename}},&nbsp;{{location.area}},&nbsp;{{location.country}}&nbsp;({{location.predefined_area}})
         <div ng-if="location.field_camp">field camp</div>
         <div ng-if="location.operation_area">operational area</div>
         gps:&nbsp;&nbsp; {{location.gps.north}}&nbsp;&nbsp;{{location.gps.east}}&nbsp;&nbsp;{{location.gps.south}}&nbsp;&nbsp;{{location.gps.west}}
@@ -93,22 +94,12 @@
   </ul>
 </section>
 
-<section>
-<h3>Cruise</h3>
-<md-divider></md-divider>
- <p>Cruise id: {{document.cruise_id}}  <p />
-  <p>Operator: {{document.sponsor}}  <p />
-  <p>Sailed distance: {{document.sailed_distance}}<p />
-  <p>Fuel main engine: {{document.fuel_main_engine}}<p />
-  <p>Fuel auxillary engine: {{ (document.fuel_auxillary_engine) }} <p />
-  <p>Fuel boiler: {{document.fuel_boiler}}<p />
-</section>
 
 <section>
-<h3>Classification</h3>
+<h3>{{ 'Classification' | t }}</h3>
 <md-divider></md-divider>
  <div ng-if="document.tags">
-          <h4>Tags</h4>
+          <h4>{{ 'Tags' | t }}</h4>
           <p>
             <md-icon>label_outline</md-icon><span ng-repeat="tag in document.tags">
               <a ng-href="?q=&filter-tags={{tag}}">{{ tag }}</a>{{!$last ? ' / ':''}}
@@ -118,7 +109,7 @@
  </section>
 
 <section>
-  <h3>Links</h3>
+  <h3>{{'Links' | t }}</h3>
    <md-divider></md-divider>
   <ul>
     <div ng-if="document.links" ng-repeat="link in document.links">

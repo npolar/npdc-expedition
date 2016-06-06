@@ -4,7 +4,8 @@
  *
  * @ngInject
  */
-var ExpeditionShowController = function ($scope, $controller, $q, $routeParams, Expedition, Inventory, Dataset, Project, Publication, npdcAppConfig) {
+var ExpeditionShowController = function ($scope, $controller, $q, $routeParams,
+  Expedition, Inventory, Dataset, Project, Publication, npdcAppConfig) {
    'ngInject';
 
   $controller('NpolarBaseController', {$scope: $scope});
