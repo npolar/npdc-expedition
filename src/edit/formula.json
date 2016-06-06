@@ -149,10 +149,9 @@
         }
       }]
   },
-  {
-      "title": "Files",
-      "fields": [
-      ]
+    {
+      "title": "File upload",
+      "fields": ["attachments"]
     },
     {
       "title": "Edits",

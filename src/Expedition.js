@@ -26,12 +26,10 @@ function Expedition( $q, ExpeditionResource) {
     ExpeditionResource.hashiObject = function(link) {
       console.debug('hashiObject', link);
       // Ignore links that are not data
-      if (link.rel !== 'data') {
-        return null;
-      }
+
       return {
         url: link.href,
-        filename: link.title,
+        filename: link.filename,
         file_size: link.length,
         md5sum: (link.hash||'md5:').split('md5:')[1],
         content_type: link.type
@@ -41,9 +39,9 @@ function Expedition( $q, ExpeditionResource) {
     ExpeditionResource.linkObject = function(hashi) {
       console.debug('linkObject', hashi);
       return {
-        rel: 'data',
+       // rel: 'data',
         href: hashi.url,
-        title: hashi.filename,
+        filename: hashi.filename,
         length: hashi.file_size,
         hash: 'md5:'+hashi.md5sum,
         type: hashi.content_type

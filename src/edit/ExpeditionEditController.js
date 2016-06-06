@@ -51,6 +51,7 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
     };
 
   $scope.formula = formula.getInstance(formulaOptions);
+  initFileUpload($scope.formula);
 
 
 
@@ -71,6 +72,23 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
   }, format: '{date}'});
 
 }
+
+ function initFileUpload(formula) {
+
+    let server = `${NpolarApiSecurity.canonicalUri($scope.resource.path)}/:id/_file`;
+    console.log(server);
+      fileFunnelService.fileUploader({
+        match(field) {
+          return field.id === "attachments";
+        },
+        server,
+        multiple: true,
+        restricted: false,
+        fileToValueMapper: Expedition.linkObject,
+        valueToFileMapper: Expedition.hashiObject,
+        fields: ['type']
+      }, formula);
+  }
 
 
   try {
