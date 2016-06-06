@@ -55,7 +55,7 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
 
 
   formulaAutoCompleteService.autocomplete({
-    match: "#/organisations/country",
+    match: "#/people/country",
     querySource: npolarApiConfig.base + '/country',
     label: 'name',
     value: 'code'
@@ -63,7 +63,7 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
 
 
   formulaAutoCompleteService.autocompleteFacets(['people.first_name',
-    'people.last_name', 'links.type', 'sponsor', 'tags'], Expedition, $scope.formula);
+    'people.last_name', 'people.organisation', 'platforms.sponsor', 'tags'], Expedition, $scope.formula);
 
   chronopicService.defineOptions({ match: 'released', format: '{date}'});
   chronopicService.defineOptions({ match(field) {
@@ -72,26 +72,13 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
 
 }
 
- function initFileUpload(formula) {
-
-    let server = `${NpolarApiSecurity.canonicalUri($scope.resource.path)}/:id/_file`;
-      fileFunnelService.fileUploader({
-        match(field) {
-          return field.id === "links" && field.instance === 'data';
-        },
-        server,
-        multiple: true,
-        restricted: false,
-        fileToValueMapper: Expedition.linkObject,
-        valueToFileMapper: Expedition.hashiObject,
-        fields: ['license', 'href', 'type']
-      }, formula);
-  }
 
   try {
     init();
+
      // edit (or new) action
      $scope.edit();
+
   } catch (e) {
     NpolarMessage.error(e);
   }

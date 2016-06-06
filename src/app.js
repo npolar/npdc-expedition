@@ -12,6 +12,7 @@ npdcExpeditionApp.controller('ExpeditionShowController', require('./show/Expedit
 npdcExpeditionApp.controller('ExpeditionSearchController', require('./search/ExpeditionSearchController'));
 npdcExpeditionApp.controller('ExpeditionEditController', require('./edit/ExpeditionEditController'));
 npdcExpeditionApp.directive('expeditionCoverage', require('./edit/coverage/coverageDirective'));
+npdcExpeditionApp.factory('Expedition', require('./Expedition.js'));
 
 
 
@@ -23,7 +24,7 @@ var resources = [
   {'path': '/publication', 'resource': 'Publication' },
   {'path': '/project', 'resource': 'Project' },
   {'path': '/inventory', 'resource': 'Inventory'},
-  {'path': '/expedition', 'resource': 'Expedition'}
+  {'path': '/expedition', 'resource': 'ExpeditionResource'}
 ];
 
 resources.forEach(service => {
