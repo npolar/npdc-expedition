@@ -12,10 +12,11 @@ function Expedition( $q, ExpeditionResource) {
       let ship_type = "researchVessel";
       let use_limitation = "none";
       let availability ="unrestricted";
+      let lang = "en";
 
 
       //let id = PublicationResource.randomUUID();
-      let e = {  ship_type, use_limitation, availability
+      let e = {  ship_type, use_limitation, availability, lang
       };
       console.debug(e);
       return e;

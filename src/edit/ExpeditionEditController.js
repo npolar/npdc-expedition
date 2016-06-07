@@ -86,7 +86,7 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
         restricted: false,
         fileToValueMapper: Expedition.linkObject,
         valueToFileMapper: Expedition.hashiObject,
-        fields: ['type']
+        fields: ['filename']
       }, formula);
   }
 
