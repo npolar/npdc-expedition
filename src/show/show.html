@@ -19,7 +19,7 @@
 
 
 
-<section>
+<section ng-if="document.platforms && document.platforms.length > 0">
   <md-divider></md-divider>
   <h3>{{'Platforms' | t }}</h3>
     <div ng-if="document.platforms" ng-repeat="platform in document.platforms">
@@ -30,7 +30,7 @@
 </section>
 <br />
 
-<section>
+<section ng-if="document.research && document.research.length > 0">
   <md-divider></md-divider>
   <h3>{{ 'Activities' | t }}</h3>
     <div ng-if="document.research" ng-repeat="research in document.research">
@@ -80,11 +80,10 @@
 </section>
 <br />
 
-<section>
+<section ng-if="document.locations">
    <md-divider></md-divider>
    <h3>{{ 'Locations' | t }}</h3>
-
-    <div ng-if="document.locations" ng-repeat="location in document.locations">
+    <div  ng-repeat="location in document.locations">
         <md-icon>place</md-icon>
 
         <span ng-if="location.location_dates">{{location.location_dates.start_date.substr(0,10)}} - {{location.location_dates.end_date.substr(0,10)}}&nbsp;&nbsp;</span>
@@ -100,32 +99,45 @@
 </section>
 <br />
 
-<section>
+<section ng-if="document.tags && document.tags.length > 0">
 <md-divider></md-divider>
 <h3>{{ 'Classification' | t }}</h3>
 
- <div ng-if="document.tags">
           <h4>{{ 'Tags' | t }}</h4>
           <p>
             <md-icon>label_outline</md-icon><span ng-repeat="tag in document.tags">
               <a ng-href="?q=&filter-tags={{tag}}">{{ tag }}</a>{{!$last ? ' / ':''}}
             </span>
           </p>
-  </div>
  </section>
  <br />
 
-<section>
+
+<section ng-if="document.links && document.links.length > 0">
    <md-divider></md-divider>
   <h3>{{'Links' | t }}</h3>
 
-    <div ng-if="document.links" ng-repeat="link in document.links">
+    <div ng-repeat="link in document.links">
 
         <a href="{{link.href}}">{{link.title}}</a>
 
     </div>
 </section>
 <br />
+
+ <section ng-if="document.attachments">
+ <!-- FIXME @todo
+    If license was set after uploading, the files are restricted and therefore not available unless logged in and authorized
+    Once this is fixed, append this to the ng-if: || document.license
+    -->
+     <md-divider></md-divider>
+  <h3>{{'Files' | t }}</h3>
+      <div ng-repeat="file in document.attachments">
+        <md-icon>file_download</md-icon> <a ng-href="{{file.href+'?key='+key()}}">{{ file.filename}}</a> ({{ file.type }} {{ file.length | bytes }})
+      </div>
+</section>
+<br />
+
 
 <section ng-if="alternate">
         <md-divider></md-divider>
