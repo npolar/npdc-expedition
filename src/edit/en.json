@@ -1,148 +1,9 @@
 {
 	"fields": {
-		"platforms": {
-			"title": "platforms",
-			"items": {
-				"fields": {
-					"type": {
-			          "title": "type",
-			          "description": "type of vehicle",
-				      "values": [
-				        "ship",
-				        "boat",
-              			"helicopter",
-			            "snowmobile",
-			            "snow tractor",
-			            "hovercraft",
-			            "other"
-						]
-					}
-              }
-			}
-		},
 		"research": {
 			"title": "research or not?",
 			"items": {
-				"fields": {
-					"topics": {
-			          "title": "topics",
-			          "description": "topics",
-				      "values": [
-				          "acidification",
-				          "atmosphere",
-				          "biology",
-				          "biochemistry",
-				          "biodiversity",
-				          "chemistry",
-				          "climate",
-				          "conservation",
-				          "ecology",
-				          "ecotoxicology",
-				          "environment",
-				          "geology",
-				          "geophysics",
-				          "glaciology",
-				          "history",
-				          "human-dimension",
-				          "management",
-				          "marine",
-				          "marineecosystems",
-				          "maps",
-				          "oceanography",
-				          "other",
-				          "paleoclimate",
-				          "remote-sensing",
-				          "seaice",
-				          "snow",
-				          "terrestrial",
-				          "topography",
-				          "vegetation"
-						]
-					},
-	    "research_type": {
-			"title": "type of activity",
-			"description": "research or not?",
-						"values": [
-							"research",
-							"monitoring",
-							"mapping",
-							"outreach VIP",
-							"education",
-							"logistic operations",
-							"other"
-						]
-					}
-              }
-			}
-		},
-    "people": {
-			"title": "people",
-			"items": {
-				"fields": {
-					"roles": {
-						"title": "roles",
-						"values": [
-							"expedition/cruise leader",
-							"field assistant",
-							"guest",
-							"investigator",
-							"other",
-							"principal investigator",
-							"technitian"
-						]
-					}
-              }
-			}
-		},
-		"activity": {
-			"title": "travel route",
-			"items": {
-				"fields": {
-					"departure_predefined_area": {
-						"title": "departure predefined area",
-						"values": [
-							"Sverdrup research station",
-							"Zeppelin research station",
-							"Ny-Ålesund", "Svalbard", "Frans Josefs land",
-							"Bjørnøya",
-							"Jan Mayen",
-							"Hopen",
-							"Bouvet Island",
-							"Troll",
-							"Tor",
-                            "Dronning Maud Land",
-                            "Antarctica",
-                            "Fram Strait",
-                            "Arctic Ocean",
-                            "Barents Sea North",
-                            "Southern Ocean",
-                            "other"
-						]
-					},
-					"return_predefined_area": {
-						"title": "departure predefined area",
-						"values": [
-							"Sverdrup research station",
-							"Zeppelin reserach station",
-							"Ny-Ålesund", "Svalbard", "Frans Josefs land",
-							"Bjørnøya",
-							"Jan Mayen",
-							"Hopen",
-							"Bouvet Island",
-							"Troll",
-							"Tor",
-                            "Dronning Maud Land",
-                            "Antarctica",
-                            "Fram Strait",
-                            "Arctic Ocean",
-                            "Barents Sea North",
-                            "Southern Ocean",
-                            "other"
-						]
-					}
-              }
-			}
-		},
+				"fields":{
 		"locations": {
 			"title": "locations",
 			"items": {
@@ -153,30 +14,12 @@
 						    "north",
 							"south"
 						]
-					},
-					"predefined_area": {
-						"title": "predefined area",
-						"values": [
-							"Sverdrup research station",
-							"Zeppelin reserach station",
-							"Ny-Ålesund", "Svalbard", "Frans Josefs land",
-							"Bjørnøya",
-							"Jan Mayen",
-							"Hopen",
-							"Bouvet Island",
-							"Troll",
-							"Tor",
-                            "Dronning Maud Land",
-                            "Antarctica",
-                            "Fram Strait",
-                            "Arctic Ocean",
-                            "Barents Sea North",
-                            "Southern Ocean",
-                            "other"
-						]
 					}
               }
 			}
 		}
 	}
+}
+}
+}
 }

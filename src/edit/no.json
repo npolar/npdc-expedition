@@ -32,6 +32,7 @@
 			          "title": "type",
 			          "description": "type fartøy",
 				      "values": [
+				        "",
 				        "skip",
 				        "båt",
               			"helikopter",
@@ -99,6 +100,7 @@
 	                "activity_type": {
 			        "title": "type aktivitet",
 						"values": [
+						    "",
 							"forskning",
 							"monitorering",
 							"kartlegging",
@@ -217,6 +219,7 @@
 					"predefined_area": {
 						"title": "forhåndsdefinert område",
 						"values": [
+						    "",
 						    "Sverdrup forskningsstasjon",
 							"Zeppelin forskningsstasjon",
 							"Ny-Ålesund", "Svalbard", "Frans Josefs land",
@@ -275,7 +278,9 @@
 				"fields": {
 					"rel": {
             			"title": "lenke type (forbindelse mellom denne registreringen og lenke)",
-            			"values": ["fooo","ekspedisjon",
+            			"values": [
+            			    "",
+            			    "ekspedisjon",
 							"datasett",
 							"barn",
 							"forelder",
