@@ -50,8 +50,8 @@
               }
 			}
 		},
-		"research": {
-			"title": "aktivitetskategorier",
+		"activity": {
+			"title": "aktivitet",
 			"description": "Oppgi type aktivitet",
 			"items": {
 				"fields": {
@@ -90,11 +90,14 @@
 				        "vegetasjon"
 			          ]
 					},
-					"research_title": {
+					"activity_title": {
         			"title": "tittel på forskningsprosjekt eller annen virskomhet"
-         		},
-	    "research_type": {
-			"title": "type aktivitet",
+         		    },
+                    "href": {
+                    "title": "lenke (inkludere også protokoll f.eks. http:// som i  http://www.npolar.no)"
+                    },
+	                "activity_type": {
+			        "title": "type aktivitet",
 						"values": [
 							"forskning",
 							"monitorering",
@@ -153,100 +156,20 @@
               }
 			}
 		},
-		"activity": {
+		 "travels": {
 			"title": "reiserute",
-			"description":"Liste over reiserute",
+		    "description":"Liste over reiserute",
 			"items": {
 				"fields": {
-					 "departure_return_dates":{
-        				"title": "reisedatoer",
-				         "fields": {
-				         	"start_date":{
-        				        "title": "avreisedato"
-   					        },
-   					        "end_date":{
-        				        "title": "ankomstdato"
-   					        }
+					  "start_date":{
+        				  "title": "avreisedato"
+   					},
+   					"end_date":{
+        				  "title": "ankomstdato"
+   					}
+
 				          }
-   					 },
-					"departure_predefined_area": {
-						"title": "avreise forhåndsdefinert område",
-						"values": [
-							"Sverdrup forskningsstasjon",
-							"Zeppelin forskningsstasjon",
-							"Ny-Ålesund", "Svalbard", "Frans Josefs land",
-							"Bjørnøya",
-							"Jan Mayen",
-							"Hopen",
-							"Bouvetøya",
-							"Troll",
-							"Tor",
-                            "Dronning Maud Land",
-                            "Antarktis",
-                            "Framstredet",
-                            "Nordishavet",
-                            "Barentshavet, nord",
-                            "Sørishavet",
-                            "annet"
-						]
-					},
-					"departure_placename": {
-						"title":"avreisested"
-					},
-					"departure_country": {
-						"title":"avreiseland"
-					},
-					"departure_gps": {
-						"title":"avreise gps",
-						 "fields": {
-				         "latitude":{
-        				   "title": "breddegrad"
-   					 },
-   					 "longitude":{
-        				 "title": "lengdegrad"
-   					 }
-				          }
-					},
-					"return_placename": {
-						"title":"ankomststed"
-					},
-					"return_country": {
-						"title":"ankomstland"
-					},
-					"return_gps": {
-						"title":"ankomst gps",
-						 "fields": {
-				         "latitude":{
-        				   "title": "breddegrad"
-   					     },
-   					     "longitude":{
-        				    "title": "lengdegrad"
-   					     }
-				       }
-					},
-					"return_predefined_area": {
-						"title": "ankomst forhåndsdefinert område",
-						"values": [
-						    "Sverdrup forskningsstasjon",
-							"Zeppelin forskningsstasjon",
-							"Ny-Ålesund", "Svalbard", "Frans Josefs land",
-							"Bjørnøya",
-							"Jan Mayen",
-							"Hopen",
-							"Bouvetøya",
-							"Troll",
-							"Tor",
-                            "Dronning Maud Land",
-                            "Antarktis",
-                            "Framstredet",
-                            "Nordishavet",
-                            "Barentshavet, nord",
-                            "Sørishavet",
-                            "annet"
-						]
-					}
-              }
-			}
+			             }
 		},
 		"locations": {
 			"title": "lokasjoner",
@@ -315,6 +238,7 @@
               }
 			}
 		},
+
 		"draft": {
 	      "title": "Kladd (registrering holdes internt)",
 	      "values": [

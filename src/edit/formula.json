@@ -34,16 +34,20 @@
     {
       "title": "Activities",
       "fields": [{
-        "id": "research",
+        "id": "activity",
         "items": {
           "fields": [
              {
-          "id": "research_title",
+          "id": "activity_title",
           "title": "research title or activity description"
         },
         {
-          "id": "research_type",
+          "id": "activity_type",
           "title": "research or not"
+        },
+        {
+        "id": "href",
+        "title": "link (please include protocol f.ex. 'http://' as in link http://www.npolar.no)"
         },
         "topics"
           ]
@@ -66,7 +70,10 @@
           "title": "last name"
         },
         "organisation",
-        "country",
+        {
+          "id": "@country",
+          "title": "country"
+        },
         "roles",
         {
       "title": "expedition dates",
@@ -94,15 +101,21 @@
      {
       "title": "Travels",
       "fields": [{
-        "id": "activity",
+        "id": "travels",
         "items": {
           "fields": [
-            "departure_placename",
-            "departure_country",
-            "departure_predefined_areas",
-            "return_placename",
-            "return_country",
-            "return_predefined_areas"
+            "start_date",
+            "end_date",
+            "@departure_placename",
+            "@departure_country",
+            "departure_predefined_area",
+            "departure_latitude",
+            "departure_longitude",
+            "@return_placename",
+            "@return_country",
+            "return_predefined_area",
+            "return_latitude",
+            "return_longitude"
           ]
         }
       }]
@@ -160,10 +173,22 @@
           "id": "draft",
           "title": "draft (not visible to Internet users)"
         },
-        "created",
-        "updated",
-        "created_by",
-        "updated_by",
+        {
+         "id": "created",
+         "disabled": true
+        },
+        {
+         "id": "updated",
+         "disabled": true
+         },
+        {
+         "id": "created_by",
+          "disabled": true
+         },
+        {
+          "id": "updated_by",
+          "disabled": true
+        },
          {
           "id": "comment",
           "title": "comment major changes to this entry"
