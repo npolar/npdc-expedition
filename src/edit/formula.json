@@ -106,13 +106,25 @@
           "fields": [
             "start_date",
             "end_date",
-            "@departure_placename",
-            "@departure_country",
+             {
+          "id": "@departure_placename",
+          "title": "departure placename"
+           },
+            {
+          "id": "@departure_country",
+          "title": "departure country"
+           },
             "departure_predefined_area",
             "departure_latitude",
             "departure_longitude",
-            "@return_placename",
-            "@return_country",
+              {
+          "id": "@return_placename",
+          "title": "return placename"
+           },
+            {
+          "id": "@return_country",
+          "title": "return country"
+           },
             "return_predefined_area",
             "return_latitude",
             "return_longitude"

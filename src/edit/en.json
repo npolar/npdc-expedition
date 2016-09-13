@@ -177,29 +177,6 @@
 					}
               }
 			}
-		},
-		"links": {
-			"title": "links",
-			"items": {
-				"fields": {
-					 "rel": {
-						"title": "relation to link",
-						"values": [
-						    "expedition",
-							"child",
-							"dataset",
-							"parent",
-				            "program",
-				            "project",
-				            "publication",
-				            "reference",
-				            "related",
-				            "stationInformation",
-				            "track"
-						]
-					}
-              }
-			}
 		}
 	}
 }

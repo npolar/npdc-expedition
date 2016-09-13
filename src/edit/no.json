@@ -275,7 +275,7 @@
 				"fields": {
 					"rel": {
             			"title": "lenke type (forbindelse mellom denne registreringen og lenke)",
-            			"values": ["ekspedisjon",
+            			"values": ["fooo","ekspedisjon",
 							"datasett",
 							"barn",
 							"forelder",
