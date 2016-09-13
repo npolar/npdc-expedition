@@ -50,6 +50,7 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
       }])
     };
 
+
   $scope.formula = formula.getInstance(formulaOptions);
   initFileUpload($scope.formula);
 
