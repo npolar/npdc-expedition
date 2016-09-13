@@ -60,7 +60,6 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
     label: 'name',
     value: 'code'
   }, $scope.formula);
-
   formulaAutoCompleteService.autocomplete({
     match: "@departure_placename",
     querySource: npolarApiConfig.base + '/placename',
