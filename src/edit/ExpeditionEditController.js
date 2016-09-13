@@ -35,11 +35,11 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
       },  {
         match: "locations_item",
         template: "<expedition:coverage></expedition:coverage>"
-      },
-    {
-        match: "placenames_item",
-        template: '<npdc:formula-placename></npdc:formula-placename>'
-      }
+      } //,
+  //  {
+  //      match: "placenames_item",
+  //      template: '<npdc:formula-placename></npdc:formula-placename>'
+  //    }
     ]),
       languages: npdcAppConfig.formula.languages.concat([{
         map: require('./en.json'),
@@ -54,17 +54,43 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
   initFileUpload($scope.formula);
 
 
-
   formulaAutoCompleteService.autocomplete({
-    match: "#/people/country",
+    match: "@country",
     querySource: npolarApiConfig.base + '/country',
     label: 'name',
     value: 'code'
   }, $scope.formula);
 
+  formulaAutoCompleteService.autocomplete({
+    match: "@departure_placename",
+    querySource: npolarApiConfig.base + '/placename',
+    label: 'title',
+    value: 'title'
+  }, $scope.formula);
+
+  formulaAutoCompleteService.autocomplete({
+    match: "@return_placename",
+    querySource: npolarApiConfig.base + '/placename',
+    label: 'title',
+    value: 'title'
+  }, $scope.formula);
+
+  formulaAutoCompleteService.autocomplete({
+    match: "@departure_country",
+    querySource: npolarApiConfig.base + '/country',
+    label: 'name',
+    value: 'code'
+  }, $scope.formula);
+
+  formulaAutoCompleteService.autocomplete({
+    match: "@return_country",
+    querySource: npolarApiConfig.base + '/country',
+    label: 'name',
+    value: 'code'
+  }, $scope.formula);
 
   formulaAutoCompleteService.autocompleteFacets(['people.first_name',
-    'people.last_name', 'people.organisation', 'platforms.sponsor', 'tags'], Expedition, $scope.formula);
+    'people.last_name', 'people.organisation', 'platforms.sponsor', 'tags', 'platforms.vessel_name'], Expedition, $scope.formula);
 
   chronopicService.defineOptions({ match: 'released', format: '{date}'});
   chronopicService.defineOptions({ match(field) {
