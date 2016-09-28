@@ -127,7 +127,7 @@
    					 "organisation":{
         				"title": "organisasjon"
    					 },
-   					 "country":{
+   					 "@country":{
         				"title": "land"
    					 },
 					"roles": {
@@ -168,10 +168,39 @@
    					},
    					"end_date":{
         				  "title": "ankomstdato"
+   					},
+   					"@departure_placename":{
+        				  "title": "avreise stedsnavn"
+   					},
+   					"@departure_country":{
+        				  "title": "avreise land"
+   					},
+   					"departure_predefined_area":{
+   						 "title": "avreise forhåndsdefinert område"
+   					},
+   					"departure_latitude":{
+   						 "title": "avreise breddegrad"
+   					},
+   					"departure_longitude":{
+   						 "title": "avreise lengdegrad"
+   					},
+   					"@return_placename":{
+        				  "title": "ankomst stedsnavn"
+   					},
+   					"@return_country":{
+        				  "title": "ankomst land"
+   					},
+   					"return_predefined_area":{
+   						 "title": "ankomst forhåndsdefinert område"
+   					},
+   					"return_latitude":{
+   						 "title": "ankomst breddegrad"
+   					},
+   					"return_longitude":{
+   						 "title": "ankomst lengdegrad"
    					}
-
-				          }
-			             }
+				    }
+			       }
 		},
 		"locations": {
 			"title": "lokasjoner",
@@ -185,22 +214,24 @@
 							"sørlig"
 						]
 					},
-					"location_dates": {
-						"title":"datoer på lokasjon",
-						 "fields": {
-				         "start_date":{
+				    "start_date":{
         				   "title": "ankomstdato"
-   					     },
-   					     "end_date":{
+   					},
+   					"end_date":{
         				    "title": "avreisedato"
-   					     }
-				       }
-					},
-					"gps": {
-						"title":"gps",
-						 "items": {
-   					     }
-					},
+   					},
+   					 "north":{
+        				   "title": "nord"
+   					},
+   					"south":{
+        				    "title": "sør"
+   					},
+   					"east":{
+        				    "title": "øst"
+   					},
+   					"west":{
+        				    "title": "vest"
+   					},
 					"field_camp": {
                        "title": "feltleir"
                     },
@@ -256,6 +287,12 @@
 	    		"title":"oppgi et nøkkelord"
 	    	}
 	    },
+	    "files": {
+      "title": "filer"
+    },
+    "attachments":{
+      "title": "filvedlegg"
+},
 		"created": {
 	      "title": "opprettet"
 	    },
