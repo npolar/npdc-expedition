@@ -64,18 +64,22 @@
   <md-divider></md-divider>
   <h3>{{ 'Travel' | t}}</h3>
 
-    <div  ng-repeat="activity in document.activity">
-       <md-icon>place</md-icon>
-    <span ng-if="activity.departure_return_dates">{{activity.departure_return_dates.start_date.substr(0,10)}} - {{activity.departure_return_dates.end_date.substr(0,10)}}</span>
-    <span ng-if="activity.departure_placename"> &nbsp;&nbsp;{{activity.departure_placename}}</span> <span ng-if="activity.departure_gps"> ({{activity.departure_gps.latitude}},{{activity.departure_gps.longitude}})</span>
-     <span ng-if="activity.departure_country">,&nbsp;{{activity.departure_country}} </span>
-      <span ng-if="activity.departure_predefined_area"> [{{activity.departure_predefined_area}}]</span> -
-       <span ng-if="activity.return_placename">&nbsp;&nbsp;{{activity.return_placename}} </span>
-        <span ng-if="activity.return_gps"> ({{activity.return_gps.latitude}},{{activity.return_gps.longitude}})</span>
-        <span ng-if="activity.return_country">,&nbsp;{{activity.return_country}}</span>
-         <span ng-if="activity.return_predefined_area"> [{{activity.return_predefined_area}}]</span>
-
-        <br />
+    <div  ng-repeat="activity in document.travels">
+    <md-icon>place</md-icon>
+    <span ng-if="activity.start_date">{{activity.start_date.substr(0,10)}}</span>
+    <span ng-if='activity["@departure_placename"]'> {{ activity["@departure_placename"]}}</span>
+    <span ng-if='activity["@departure_country"]'> {{ activity["@departure_country"]}}</span>
+    <span ng-if="activity.departure_predefined_area">&nbsp; [{{activity.departure_predefined_area}}]</span>
+    <span ng-if="activity.departure_latitude">&nbsp;({{activity.departure_latitude}} , </span>
+    <span ng-if="activity.departure_longitude">&nbsp;{{activity.departure_longitude}}) </span>
+    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span ng-if="activity.end_date">{{activity.end_date.substr(0,10)}}</span>
+    <span ng-if='activity["@return_placename"]'> {{ activity["@return_placename"]}}</span>
+    <span ng-if='activity["@return_country"]'> {{ activity["@return_country"]}}</span>
+    <span ng-if="activity.return_predefined_area">&nbsp; [{{activity.return_predefined_area}}]</span>
+    <span ng-if="activity.return_latitude">&nbsp;({{activity.return_latitude}}, </span>
+    <span ng-if="activity.return_longitude">&nbsp;{{activity.return_longitude}} )</span>
+    <br />
     </div>
 </section>
 <br />
@@ -86,12 +90,13 @@
     <div  ng-repeat="location in document.locations">
         <md-icon>place</md-icon>
 
-        <span ng-if="location.location_dates">{{location.location_dates.start_date.substr(0,10)}} - {{location.location_dates.end_date.substr(0,10)}}&nbsp;&nbsp;</span>
+        <span ng-if="location.start_date">{{location.start_date.substr(0,10)}} - {{location.end_date.substr(0,10)}}&nbsp;&nbsp;</span>
 
         <span ng-if="location.placename">{{location.placename}}</span>
-        <span ng-if="location.north">({{location.north}},{{location.east}}&nbsp;{{location.south}},{{location.west}})</span>
-        <span ng-if="location.country">,&nbsp;{{location.country}}</span>
-        <span ng-if="location.predefined_area"> [{{location.predefined_area}}]</span>
+         <span ng-if="location.country">&nbsp;{{(location.country).toUpperCase()}}</span>
+        <span ng-if="location.predefined_area"> &nbsp;[{{location.predefined_area}}]</span>
+        <span ng-if="location.north">[({{location.north}},{{location.east}})&nbsp;-&nbsp;({{location.south}},{{location.west}})]</span>
+
          <span ng-if="location.field_camp"><i>field camp </i></span>
         <span ng-if="location.operation_area"><i>operational area</i></span>
         <br />
