@@ -3,9 +3,7 @@
     "Ekspedisjon",
     "Aktiviteter",
     "Personer",
-    "Reiserute",
     "Lokasjoner",
-    "Lenker",
     "Filopplasting",
     "Endringer"
     ],
@@ -17,13 +15,25 @@
         "title": "type ekspedisjon",
         "values": [
 			"tokt",
-		    "felt"
+		    "feltarbeid"
 		 ]
          },
          "summary": {
          "title": "kort beskrivelse"
          },
-		"platforms": {
+         "start_date":{
+         	"title": "avreisedato"
+   	     },
+   		 "end_date":{
+        	"title": "ankomstdato"
+   	 	 },
+   		 "@departure_placename":{
+        	"title": "avreise stedsnavn"
+   		 },
+   		 "@return_placename":{
+        	"title": "ankomst stedsnavn"
+   		 },
+		 "platforms": {
 			"title": "platformer",
 			"description": "En liste med fartøy som er brukt",
 			"items": {
@@ -46,11 +56,14 @@
         			"title": "navn på fartøy"
          		},
          		 "sponsor": {
-         			"title": "operatør (kun for 'Kronprins Haakon')"
+         			"title": "cruise ansvarlig (kun for 'Kronprins Haakon')"
          		}
               }
 			}
 		},
+		"research_program": {
+        			"title": "forskningsprogram (hvis passende)"
+         		    },
 		"activity": {
 			"title": "aktivitet",
 			"description": "Oppgi type aktivitet",
@@ -158,50 +171,6 @@
               }
 			}
 		},
-		 "travels": {
-			"title": "reiserute",
-		    "description":"Liste over reiserute",
-			"items": {
-				"fields": {
-					  "start_date":{
-        				  "title": "avreisedato"
-   					},
-   					"end_date":{
-        				  "title": "ankomstdato"
-   					},
-   					"@departure_placename":{
-        				  "title": "avreise stedsnavn"
-   					},
-   					"@departure_country":{
-        				  "title": "avreise land"
-   					},
-   					"departure_predefined_area":{
-   						 "title": "avreise forhåndsdefinert område"
-   					},
-   					"departure_latitude":{
-   						 "title": "avreise breddegrad"
-   					},
-   					"departure_longitude":{
-   						 "title": "avreise lengdegrad"
-   					},
-   					"@return_placename":{
-        				  "title": "ankomst stedsnavn"
-   					},
-   					"@return_country":{
-        				  "title": "ankomst land"
-   					},
-   					"return_predefined_area":{
-   						 "title": "ankomst forhåndsdefinert område"
-   					},
-   					"return_latitude":{
-   						 "title": "ankomst breddegrad"
-   					},
-   					"return_longitude":{
-   						 "title": "ankomst lengdegrad"
-   					}
-				    }
-			       }
-		},
 		"locations": {
 			"title": "lokasjoner",
 			"description": "Liste med lokasjoner som beskriver hvor feltarbeidet fant sted",
@@ -232,20 +201,11 @@
    					"west":{
         				    "title": "vest"
    					},
-					"field_camp": {
-                       "title": "feltleir"
-                    },
-                     "operation_area": {
-                       "title": "operasjonsområde"
-                     },
                       "placename": {
                        "title": "stedsnavn"
                      },
                      "area": {
                        "title": "område"
-                     },
-                     "country": {
-                       "title": "land"
                      },
 					"predefined_area": {
 						"title": "forhåndsdefinert område",
@@ -280,13 +240,6 @@
 	         "nei"
 	      ]
 	    },
-	    "tags":{
-	    	"title":"nøkkelord",
-	    	"description": "En liste av ett eller flere nøkkelord som beskriver ekpedisjonen",
-	    	"items": {
-	    		"title":"oppgi et nøkkelord"
-	    	}
-	    },
 	    "files": {
       "title": "filer"
     },
@@ -307,37 +260,6 @@
 	    },
 	    "comment": {
 	      "title": "kommentar til større endringer i registreringen"
-	    },
-		"links": {
-			"title": "lenker",
-			"description": "Lenker som har forbindelse til ekspedisjonen",
-			"items": {
-				"fields": {
-					"rel": {
-            			"title": "lenke type (forbindelse mellom denne registreringen og lenke)",
-            			"values": [
-            			    "",
-            			    "ekspedisjon",
-							"datasett",
-							"barn",
-							"forelder",
-				            "program",
-				            "prosjekt",
-				            "publikasjon",
-				            "referanse",
-				            "relatert",
-				            "stasjonsinformasjon",
-				            "track"
-				            ]
-				          },
-					 "href":{
-            "title":"weblenke inkludert protokoll (f.eks. http:// som i lenken http://www.npolar.no)"
-          },
-          "title": {
-            "title": "tittel"
-          }
-              }
-			}
-		}
+	    }
 	}
 }

@@ -101,7 +101,6 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
  function initFileUpload(formula) {
 
     let server = `${NpolarApiSecurity.canonicalUri($scope.resource.path)}/:id/_file`;
-    console.log(server);
       fileFunnelService.fileUploader({
         match(field) {
           return field.id === "attachments";

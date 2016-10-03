@@ -12,8 +12,17 @@
           "title": "type of expedition"
         },
         "summary",
-        "tags",
-        {
+      "start_date",
+      "end_date",
+      {
+          "id": "@departure_placename",
+          "title": "departure placename"
+      },
+      {
+          "id": "@return_placename",
+          "title": "return placename"
+      },
+      {
         "id": "platforms",
         "items": {
           "fields": [
@@ -24,7 +33,7 @@
         },
         {
           "id": "sponsor",
-          "title": "operator ('Kronprins Haakon' only)"
+          "title": "cruise responsible ('Kronprins Haakon' only)"
         }
           ]
         }
@@ -33,23 +42,28 @@
     },
     {
       "title": "Activities",
-      "fields": [{
+      "fields": [
+      {
+          "id": "research_program",
+          "title": "research program (if applicable)"
+      },
+      {
         "id": "activity",
         "items": {
           "fields": [
-             {
-          "id": "activity_title",
-          "title": "research title or activity description"
-        },
-        {
-          "id": "activity_type",
-          "title": "research or not"
-        },
-        {
-        "id": "href",
-        "title": "link (please include protocol f.ex. 'http://' as in link http://www.npolar.no)"
-        },
-        "topics"
+           {
+              "id": "activity_type",
+              "title": "activity type"
+            },
+            {
+              "id": "activity_title",
+              "title": "activity title"
+            },
+            {
+              "id": "href",
+              "title": "activity link (please include protocol f.ex. 'http://' as in link http://www.npolar.no)"
+            },
+            "topics"
           ]
         }
       }]
@@ -98,40 +112,6 @@
         }
       }]
     },
-     {
-      "title": "Travels",
-      "fields": [{
-        "id": "travels",
-        "items": {
-          "fields": [
-            "start_date",
-            "end_date",
-             {
-          "id": "@departure_placename",
-          "title": "departure placename"
-           },
-            {
-          "id": "@departure_country",
-          "title": "departure country"
-           },
-            "departure_predefined_area",
-            "departure_latitude",
-            "departure_longitude",
-              {
-          "id": "@return_placename",
-          "title": "return placename"
-           },
-            {
-          "id": "@return_country",
-          "title": "return country"
-           },
-            "return_predefined_area",
-            "return_latitude",
-            "return_longitude"
-          ]
-        }
-      }]
-    },
     {
       "title": "Locations",
       "fields": [{
@@ -139,41 +119,19 @@
         "items": {
           "fields": [
             "north",
-            "field_camp",
-            "operation_area",
-            "location_dates",
-            "hemisphere",
+            "east",
+            "south",
+            "west",
             "placename",
             "predefined_area",
-            "country"
+            "start_date",
+            "end_date",
+            "hemisphere"
           ]
         }
       }
       ]
     },
-    {
-      "title": "Links",
-      "fields": [{
-        "id": "links",
-        "items": {
-          "fields": [{
-            "id": "rel",
-            "title": "type of link (relation between this registration and the link)"
-          }, {
-            "id": "href",
-            "title": "link (please include protocol f.ex. 'http://' as in link http://www.npolar.no)"
-          },
-        "!hreflang",
-        "!type",
-        "!length",
-        {
-          "id": "title",
-          "title": "link title"
-        }
-          ]
-        }
-      }]
-  },
     {
       "title": "File upload",
       "fields": ["attachments"]
