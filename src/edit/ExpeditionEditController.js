@@ -91,10 +91,15 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
   formulaAutoCompleteService.autocompleteFacets(['people.first_name',
     'people.last_name', 'people.organisation', 'platforms.sponsor', 'tags', 'platforms.vessel_name'], Expedition, $scope.formula);
 
-  chronopicService.defineOptions({ match: 'released', format: '{date}'});
-  chronopicService.defineOptions({ match(field) {
-    return field.path.match(/^#\/activity\/\d+\/.+/);
-  }, format: '{date}'});
+//  chronopicService.defineOptions({ match: 'released', format: '{date}'});
+//  chronopicService.defineOptions({ match(field) {
+//    return field.path.match(/^#\/activity\/\d+\/.+/);
+//  }, format: '{date}'});
+
+//Set chronopic view format (this does not change the internal value, i.e. ISO string date)
+ chronopicService.defineOptions({ match(field) {
+    return field.path.match(/_date$/);
+ }, format: '{date}'});
 
 }
 
