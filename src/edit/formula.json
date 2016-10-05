@@ -116,6 +116,7 @@
       "title": "Locations",
       "fields": [{
         "id": "locations",
+        "title": "locations (please also deliver tracks to the Environmental Data Section)",
         "items": {
           "fields": [
             "north",
