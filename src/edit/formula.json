@@ -127,7 +127,7 @@
             "predefined_area",
             "start_date",
             "end_date",
-            "hemisphere"
+            "!hemisphere"
           ]
         }
       }

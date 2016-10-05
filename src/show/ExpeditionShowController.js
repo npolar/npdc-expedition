@@ -12,6 +12,12 @@ var ExpeditionShowController = function ($scope, $controller, $q, $routeParams,
   $scope.resource = Expedition;
 
 
+  //Some fields should not be shown unless you are logged in
+  $scope.isLoggedInAs = function() {
+    return ($scope.security.getUser().email);
+  };
+
+
   let uri = (expedition) => {
     let link = expedition.links.find(l => {
       return l.rel === "alternate" && (/html$/).test(l.type);

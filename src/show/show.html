@@ -42,7 +42,7 @@
 </section>
 <br />
 
-
+ <div ng-if="isLoggedInAs()">
   <section ng-if="document.people && document.people.length > 0">
      <md-divider></md-divider>
   <h3>{{ 'People' | t }}</h3>
@@ -58,6 +58,7 @@
       </md-list-item>
     </md-list>
 </section>
+</div>
 
 
 <section ng-if="document.activity && document.activity.length > 0">

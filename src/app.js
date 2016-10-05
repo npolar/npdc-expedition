@@ -44,7 +44,7 @@ npdcExpeditionApp.config(require('./router'));
 
 
 npdcExpeditionApp.config(($httpProvider, npolarApiConfig) => {
-  var autoconfig = new AutoConfig("test");
+  var autoconfig = new AutoConfig("production");
   angular.extend(npolarApiConfig, autoconfig, { resources });
   console.debug("npolarApiConfig", npolarApiConfig);
 
