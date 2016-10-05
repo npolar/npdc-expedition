@@ -105,10 +105,10 @@
 			          ]
 					},
 					"activity_title": {
-        			"title": "tittel på forskningsprosjekt eller annen virskomhet"
+        			"title": "tittel på aktivitet"
          		    },
                     "href": {
-                    "title": "lenke (inkludere også protokoll f.eks. http:// som i  http://www.npolar.no)"
+                    "title": "lenke til aktivitet (inkludere også protokoll f.eks. http:// som i  http://www.npolar.no)"
                     },
 	                "activity_type": {
 			        "title": "type aktivitet",
@@ -172,7 +172,7 @@
 			}
 		},
 		"locations": {
-			"title": "lokasjoner",
+			"title": "lokasjoner (vennligst også lever sporing separat til Miljødataseksjonen)",
 			"description": "Liste med lokasjoner som beskriver hvor feltarbeidet fant sted",
 			"items": {
 				"fields": {
