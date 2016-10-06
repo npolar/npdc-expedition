@@ -25,13 +25,13 @@
          	"title": "avreisedato"
    	     },
    		 "end_date":{
-        	"title": "ankomstdato"
+        	"title": "returdato"
    	 	 },
    		 "@departure_placename":{
         	"title": "avreise stedsnavn"
    		 },
    		 "@return_placename":{
-        	"title": "ankomst stedsnavn"
+        	"title": "retur stedsnavn"
    		 },
 		 "platforms": {
 			"title": "platformer",
