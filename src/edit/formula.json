@@ -12,8 +12,14 @@
           "title": "type of expedition"
         },
         "summary",
-      "start_date",
-      "end_date",
+      {
+          "id": "start_date",
+          "title": "departure date"
+        },
+         {
+          "id": "end_date",
+          "title": "return date"
+        },
       {
           "id": "@departure_placename",
           "title": "departure placename"
