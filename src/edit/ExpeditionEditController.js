@@ -16,7 +16,7 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
   // Inventory -> npolarApiResource -> ngResource
   $scope.resource = Expedition;
 
-   let formulaOptions = {
+  let formulaOptions = {
       schema: '//api.npolar.no/schema/expedition-1',
       form: 'edit/formula.json',
       language: NpolarLang.getLang(),
@@ -105,6 +105,8 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
 
  function initFileUpload(formula) {
 
+    console.log($scope.resource.path);
+    console.log("----------");
     let server = `${NpolarApiSecurity.canonicalUri($scope.resource.path)}/:id/_file`;
       fileFunnelService.fileUploader({
         match(field) {

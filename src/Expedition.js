@@ -8,6 +8,7 @@ function Expedition( $q, ExpeditionResource) {
   ExpeditionResource.schema = schema;
 
   ExpeditionResource.create = function() {
+       console.log("create");
 
       let ship_type = "researchVessel";
       let use_limitation = "none";

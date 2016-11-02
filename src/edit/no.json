@@ -156,7 +156,7 @@
 						]
 					},
 					 "expedition_dates":{
-        				"title": "ekspedisjonsdatoer",
+        				"title": "ekspedisjonsdatoer per person",
         				"items": {
 				         "fields": {
 				         	 "start_date":{

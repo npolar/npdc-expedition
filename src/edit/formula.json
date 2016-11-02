@@ -51,7 +51,7 @@
       "fields": [
       {
           "id": "research_program",
-          "title": "research program (if applicable)"
+          "title": "part of research program (if applicable)"
       },
       {
         "id": "activity",
@@ -96,24 +96,22 @@
         },
         "roles",
         {
-      "title": "expedition dates",
-      "fields": [{
         "id": "expedition_dates",
+        "title":"expedition dates per person",
         "items": {
           "fields": [
-               {
-          "id": "start_date",
-          "title": "departure date"
-        },
-        {
-          "id": "end_date",
-          "title": "return date"
-        }
-
+           {
+              "id": "start_date",
+              "title": "arrival date"
+            },
+            {
+              "id": "end_date",
+              "title": "departure date"
+            }
           ]
         }
-      }]
-    }
+      }
+
           ]
         }
       }]
