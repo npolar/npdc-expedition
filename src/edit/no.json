@@ -105,13 +105,13 @@
 			          ]
 					},
 					"activity_title": {
-        			"title": "tittel på aktivitet"
+        			"title": "tittel på aktivitet (ønsket felt)"
          		    },
                     "href": {
                     "title": "lenke til aktivitet (inkludere også protokoll f.eks. http:// som i  http://www.npolar.no)"
                     },
 	                "activity_type": {
-			        "title": "type aktivitet",
+			        "title": "type aktivitet (ønsket felt)",
 						"values": [
 						    "",
 							"forskning",
@@ -132,19 +132,19 @@
 			"items": {
 				"fields": {
 					"first_name": {
-        				"title": "fornavn"
+        				"title": "fornavn (ønsket felt)"
    					 },
    					 "last_name": {
-        				"title": "etternavn"
+        				"title": "etternavn (ønsket felt)"
    					 },
    					 "organisation":{
-        				"title": "organisasjon"
+        				"title": "organisasjon (ønsket felt)"
    					 },
    					 "@country":{
-        				"title": "land"
+        				"title": "land (ønsket felt)"
    					 },
 					"roles": {
-						"title": "roller",
+						"title": "roller (ønsket felt)",
 						"values": [
 							"ekspedisjonsleder",
 							"feltassistent",
@@ -160,10 +160,10 @@
         				"items": {
 				         "fields": {
 				         	 "start_date":{
-        				"title": "avreisedato"
+        				"title": "avreisedato (ønsket felt)"
    					 },
    					 "end_date":{
-        				"title": "ankomstdato"
+        				"title": "ankomstdato (ønsket felt)"
    					 }
 				          }
 			             }
@@ -172,43 +172,36 @@
 			}
 		},
 		"locations": {
-			"title": "lokasjoner (vennligst også lever sporing separat til Miljødataseksjonen)",
+			"title": "lokasjoner (fyll inn lokalsjoner ELLER last opp track)",
 			"description": "Liste med lokasjoner som beskriver hvor feltarbeidet fant sted",
 			"items": {
 				"fields": {
-					"hemisphere": {
-						"title": "halvkule",
-						"values": [
-						    "nordlig",
-							"sørlig"
-						]
-					},
 				    "start_date":{
-        				   "title": "ankomstdato"
+        				   "title": "ankomstdato (ønsket felt)"
    					},
    					"end_date":{
-        				    "title": "avreisedato"
+        				    "title": "avreisedato (ønsket felt)"
    					},
    					 "north":{
-        				   "title": "nord"
+        				   "title": "nord (ønsket felt)"
    					},
    					"south":{
-        				    "title": "sør"
+        				    "title": "sør (ønsket felt)"
    					},
    					"east":{
-        				    "title": "øst"
+        				    "title": "øst (ønsket felt)"
    					},
    					"west":{
-        				    "title": "vest"
+        				    "title": "vest (ønsket felt)"
    					},
                       "placename": {
-                       "title": "stedsnavn"
+                       "title": "stedsnavn (ønsket felt)"
                      },
                      "area": {
-                       "title": "område"
+                       "title": "område (ønsket felt)"
                      },
 					"predefined_area": {
-						"title": "forhåndsdefinert område",
+						"title": "forhåndsdefinert område (ønsket felt)",
 						"values": [
 						    "",
 						    "Sverdrup forskningsstasjon",

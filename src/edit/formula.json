@@ -59,22 +59,25 @@
           "fields": [
            {
               "id": "activity_type",
-              "title": "activity type"
+              "title": "activity type (demanded field)"
             },
             {
               "id": "activity_title",
-              "title": "activity title"
+              "title": "activity title (demanded field)"
             },
             {
               "id": "href",
               "title": "activity link (please include protocol f.ex. 'http://' as in link http://www.npolar.no)"
             },
-            "topics"
+             {
+              "id": "topics",
+              "title": "topics (demanded field)"
+            }
           ]
         }
       }]
     },
-     {
+  {
       "title": "People",
       "fields": [{
         "id": "people",
@@ -83,55 +86,83 @@
              "!id",
              {
           "id": "first_name",
-          "title": "first name"
+          "title": "first name (demanded field)"
         },
         {
           "id": "last_name",
-          "title": "last name"
+          "title": "last name (demanded field)"
         },
-        "organisation",
-        {
+         {
+          "id": "organisation",
+          "title": "organisation (demanded field)"
+        },
+         {
           "id": "@country",
-          "title": "country"
+          "title": "country (demanded field)"
         },
-        "roles",
+         {
+          "id": "roles",
+          "title": "roles (demanded field)"
+        },
         {
         "id": "expedition_dates",
-        "title":"expedition dates per person",
         "items": {
           "fields": [
            {
-              "id": "start_date",
-              "title": "arrival date"
-            },
-            {
-              "id": "end_date",
-              "title": "departure date"
-            }
+             "id": "start_date",
+             "title": "arrival date (demanded field)"
+           },
+           {
+             "id": "end_date",
+             "title": "departure date (demanded field)"
+           }
           ]
         }
       }
-
-          ]
+      ]
         }
       }]
-    },
+},
     {
       "title": "Locations",
       "fields": [{
         "id": "locations",
-        "title": "locations (please deliver track(s) to the Environmental Data Section)",
+        "title": "locations (fill in locations OR upload tracks)",
         "items": {
           "fields": [
-            "north",
-            "east",
-            "south",
-            "west",
-            "placename",
-            "predefined_area",
-            "start_date",
-            "end_date",
-            "!hemisphere"
+          {
+          "id": "north",
+          "title": "north (demanded field)"
+          },
+          {
+          "id": "east",
+          "title": "east (demanded field)"
+          },
+          {
+          "id": "south",
+          "title": "south (demanded field)"
+          },
+          {
+          "id": "west",
+          "title": "west (demanded field)"
+          },
+          {
+          "id": "placename",
+          "title": "placename (demanded field)"
+           },
+        {
+          "id": "predefined_area",
+          "title": "predefined area (demanded field)"
+        },
+        {
+          "id": "start_date",
+          "title": "start date (demanded field)"
+        },
+        {
+          "id": "end_date",
+          "title": "end date (demanded field)"
+        },
+          "!hemisphere"
           ]
         }
       }
