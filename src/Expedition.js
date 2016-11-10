@@ -1,14 +1,15 @@
 'use strict';
 
-function Expedition( $q, ExpeditionResource) {
+function Expedition( NpolarApiSecurity, ExpeditionResource) {
   'ngInject';
 
   const schema = 'http://api.npolar.no/schema/expedition-1';
 
-  ExpeditionResource.schema = schema;
+  return Object.assign(ExpeditionResource, {
 
-  ExpeditionResource.create = function() {
-       console.log("create");
+     schema,
+
+     create: function() {
 
       let ship_type = "researchVessel";
       let use_limitation = "none";
@@ -17,42 +18,36 @@ function Expedition( $q, ExpeditionResource) {
 
 
       //let id = PublicationResource.randomUUID();
-      let e = {  ship_type, use_limitation, availability, lang
-      };
+      let e = {  ship_type, use_limitation, availability, lang };
       console.debug(e);
       return e;
 
-    };
+    },
 
-    // The hashi (v0) file object should be object with keys filename, url, [file_size, icon, extras].
-    ExpeditionResource.hashiObject = function(link) {
-      console.debug('hashiObject', link);
-      // Ignore links that are not data
-
+     hashiObject: function(file) {
+       console.debug('hashiObject', file);
       return {
-        url: link.href,
-        filename: link.filename,
-        file_size: link.length,
-        md5sum: (link.hash||'md5:').split('md5:')[1],
-        content_type: link.type
+        url: file.uri,
+        filename: file.filename,
+        // icon
+        length: file.file_size,
+        md5sum: (file.hash||'md5:').split('md5:')[1],
+        content_type: file.type
       };
-    };
+    },
 
-    ExpeditionResource.linkObject = function(hashi) {
-      console.debug('linkObject', hashi);
+  fileObject: function(hashi) {
+      console.debug('fileObject', hashi);
       return {
-       // rel: 'data',
-        href: hashi.url,
+        uri: hashi.url,
         filename: hashi.filename,
         length: hashi.file_size,
         hash: 'md5:'+hashi.md5sum,
         type: hashi.content_type
       };
-    };
+    }
 
-  return ExpeditionResource;
-
-
+ });
 
 }
 module.exports = Expedition;

@@ -105,22 +105,23 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
 
  function initFileUpload(formula) {
 
-    console.log($scope.resource.path);
-    console.log("----------");
-    let server = `${NpolarApiSecurity.canonicalUri($scope.resource.path)}/:id/_file`;
-      fileFunnelService.fileUploader({
-        match(field) {
-          return field.id === "attachments";
-        },
-        server,
-        multiple: true,
-        restricted: false,
-        fileToValueMapper: Expedition.linkObject,
-        valueToFileMapper: Expedition.hashiObject,
-        fields: ['filename']
-      }, formula);
-  }
+    let server = `${NpolarApiSecurity.canonicalUri($scope.resource.path)}/restricted/:id/_file`;
 
+    fileFunnelService.fileUploader({
+      match(field) {
+        return field.id === "files";
+      },
+      server,
+      multiple: true,
+      progress: false,
+       restricted: function () {
+        return formula.getModel().restricted;
+      },
+      fileToValueMapper: Expedition.fileObject,
+      valueToFileMapper: Expedition.hashiObject,
+      fields: ['filename'] // 'type', 'hash'
+    }, formula);
+}
 
   try {
     init();

@@ -4,6 +4,7 @@
     "Aktiviteter",
     "Personer",
     "Lokasjoner",
+    "Sporing",
     "Filopplasting",
     "Endringer"
     ],
@@ -73,7 +74,8 @@
 			          "title": "emner",
 			          "description": "emner",
 				      "values": [
-				       "forsuring",
+				      	"passer ikke",
+				        "forsuring",
 				        "atmosfære",
 				        "biologi",
 				        "biokjemi",
@@ -105,13 +107,13 @@
 			          ]
 					},
 					"activity_title": {
-        			"title": "tittel på aktivitet (ønsket felt)"
+        			"title": "tittel på aktivitet (påkrevd)"
          		    },
                     "href": {
                     "title": "lenke til aktivitet (inkludere også protokoll f.eks. http:// som i  http://www.npolar.no)"
                     },
 	                "activity_type": {
-			        "title": "type aktivitet (ønsket felt)",
+			        "title": "type aktivitet (påkrevd)",
 						"values": [
 						    "",
 							"forskning",
@@ -132,19 +134,19 @@
 			"items": {
 				"fields": {
 					"first_name": {
-        				"title": "fornavn (ønsket felt)"
+        				"title": "fornavn (påkrevd)"
    					 },
    					 "last_name": {
-        				"title": "etternavn (ønsket felt)"
+        				"title": "etternavn (påkrevd)"
    					 },
    					 "organisation":{
-        				"title": "organisasjon (ønsket felt)"
+        				"title": "organisasjon (påkrevd)"
    					 },
    					 "@country":{
-        				"title": "land (ønsket felt)"
+        				"title": "land (påkrevd)"
    					 },
 					"roles": {
-						"title": "roller (ønsket felt)",
+						"title": "roller (påkrevd)",
 						"values": [
 							"ekspedisjonsleder",
 							"feltassistent",
@@ -160,10 +162,10 @@
         				"items": {
 				         "fields": {
 				         	 "start_date":{
-        				"title": "avreisedato (ønsket felt)"
+        				"title": "avreisedato (påkrevd)"
    					 },
    					 "end_date":{
-        				"title": "ankomstdato (ønsket felt)"
+        				"title": "ankomstdato (påkrevd)"
    					 }
 				          }
 			             }
@@ -172,36 +174,36 @@
 			}
 		},
 		"locations": {
-			"title": "lokasjoner (fyll inn lokalsjoner ELLER last opp track)",
+			"title": "lokasjoner (fyll inn lokasjoner ELLER spor)",
 			"description": "Liste med lokasjoner som beskriver hvor feltarbeidet fant sted",
 			"items": {
 				"fields": {
 				    "start_date":{
-        				   "title": "ankomstdato (ønsket felt)"
+        				   "title": "ankomstdato (påkrevd)"
    					},
    					"end_date":{
-        				    "title": "avreisedato (ønsket felt)"
+        				    "title": "avreisedato (påkrevd)"
    					},
    					 "north":{
-        				   "title": "nord (ønsket felt)"
+        				   "title": "nord (påkrevd)"
    					},
    					"south":{
-        				    "title": "sør (ønsket felt)"
+        				    "title": "sør (påkrevd)"
    					},
    					"east":{
-        				    "title": "øst (ønsket felt)"
+        				    "title": "øst (påkrevd)"
    					},
    					"west":{
-        				    "title": "vest (ønsket felt)"
+        				    "title": "vest (påkrevd)"
    					},
                       "placename": {
-                       "title": "stedsnavn (ønsket felt)"
+                       "title": "stedsnavn (påkrevd)"
                      },
                      "area": {
-                       "title": "område (ønsket felt)"
+                       "title": "område (påkrevd)"
                      },
 					"predefined_area": {
-						"title": "forhåndsdefinert område (ønsket felt)",
+						"title": "forhåndsdefinert område (påkrevd)",
 						"values": [
 						    "",
 						    "Sverdrup forskningsstasjon",
@@ -225,7 +227,45 @@
               }
 			}
 		},
-
+		"track_information": {
+			"title": "sporing (fyll inn lokasjoner ELLER spor)",
+			"description": "Liste med sporingslokasjoner som beskriver hvor feltarbeidet fant sted",
+			"items": {
+				"fields": {
+				    "start_date":{
+        				   "title": "ankomstdato (påkrevd)"
+   					},
+   					"end_date":{
+        				    "title": "avreisedato (påkrevd)"
+   					},
+                      "placename": {
+                       "title": "stedsnavn (påkrevd)"
+                     },
+					"predefined_area": {
+						"title": "forhåndsdefinert område (påkrevd)",
+						"values": [
+						    "",
+						    "Sverdrup forskningsstasjon",
+							"Zeppelin forskningsstasjon",
+							"Ny-Ålesund", "Svalbard", "Frans Josefs land",
+							"Bjørnøya",
+							"Jan Mayen",
+							"Hopen",
+							"Bouvetøya",
+							"Troll",
+							"Tor",
+                            "Dronning Maud Land",
+                            "Antarktis",
+                            "Framstredet",
+                            "Nordishavet",
+                            "Barentshavet, nord",
+                            "Sørishavet",
+                            "annet"
+						]
+					}
+              }
+			}
+		},
 		"draft": {
 	      "title": "Kladd (registrering holdes internt)",
 	      "values": [
@@ -238,7 +278,7 @@
     },
     "attachments":{
       "title": "filvedlegg"
-},
+    },
 		"created": {
 	      "title": "opprettet"
 	    },

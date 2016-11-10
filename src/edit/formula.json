@@ -59,11 +59,11 @@
           "fields": [
            {
               "id": "activity_type",
-              "title": "activity type (demanded field)"
+              "title": "activity type (required)"
             },
             {
               "id": "activity_title",
-              "title": "activity title (demanded field)"
+              "title": "activity title (required)"
             },
             {
               "id": "href",
@@ -71,7 +71,7 @@
             },
              {
               "id": "topics",
-              "title": "topics (demanded field)"
+              "title": "topics (required)"
             }
           ]
         }
@@ -86,23 +86,23 @@
              "!id",
              {
           "id": "first_name",
-          "title": "first name (demanded field)"
+          "title": "first name (required)"
         },
         {
           "id": "last_name",
-          "title": "last name (demanded field)"
+          "title": "last name (required)"
         },
          {
           "id": "organisation",
-          "title": "organisation (demanded field)"
+          "title": "organisation (required)"
         },
          {
           "id": "@country",
-          "title": "country (demanded field)"
+          "title": "country (required)"
         },
          {
           "id": "roles",
-          "title": "roles (demanded field)"
+          "title": "roles (required)"
         },
         {
         "id": "expedition_dates",
@@ -110,11 +110,11 @@
           "fields": [
            {
              "id": "start_date",
-             "title": "arrival date (demanded field)"
+             "title": "arrival date (required)"
            },
            {
              "id": "end_date",
-             "title": "departure date (demanded field)"
+             "title": "departure date (required)"
            }
           ]
         }
@@ -127,40 +127,40 @@
       "title": "Locations",
       "fields": [{
         "id": "locations",
-        "title": "locations (fill in locations OR upload tracks)",
+        "title": "locations (complete locations OR tracks)",
         "items": {
           "fields": [
           {
           "id": "north",
-          "title": "north (demanded field)"
+          "title": "north (required)"
           },
           {
           "id": "east",
-          "title": "east (demanded field)"
+          "title": "east (required)"
           },
           {
           "id": "south",
-          "title": "south (demanded field)"
+          "title": "south (required)"
           },
           {
           "id": "west",
-          "title": "west (demanded field)"
+          "title": "west (required)"
           },
           {
           "id": "placename",
-          "title": "placename (demanded field)"
+          "title": "placename (required)"
            },
         {
           "id": "predefined_area",
-          "title": "predefined area (demanded field)"
+          "title": "predefined area (required)"
         },
         {
           "id": "start_date",
-          "title": "start date (demanded field)"
+          "title": "start date (required)"
         },
         {
           "id": "end_date",
-          "title": "end date (demanded field)"
+          "title": "end date (required)"
         },
           "!hemisphere"
           ]
@@ -168,9 +168,41 @@
       }
       ]
     },
+     {
+      "title": "tracks",
+      "fields": [
+      {
+        "id": "track_information",
+        "title": "tracks - deliver track to the Environmental Data Section (complete tracks OR locations)",
+        "items": {
+          "fields": [
+           {
+          "id": "placename",
+          "title": "placename (required)"
+        },
+        {
+          "id": "predefined_area",
+          "title": "predefined area (required)"
+        },
+           {
+             "id": "start_date",
+             "title": "arrival date (required)"
+           },
+           {
+             "id": "end_date",
+             "title": "departure date (required)"
+           }
+          ]
+        }
+      }]
+    },
     {
-      "title": "File upload",
-      "fields": ["attachments"]
+      "title": "file upload",
+      "fields": [
+      {
+          "id": "files",
+           "title":"file upload"
+      }]
     },
     {
       "title": "Edits",
