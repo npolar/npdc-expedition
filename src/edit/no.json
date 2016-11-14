@@ -196,11 +196,13 @@
    					"west":{
         				    "title": "vest (påkrevd)"
    					},
-                      "placename": {
+   					 "places": {
+			"title": "steder",
+			"description":"Steder på ekspedisjonen",
+			"items": {
+				"fields": {
+					 "placename": {
                        "title": "stedsnavn (påkrevd)"
-                     },
-                     "area": {
-                       "title": "område (påkrevd)"
                      },
 					"predefined_area": {
 						"title": "forhåndsdefinert område (påkrevd)",
@@ -223,7 +225,16 @@
                             "Sørishavet",
                             "annet"
 						]
-					}
+					},
+                  "start_date": {
+                       "title": "ankomstdato (påkrevd)"
+                   },
+                  "end_date":{
+                       "title": "avreisedato (påkrevd)"
+                   }
+                  }
+              }
+			}
               }
 			}
 		},

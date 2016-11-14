@@ -60,19 +60,6 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
     label: 'name',
     value: 'code'
   }, $scope.formula);
-/*  formulaAutoCompleteService.autocomplete({
-    match: "@departure_placename",
-    querySource: npolarApiConfig.base + '/placename',
-    label: 'title',
-    value: 'title'
-  }, $scope.formula);
-
-  formulaAutoCompleteService.autocomplete({
-    match: "@return_placename",
-    querySource: npolarApiConfig.base + '/placename',
-    label: 'title',
-    value: 'title'
-  }, $scope.formula); */
 
   formulaAutoCompleteService.autocomplete({
     match: "@departure_country",
@@ -88,8 +75,11 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
     value: 'code'
   }, $scope.formula);
 
+ // formulaAutoCompleteService.autocompleteFacets(['people.first_name',
+ //   'people.last_name', 'people.organisation', 'platforms.sponsor', 'tags', 'platforms.vessel_name'], Expedition, $scope.formula);
+
   formulaAutoCompleteService.autocompleteFacets(['people.first_name',
-    'people.last_name', 'people.organisation', 'platforms.sponsor', 'tags', 'platforms.vessel_name'], Expedition, $scope.formula);
+    'people.last_name', 'platforms.sponsor', 'people.organisation', 'tags', 'platforms.vessel_name'], Expedition, $scope.formula);
 
 //  chronopicService.defineOptions({ match: 'released', format: '{date}'});
 //  chronopicService.defineOptions({ match(field) {

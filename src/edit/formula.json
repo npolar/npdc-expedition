@@ -147,23 +147,33 @@
           "title": "west (required)"
           },
           {
-          "id": "placename",
-          "title": "placename (required)"
-           },
-        {
-          "id": "predefined_area",
-          "title": "predefined area (required)"
-        },
-        {
-          "id": "start_date",
-          "title": "start date (required)"
-        },
-        {
-          "id": "end_date",
-          "title": "end date (required)"
-        },
-          "!hemisphere"
+          "title": "places",
+          "fields": [{
+            "id": "places",
+            "items": {
+                "fields": [
+                   {
+                "id": "placename",
+                "title": "placename (required)"
+                 },
+              {
+                "id": "predefined_area",
+                "title": "predefined area (required)"
+              },
+              {
+                "id": "start_date",
+                "title": "start date (required)"
+              },
+              {
+                "id": "end_date",
+                "title": "end date (required)"
+              }
           ]
+        }
+      }
+      ]
+        }
+       ]
         }
       }
       ]
