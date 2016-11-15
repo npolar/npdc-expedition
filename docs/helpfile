@@ -14,11 +14,6 @@ If you do not have a data.npolar.no account, choose the "user menu" icon, write 
 
 If you do not see any green buttons to the right at all when you should be logged in, you are either not logged in or something is wrong. By hovering over the "user menu" button, you should see your login name as a check. If you only see "User menu", try to log in again. If you still do not succeed, [contact us](https://github.com/npolar/npdc-expedition/wiki/helpfile#contact).
 
-#Language
-We are trying to keep the database in English, but if you want Norwegian texts, you can use "Usermenu" and select "English" at the bottom of the menu. Then you will be able to switch to Norwegian texts.
-
-[[https://github.com/npolar/npdc-expedition/blob/master/docs/img/language_detail.png |alt="Add new entry"]]
-
 #Get started
 Go to the homepage, [Norwegian Polar Institute Expedition Database](https://data.npolar.no/expedition). To enter a new entry, choose "New", the green "+"-icon button in the top right corner (see screenshot below).
 
@@ -71,8 +66,6 @@ The first tab contains overview information.
 
 
 ##People
-Choose between the PEOPLE tab or the GROUP tab.
-
 **First name/Last name:** Register the name of the person, typically this is the researcher of staff/logistics operations.
 
 **Organisation:** List the person's organisation. Organizations also have autocomplete, so be careful when typing to choose the correct organization if it is available. Avoid abbreviations.
@@ -84,7 +77,7 @@ Choose between the PEOPLE tab or the GROUP tab.
 **Expedition dates:** Register the arrival and departure date of the person. If the person leaves f.ex. on a field trip and returns later, it should be registered twice - first arrival and departure date and last arrival and departure date.
 
 ##Locations
-Choose between the locations tab or the track tab.
+Choose between the locations tab OR the track tab.
 
 [[https://github.com/npolar/npdc-expedition/blob/master/docs/img/Expedition_map_small.png | alt="Add boundary box in map"]]
 
@@ -105,7 +98,7 @@ Choose between the locations tab or the track tab.
 **End date:** End date for the location stay.
 
 ##Tracks
-Choose between the locations tab or the track tab. The track itself should be sent to  [the Environmental Data Section](https://github.com/npolar/npdc-expedition/wiki/helpfile#contact)
+Choose between the locations tab OR the track tab. The track itself should be sent to  [the Environmental Data Section](https://github.com/npolar/npdc-expedition/wiki/helpfile#contact)
 
 **Placename:**  Add a placename.
 
