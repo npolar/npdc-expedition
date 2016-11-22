@@ -106,6 +106,7 @@
         },
         {
         "id": "expedition_dates",
+        "title":"expedition dates (required)",
         "items": {
           "fields": [
            {
@@ -211,7 +212,7 @@
       "fields": [
       {
           "id": "files",
-           "title":"file upload"
+           "title":"file upload (do not upload track - send it by email to Environmental Data Section)"
       }]
     },
     {

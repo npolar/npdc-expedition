@@ -158,7 +158,7 @@
 						]
 					},
 					 "expedition_dates":{
-        				"title": "ekspedisjonsdatoer per person",
+        				"title": "ekspedisjonsdatoer per person (påkrevd)",
         				"items": {
 				         "fields": {
 				         	 "start_date":{
@@ -285,7 +285,7 @@
 	      ]
 	    },
 	    "files": {
-      "title": "filer"
+      "title": "last opp filer (ikke last opp sporing - denne sendes på epost til Miljødataseksjonen)"
     },
     "attachments":{
       "title": "filvedlegg"
