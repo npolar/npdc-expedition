@@ -11,6 +11,17 @@ var ExpeditionShowController = function ($scope, $controller, $q, $routeParams,
   $controller('NpolarBaseController', {$scope: $scope});
   $scope.resource = Expedition;
 
+ // $scope.pi = [{
+ //          "first_name": "Per Inge",
+ //          "last_name": "Myhre",
+ //          "organisation": "Norwegian Polar Institute",
+ //          "@country": "NO",
+ //          "roles": [
+ //              "principal investigator"
+ //          ]
+ //      }
+ //      ];
+
 
   //Some fields should not be shown unless you are logged in
   $scope.isLoggedInAs = function() {
@@ -29,6 +40,16 @@ var ExpeditionShowController = function ($scope, $controller, $q, $routeParams,
          $scope.mapOptions.coverage = bounds;
          $scope.mapOptions.geojson = "geojson";
       }
+
+      var pi = [];
+       //Convert from camelCase to human readable
+      for(var a=0; a<($scope.document.people).length; a++){
+         for(var b=0; b<($scope.document.people[a].roles).length; b++){
+            if ($scope.document.people[a].roles[b] === 'expedition/cruise leader'){
+                             pi.push($scope.document.people[a]);
+            }
+      }}
+      $scope.pi = pi;
 
       //Convert from camelCase to human readable
       for(var j=0; j<($scope.document.activity).length; j++){
