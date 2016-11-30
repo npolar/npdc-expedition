@@ -57,7 +57,7 @@
         			"title": "navn på fartøy"
          		},
          		 "sponsor": {
-         			"title": "cruise ansvarlig (kun for 'Kronprins Haakon')"
+         			"title": "ansvarlig institusjon (kun for 'Kronprins Haakon')"
          		}
               }
 			}
