@@ -4,7 +4,6 @@
     "Aktiviteter",
     "Personer",
     "Lokasjoner",
-    "Sporing",
     "Filopplasting",
     "Endringer"
     ],
@@ -174,7 +173,7 @@
 			}
 		},
 		"locations": {
-			"title": "lokasjoner (fyll inn lokasjoner ELLER spor)",
+			"title": "lokasjoner (tegn en firkant rundt operasjonsområdet)",
 			"description": "Liste med lokasjoner som beskriver hvor feltarbeidet fant sted",
 			"items": {
 				"fields": {
@@ -197,7 +196,7 @@
         				    "title": "vest (påkrevd)"
    					},
    					 "places": {
-			"title": "steder",
+			"title": "steder (påkrevd)",
 			"description":"Steder på ekspedisjonen",
 			"items": {
 				"fields": {
@@ -205,7 +204,7 @@
                        "title": "stedsnavn (påkrevd)"
                      },
 					"predefined_area": {
-						"title": "forhåndsdefinert område (påkrevd)",
+						"title": "forhåndsdefinert område (alle tokter må ha med havområdene de har seilt) (påkrevd)",
 						"values": [
 						    "",
 						    "Sverdrup forskningsstasjon",
@@ -235,45 +234,6 @@
                   }
               }
 			}
-              }
-			}
-		},
-		"track_information": {
-			"title": "sporing (fyll inn lokasjoner ELLER spor)",
-			"description": "Liste med sporingslokasjoner som beskriver hvor feltarbeidet fant sted",
-			"items": {
-				"fields": {
-				    "start_date":{
-        				   "title": "ankomstdato (påkrevd)"
-   					},
-   					"end_date":{
-        				    "title": "avreisedato (påkrevd)"
-   					},
-                      "placename": {
-                       "title": "stedsnavn (påkrevd)"
-                     },
-					"predefined_area": {
-						"title": "forhåndsdefinert område (påkrevd)",
-						"values": [
-						    "",
-						    "Sverdrup forskningsstasjon",
-							"Zeppelin forskningsstasjon",
-							"Ny-Ålesund", "Svalbard", "Frans Josefs land",
-							"Bjørnøya",
-							"Jan Mayen",
-							"Hopen",
-							"Bouvetøya",
-							"Troll",
-							"Tor",
-                            "Dronning Maud Land",
-                            "Antarktis",
-                            "Framstredet",
-                            "Nordishavet",
-                            "Barentshavet, nord",
-                            "Sørishavet",
-                            "annet"
-						]
-					}
               }
 			}
 		},

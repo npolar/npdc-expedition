@@ -128,7 +128,7 @@
       "title": "Locations",
       "fields": [{
         "id": "locations",
-        "title": "locations (complete locations OR tracks)",
+        "title": "locations (draw a bounding box covering operational area)",
         "items": {
           "fields": [
           {
@@ -147,10 +147,11 @@
           "id": "west",
           "title": "west (required)"
           },
-          {
+        {
           "title": "places",
           "fields": [{
             "id": "places",
+            "title":"places (required)",
             "items": {
                 "fields": [
                    {
@@ -159,7 +160,7 @@
                  },
               {
                 "id": "predefined_area",
-                "title": "predefined area (required)"
+                "title": "predefined area (please include larger seas for cruises) (required)"
               },
               {
                 "id": "start_date",
@@ -178,34 +179,6 @@
         }
       }
       ]
-    },
-     {
-      "title": "tracks",
-      "fields": [
-      {
-        "id": "track_information",
-        "title": "tracks - deliver track to the Environmental Data Section (complete tracks OR locations)",
-        "items": {
-          "fields": [
-           {
-          "id": "placename",
-          "title": "placename (required)"
-        },
-        {
-          "id": "predefined_area",
-          "title": "predefined area (required)"
-        },
-           {
-             "id": "start_date",
-             "title": "arrival date (required)"
-           },
-           {
-             "id": "end_date",
-             "title": "departure date (required)"
-           }
-          ]
-        }
-      }]
     },
     {
       "title": "file upload",
