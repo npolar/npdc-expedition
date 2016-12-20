@@ -11,13 +11,12 @@ function Expedition( NpolarApiSecurity, ExpeditionResource) {
 
      create: function() {
 
-      let use_limitation = "none";
-      let availability ="unrestricted";
+      let availability ="by negotiation";
       let lang = "en";
 
 
       //let id = PublicationResource.randomUUID();
-      let e = {  use_limitation, availability, lang };
+      let e = {  availability, lang };
       console.debug(e);
       return e;
 
