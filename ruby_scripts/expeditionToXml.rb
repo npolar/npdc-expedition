@@ -43,26 +43,34 @@ module Couch
       db_entry = server.get("/"+ Couch::Config::COUCH_EXPEDITION + "/"+id)
       entry = JSON.parse(db_entry.body)
 
+      #Exclude all that are drafts
+      if entry['draft'] == 'no'
+
       #Create the file name with path
       xmlfile = 'xml/' + id.to_s + '.xml'
 
-       #Write chunk to xmlfile
 
-    #  File.open("expeditionTemplate", "r") do |f|
-    #      chunk = f.read(1024)
+
+    #Read chunk from template
     File.readlines('expeditionTemplate', "%]").map(&:rstrip).each do |line|
-         # puts line[0..-4]
+
           puts "--------------------"
           cutline = line[0..-4]
           newline = cutline.split('[%')
-          puts newline[1]
-          #Last chunk is missing [% since it is the end of template
-          if newline[1] == nil then newline[1] = '' end
 
+          @entry_name = ''
+          #Avoid last chunk since it is missing [% at end of template
+          unless newline[1] == nil
+             varname = (newline[1]).to_s
+             puts varname.strip
+             @entry_name = (entry[varname.strip]).to_s
+          end
+
+          puts @entry_name
 
           open(xmlfile, 'a') { |g|
-          g << newline[0] + entry["id"].to_s
-        }
+              g << newline[0] + @entry_name
+          }
      end
 
 
@@ -85,6 +93,7 @@ module Couch
   #  doc = @entry.to_json
 
  #   res = server.post("/"+ Couch::Config::COUCH_DB_NAME + "/", doc, postUser, postPassword)
+   end #exclude all drafts
 
  end #iterate over ids
 
