@@ -1,0 +1,16 @@
+<gmd:geographicElement>
+<gmd:EX_GeographicBoundingBox>
+<gmd:westBoundLongitude>
+<gco:Decimal>[% west %]</gco:Decimal>
+</gmd:westBoundLongitude>
+<gmd:eastBoundLongitude>
+<gco:Decimal>[% east %]</gco:Decimal>
+</gmd:eastBoundLongitude>
+<gmd:southBoundLatitude>
+<gco:Decimal>[% south %]</gco:Decimal>
+</gmd:southBoundLatitude>
+<gmd:northBoundLatitude>
+<gco:Decimal>[% north %]</gco:Decimal>
+</gmd:northBoundLatitude>
+</gmd:EX_GeographicBoundingBox>
+</gmd:geographicElement>end

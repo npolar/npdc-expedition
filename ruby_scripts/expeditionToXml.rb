@@ -44,55 +44,118 @@ module Couch
       entry = JSON.parse(db_entry.body)
 
       #Exclude all that are drafts
-      if entry['draft'] == 'no'
+      if entry['draft'] == 'no'  && entry['type'] == 'cruise'
 
       #Create the file name with path
-      xmlfile = 'xml/' + id.to_s + '.xml'
+      xmlfile = 'seadatanet/' + id.to_s + '.xml'
+
+      #Read people part from the separate template - this may be repeated
+      peo_chunk = ''
+      entry['people'].each { |peo|
+         #Get variables
+         File.readlines('peopleTemplate', "%]").map(&:rstrip).each do |people|
+              #Find which variable
+              cutline = people[0..-4]
+              newline = cutline.split('[%')
+              #Insert into entry
+              unless newline[1] == nil
+                varname = (newline[1]).to_s
+                puts varname.strip
+                #insert variable into position
+                inp = case varname.strip
+                    when 'first_name' then peo['first_name']
+                    when 'last_name' then  peo['last_name']
+                    when 'organisation' then peo['organisation']
+                    else peo['@country']
+                end
+              end #unless
+
+              #Avoid break if inp is nil
+              if inp == nil then inp = '' end
+              #Add to the people chunk
+              peo_chunk << newline[0] + inp
+         end #people
+      } #entry
+
+      #Read people part from the separate template - this may be repeated
+      loc_chunk = ''
+      entry['locations'].each do |loc|
+         File.readlines('locationsTemplate', "%]").map(&:rstrip).each do |locations|
+              #Find which variable
+              cutline = locations[0..-4]
+              newline = cutline.split('[%')
+              #Insert into entry
+              unless newline[1] == nil
+                varname = (newline[1]).to_s
+                puts varname.strip
+                #insert variable into position
+                inp = case varname.strip
+                    when 'west' then loc['west'].to_s
+                    when 'north' then loc['north'].to_s
+                    when 'east' then loc['east'].to_s
+                    else loc['south'].to_s
+                end
+              end #unless
+
+              #Avoid break if inp is nil
+              if inp == nil then inp = '' end
+              #Add to the people chunk
+              loc_chunk << newline[0] + inp
+         end
+      end
 
 
-
-    #Read chunk from template
-    File.readlines('expeditionTemplate', "%]").map(&:rstrip).each do |line|
+      #Read chunk from template
+      File.readlines('expeditionTemplate', "%]").map(&:rstrip).each do |line|
 
           puts "--------------------"
           cutline = line[0..-4]
           newline = cutline.split('[%')
 
-          @entry_name = ''
-          #Avoid last chunk since it is missing [% at end of template
-          unless newline[1] == nil
+          #If last chunk just add it
+          if newline[1] == nil
+            chunk = newline[0]
+          else #Avoid last chunk since it is missing [% at end of template
              varname = (newline[1]).to_s
              puts varname.strip
-             @entry_name = (entry[varname.strip]).to_s
-          end
 
-          puts @entry_name
+             inp = case varname.strip
+                #insert the people chunk
+                when 'REPEAT_PEOPLE'
+                    chunk = newline[0] + peo_chunk
+                #insert the locations chunk
+                when 'REPEAT_LOCATIONS'
+                    chunk = newline[0] + loc_chunk
+                when '@department_country' #This field is decided based on placename
+                     if entry['@departure_placename'] == 'Cape Town'
+                        chunk = newline[0] + 'South Africa'
+                     elsif  entry['@departure_placename'] == 'Troll' || '5 East'
+                        chunk = newline[0] + 'Antarctica'
+                     else
+                        chunk = newline[0] + 'Norway'
+                     end
+                when '@return_country' #This field is decided based on placename
+                      if entry['@return_placename'] == 'Cape Town'
+                        chunk = newline[0] + 'South Africa'
+                      elsif  entry['@return_placename'] == 'Troll' || '5 East'
+                        chunk = newline[0] + 'Antarctica'
+                      else
+                        chunk = newline[0] + 'Norway'
+                      end
+                when 'ship'
+                        chunk = newline[0] + entry['platforms'][0]['name']
+                else  #Just an ordinary tag to be replaced
+                 chunk = newline[0] + (entry[varname.strip]).to_s
+                 puts (entry[varname.strip]).to_s
+             end
+          end  #newline
 
+          #Write to file
           open(xmlfile, 'a') { |g|
-              g << newline[0] + @entry_name
+              g <<  chunk
           }
-     end
+      end
 
-
-
-          #Upload from ruby_scripts to remote server
-       #   Net::SCP.start(Couch::Config::HOST1, Couch::Config::USER2, :password => Couch::Config::PASSWORD1 ) do |scp|
-          #Create a remote directory
-
-          # puts "SCP started"
-        # scp.upload!("/home/siri/projects/ruby_scripts/images/" + uuid + "/" + pic[2], "/srv/hashi/storage/sighting/restricted/" + uuid + "/", :recursive => true)
-          # puts "scp started2"
-        # scp.upload!("/home/siri/projects/ruby_scripts/thumbnails/" + uuid + "/" + pic[2], "/srv/hashi/storage/sighting/restricted/" + uuid +"/thumb_" + pic[2], :recursive => true)
-       #  end
-
-
-
-
-
-    #Post coursetype
-  #  doc = @entry.to_json
-
- #   res = server.post("/"+ Couch::Config::COUCH_DB_NAME + "/", doc, postUser, postPassword)
    end #exclude all drafts
 
  end #iterate over ids
