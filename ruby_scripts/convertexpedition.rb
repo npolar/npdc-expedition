@@ -49,8 +49,8 @@ module Couch
       @email = ''
 
       #Need to extract roles from people, convert then into new values
-      if entry['people']
       @people_all = Array.new
+      if entry['people']
       entry['people'].each do |peo|
          @roles = Array.new
          peo['roles'].each do |role|
@@ -88,8 +88,8 @@ module Couch
 
     #Get the locations
     @locations = nil
+    @places_all = Array.new
     if entry['locations']
-          @places_all = Array.new
 
       entry['locations'].each do |loc|
           @places = [{
