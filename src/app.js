@@ -53,6 +53,7 @@ npdcExpeditionApp.config(($httpProvider, npolarApiConfig) => {
 });
 
 npdcExpeditionApp.run(($http, npdcAppConfig, NpolarTranslate, NpolarLang) => {
+  npdcAppConfig.help = {uri: 'https://github.com/npolar/npdc-expedition/wiki' };
   NpolarTranslate.loadBundles('npdc-expedition');
   npdcAppConfig.toolbarTitle = 'Expedition';
 });
