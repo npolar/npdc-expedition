@@ -37,19 +37,26 @@ module Couch
     res = JSON.parse(db_res.body)
 
     #Iterate over Ids
-  #  for i in 0..((res["rows"].size)-1)
-   #  id =  res["rows"][i]["id"]
-    id = '1b2a4c59-d917-44ec-9dbe-9ff05e07847f'
+    for i in 0..((res["rows"].size)-1)
+     id =  res["rows"][i]["id"]
+    #id = '1b2a4c59-d917-44ec-9dbe-9ff05e07847f'
 
       #Fetch the entry with the id from database
       db_entry = server.get("/"+ Couch::Config::COUCH_EXPEDITION + "/"+id)
       entry = JSON.parse(db_entry.body)
 
-      #Exclude all that are drafts
+      #Exclude all that are drafts and field trips
       if entry['draft'] == 'no'  && entry['type'] == 'cruise'
 
          #Create the file name with path
          xmlfile = 'seadatanet/' + id.to_s + '.xml'
+
+       #  start_d = entry['start_date'][0..9]
+       #  end_d = entry['end_date'][0..9]
+       #  dep_d === entry['@departure_date'].nil? " " : entry['@departure_date'][0..9]
+       #  ret_d === entry['@return_date'].nil? " " : entry['@return_date'][0..9]
+
+
 
          #Bilde an xml file with Nokogiri, only requited fields are needed
          builder = Nokogiri::XML::Builder.new do |xml|
@@ -58,14 +65,16 @@ module Couch
               xml.code entry['code']
               xml.summary entry['summary']
               xml.start_date entry['start_date']
+              xml.start_date_short entry['start_date']
               xml.end_date entry['end_date']
+              xml.end_date_short entry['end_date']
               xml.departure_date entry['@departure_date']
               xml.return_date entry['@return_date']
               xml.departure_placename entry['@departure_placename']
               xml.return_placename entry['@return_placename']
               xml.availability entry['availability']
-              xml.created entry['created']
-              xml.updated entry['updated']
+              xml.created entry['created'][0..9]
+              xml.updated entry['updated'][0..9]
               xml.departure_country 'Norway'
               xml.return_country 'Norway'
               xml.ship entry['platforms'][0]['name']
@@ -92,20 +101,20 @@ module Couch
         }
       end
 
-        xmldoc = builder.to_xml
+      xmldoc = builder.to_xml
       #  puts xmldoc
 
         #Use xslt to convert
         doc = Nokogiri::XML(xmldoc)
         template = Nokogiri::XSLT(File.read('oai-pmh.xslt'))
         transformed_doc = template.transform(doc)
-        puts transformed_doc
+       # puts transformed_doc
 
       end #exclude all drafts
 
-      #File.open(xmlfile, 'w').write(transformed_doc)
+      File.open(xmlfile, 'w').write(transformed_doc)
 
-# end #iterate over ids
+ end #iterate over ids
 
 end #class
 end #module
