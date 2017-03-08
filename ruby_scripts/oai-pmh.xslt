@@ -22,7 +22,7 @@ href="http://schemas.seadatanet.org/Standards-Software/Metadata-formats/SDN2_CSR
 <gmd:contact>
 <gmd:CI_ResponsibleParty>
 <gmd:organisationName>
-<sdn:SDN_EDMOCode codeList="http://seadatanet.maris2.nl/isocodelists/sdncodelists/edmo-edmerp-Codelists.xml#SDN_EDMOCode">Norwegian Polar Institute</sdn:SDN_EDMOCode>
+<sdn:SDN_EDMOCode codeSpace="SeaDataNet" codeListValue="1349" codeList="http://seadatanet.maris2.nl/isocodelists/sdncodelists/edmo-edmerp-Codelists.xml#SDN_EDMOCode">Norwegian Polar Institute</sdn:SDN_EDMOCode>
 </gmd:organisationName>
 <gmd:contactInfo>
 <gmd:CI_Contact>
@@ -170,7 +170,7 @@ href="http://schemas.seadatanet.org/Standards-Software/Metadata-formats/SDN2_CSR
 <gco:CharacterString><xsl:value-of select='first_name'/><xsl:value-of select='last_name'/></gco:CharacterString>
 </gmd:individualName>
 <gmd:organisationName>
-<sdn:SDN_EDMOCode codeSpace="SeaDataNet" codeListValue="1349" codeList="http://seadatanet.maris2.nl/isocodelists/sdncodelists/edmo-edmerp-Codelists.xml#SDN_EDMOCode"><xsl:value-of select='organisation'/></sdn:SDN_EDMOCode>
+<sdn:SDN_EDMOCode codeSpace="SeaDataNet" codeListValue="1349" codeList="http://seadatanet.maris2.nl/isocodelists/sdncodelists/edmo-edmerp-Codelists.xml#SDN_EDMOCode">Norwegian Polar Institute</sdn:SDN_EDMOCode>
 </gmd:organisationName>
 <gmd:role>
 <gmd:CI_RoleCode codeSpace="ISOTC211/19115" codeListValue="pointOfContact" codeList="http://vocab.nerc.ac.uk/isoCodelists/sdnCodelists/gmxCodeLists.xml#CI_RoleCode">pointOfContact</gmd:CI_RoleCode>
@@ -210,7 +210,11 @@ href="http://schemas.seadatanet.org/Standards-Software/Metadata-formats/SDN2_CSR
 <gmd:descriptiveKeywords>
 <gmd:MD_Keywords>
 <gmd:keyword>
-<xsl:value-of select="departure_placename"/>
+<sdn:SDN_PortCode codeSpace="SeaDataNet" codeList="http://vocab.nerc.ac.uk/isoCodelists/sdnCodelists/cdicsrCodeList.xml#SDN_PortCode">
+<xsl:attribute name="codeListValue">
+    <xsl:value-of select="departure_placename_id" />
+  </xsl:attribute>
+<xsl:value-of select="departure_placename"/></sdn:SDN_PortCode>
 </gmd:keyword>
 <gmd:type>
 <gmd:MD_KeywordTypeCode codeSpace="SeaDataNet" codeListValue="departure_place" codeList="http://vocab.nerc.ac.uk/isoCodelists/sdnCodelists/gmxCodeLists.xml#MD_KeywordTypeCode">departure_place</gmd:MD_KeywordTypeCode>
@@ -226,7 +230,7 @@ href="http://schemas.seadatanet.org/Standards-Software/Metadata-formats/SDN2_CSR
 <gmd:date>
 <gmd:CI_Date>
 <gmd:date>
-<gco:Date><xsl:value-of select="start_date"/></gco:Date>
+<gco:Date><xsl:value-of select="start_date_short"/></gco:Date>
 </gmd:date>
 <gmd:dateType>
 <gmd:CI_DateTypeCode codeSpace="ISOTC211/19115" codeListValue="revision" codeList="http://vocab.nerc.ac.uk/isoCodelists/sdnCodelists/gmxCodeLists.xml#CI_DateTypeCode">revision</gmd:CI_DateTypeCode>
@@ -249,8 +253,11 @@ href="http://schemas.seadatanet.org/Standards-Software/Metadata-formats/SDN2_CSR
 </gmd:descriptiveKeywords>
 <gmd:descriptiveKeywords>
 <gmd:MD_Keywords>
-<gmd:keyword>
-<xsl:value-of select="return_placename"/>
+<gmd:keyword><sdn:SDN_PortCode codeSpace="SeaDataNet" codeList="http://vocab.nerc.ac.uk/isoCodelists/sdnCodelists/cdicsrCodeList.xml#SDN_PortCode">
+<xsl:attribute name="codeListValue">
+    <xsl:value-of select="return_placename_id" />
+  </xsl:attribute>
+	<xsl:value-of select="return_placename"/></sdn:SDN_PortCode>
 </gmd:keyword>
 <gmd:type>
 <gmd:MD_KeywordTypeCode codeSpace="SeaDataNet" codeListValue="arrival_place" codeList="http://vocab.nerc.ac.uk/isoCodelists/sdnCodelists/gmxCodeLists.xml#MD_KeywordTypeCode">arrival_place</gmd:MD_KeywordTypeCode>
@@ -266,7 +273,7 @@ href="http://schemas.seadatanet.org/Standards-Software/Metadata-formats/SDN2_CSR
 <gmd:date>
 <gmd:CI_Date>
 <gmd:date>
-<gco:Date><xsl:value-of select="end_date"</gco:Date>
+<gco:Date><xsl:value-of select="end_date_short"</gco:Date>
 </gmd:date>
 <gmd:dateType>
 <gmd:CI_DateTypeCode codeSpace="ISOTC211/19115" codeListValue="revision" codeList="http://vocab.nerc.ac.uk/isoCodelists/sdnCodelists/gmxCodeLists.xml#CI_DateTypeCode">revision</gmd:CI_DateTypeCode>
@@ -288,11 +295,15 @@ href="http://schemas.seadatanet.org/Standards-Software/Metadata-formats/SDN2_CSR
 </gmd:MD_Keywords>
 </gmd:descriptiveKeywords>
 
-
 <gmd:descriptiveKeywords>
 <gmd:MD_Keywords>
 <gmd:keyword>
+<sdn:SDN_CountryCode codeSpace="SeaDataNet" codeList="http://vocab.nerc.ac.uk/isoCodelists/sdnCodelists/cdicsrCodeList.xml#SDN_CountryCode">
+	<xsl:attribute name="codeListValue">
+    <xsl:value-of select="departure_country_id" />
+    </xsl:attribute>
 <xsl:value-of select="departure_country"/>
+	</sdn:SDN_CountryCode>
 </gmd:keyword>
 <gmd:type>
 <gmd:MD_KeywordTypeCode codeSpace="SeaDataNet" codeListValue="departure_country" codeList="http://vocab.nerc.ac.uk/isoCodelists/sdnCodelists/gmxCodeLists.xml#MD_KeywordTypeCode">departure_country</gmd:MD_KeywordTypeCode>
@@ -332,7 +343,11 @@ href="http://schemas.seadatanet.org/Standards-Software/Metadata-formats/SDN2_CSR
 <gmd:descriptiveKeywords>
 <gmd:MD_Keywords>
 <gmd:keyword>
-<xsl:value-of select="return_country"/>
+	<sdn:SDN_CountryCode codeSpace="SeaDataNet" codeList="http://vocab.nerc.ac.uk/isoCodelists/sdnCodelists/cdicsrCodeList.xml#SDN_CountryCode">
+		<xsl:attribute name="codeListValue">
+    <xsl:value-of select="return_country_id" />
+  </xsl:attribute>
+ <xsl:value-of select="return_country"/></sdn:SDN_CountryCode>
 </gmd:keyword>
 <gmd:type>
 <gmd:MD_KeywordTypeCode codeSpace="SeaDataNet" codeListValue="arrival_country" codeList="http://vocab.nerc.ac.uk/isoCodelists/sdnCodelists/gmxCodeLists.xml#MD_KeywordTypeCode">arrival_country</gmd:MD_KeywordTypeCode>
@@ -372,7 +387,11 @@ href="http://schemas.seadatanet.org/Standards-Software/Metadata-formats/SDN2_CSR
 <gmd:descriptiveKeywords>
 <gmd:MD_Keywords>
 <gmd:keyword>
-<xsl:value-of select="ship"/>
+	<sdn:SDN_PlatformCode codeSpace="SeaDataNet" codeListValue="3230" codeList="http://vocab.nerc.ac.uk/isoCodelists/sdnCodelists/cdicsrCodeList.xml#SDN_PlatformCode">
+		<xsl:attribute name="codeListValue">
+    <xsl:value-of select="ship_id" />
+  </xsl:attribute>
+		<xsl:value-of select="ship"/></sdn:SDN_PlatformCode>
 </gmd:keyword>
 <gmd:type>
 <gmd:MD_KeywordTypeCode codeSpace="SeaDataNet" codeListValue="platform" codeList="http://vocab.nerc.ac.uk/isoCodelists/sdnCodelists/gmxCodeLists.xml#MD_KeywordTypeCode">platform</gmd:MD_KeywordTypeCode>
@@ -447,13 +466,8 @@ href="http://schemas.seadatanet.org/Standards-Software/Metadata-formats/SDN2_CSR
 </gmd:identifier>
 </gmd:CI_Citation>
 </gmd:thesaurusName>
-</gmd:MD_Keywords>
-</gmd:descriptiveKeywords>
-
-<gmd:descriptiveKeywords>
-<gmd:MD_Keywords>
 <gmd:type>
-<gmd:MD_KeywordTypeCode codeSpace="SeaDataNet" codeListValue="place" codeList="http://vocab.nerc.ac.uk/isoCodelists/sdnCodelists/gmxCodeLists.xml#MD_KeywordTypeCode">place</gmd:MD_KeywordTypeCode>
+<gmd:MD_KeywordTypeCode codeSpace="SeaDataNet" codeList="http://vocab.nerc.ac.uk/isoCodelists/sdnCodelists/gmxCodeLists.xml#MD_KeywordTypeCode" codeListValue="place">place</gmd:MD_KeywordTypeCode>
 </gmd:type>
 <gmd:thesaurusName>
 <gmd:CI_Citation>
@@ -528,7 +542,7 @@ href="http://schemas.seadatanet.org/Standards-Software/Metadata-formats/SDN2_CSR
 <gmd:extent>
 <gmd:EX_Extent>
 
- <xsl:for-each select="locations">
+ <xsl:for-each select="locations/location[west]">
 <gmd:geographicElement>
 <gmd:EX_GeographicBoundingBox>
 <gmd:westBoundLongitude>
@@ -617,7 +631,9 @@ href="http://schemas.seadatanet.org/Standards-Software/Metadata-formats/SDN2_CSR
 <gmi:acquisitionInformation>
 <gmi:MI_AcquisitionInformation>
 <gmi:operation>
-<gmi:MI_Operation id="urn.SDN.CSR.LOCAL.<xsl:value-of select='id'/>">
+<gmi:MI_Operation><xsl:attribute name="id">
+    <xsl:value-of select="full_id" />
+  </xsl:attribute>
 <gmi:description>
 <gco:CharacterString><xsl:value-of select="summary"/></gco:CharacterString>
 </gmi:description>
