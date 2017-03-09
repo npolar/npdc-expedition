@@ -20,6 +20,42 @@ module Couch
 
   class ExpeditionToXml2
 
+    #If departure or return placename can be either: Longyearbyen, Tromsø, Ny-Ålesund, Troll (5 East), Cape Town
+    #Country is either Norway, South Africa or Antarctica
+    def self.getPlace(input_placename)
+      case input_placename.downcase
+      when 'cape town'
+           placename = 'Cape Town'
+           placename_id = 'BSH39'
+           country = 'South Africa'
+           country_id = 'ZA'
+      when 'troll' || '5 east'
+           placename = 'Troll/5 East'
+           placename_id = "unknown"
+           country = 'Antarctica'
+           country_id = 'AQ'
+      when 'tromsø'
+           country = 'Norway'
+           country_id = 'NO'
+      when 'longyearbyen' || 'lyb'
+           placename = "Longyearbyen"
+           placename_id = 'BSH120'
+           country = 'Norway'
+           country_id = 'NO'
+      when 'ny-ålesund' || 'ny-alesund'
+           placename = 'Ny-Ålesund'
+           placename_id = 'BSH5493'
+           country = 'Norway'
+           country_id = 'NO'
+      else
+           placename = input_placename
+           placename_id = country = country_id ='unknown'
+      end
+
+      return placename_id, placename, country_id, country
+    end
+
+
     #Set server
     fetchHost = Couch::Config::HOST1
     fetchPort = Couch::Config::PORT1
@@ -52,11 +88,10 @@ module Couch
          #Create the file name with path
          xmlfile = 'seadatanet/' + id.to_s + '.xml'
 
-        #If departure or return placename can be either: Longyearbyen, Tromsø, Ny-Ålesund, Troll (5 East), Cape Town
-        #Country can be either Norway, South Africa or Antarctica
 
-
-
+        #departure and return information
+        departure_placename_id, departure_placename,departure_country_id,departure_country = getPlace(entry['@departure_placename'])
+        return_placename_id, return_placename, return_country_id, return_country = getPlace(entry['@return_placename'])
 
         #Ship can be Kronprins Haakon or RV Lance
         ship = (entry['platforms'][0]['name']).downcase
@@ -81,17 +116,17 @@ module Couch
               xml.end_date_short entry['end_date'][0..9]
               xml.departure_date entry['@departure_date']
               xml.return_date entry['@return_date']
-              xml.departure_placename entry['@departure_placename']
-              xml.departure_placename_id 'PLACE_dep'
-              xml.return_placename entry['@return_placename']
-              xml.return_placename_id 'PLACE_ret'
+              xml.departure_placename departure_placename
+              xml.departure_placename_id departure_placename_id
+              xml.return_placename return_placename
+              xml.return_placename_id return_placename_id
               xml.availability entry['availability']
               xml.created entry['created'][0..9]
               xml.updated entry['updated'][0..9]
-              xml.departure_country 'Norway'
-              xml.departure_country_id   'NOR'
-              xml.return_country 'Norway'
-              xml.return_country_id   'NOR'
+              xml.departure_country departure_country
+              xml.departure_country_id   departure_country_id
+              xml.return_country return_country
+              xml.return_country_id   return_country_id
               xml.ship entry['platforms'][0]['name']
               xml.ship_id ship_id
               if entry['people']
@@ -112,7 +147,6 @@ module Couch
                     xml.east v['east']
                     xml.west v['west']
                     }
-                   #   puts v['west'].to_s + "xxxxxxxx"
                 }
                 }
               end

@@ -3,6 +3,7 @@
 <?xml-model
 href="http://schemas.seadatanet.org/Standards-Software/Metadata-formats/SDN2_CSR_ISO19139_3.0.0.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"
 ?>
+
 <gmi:MI_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gmi="http://www.isotc211.org/2005/gmi" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sdn="http://www.seadatanet.org" xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.seadatanet.org http://schemas.seadatanet.org/Standards-Software/Metadata-formats/SDN2_CSR_ISO19139_3.0.0.xsd">
 <gmd:fileIdentifier>
 <gco:CharacterString>urn:SDN:CSR:LOCAL:<xsl:value-of select="id"/></gco:CharacterString>
@@ -461,39 +462,6 @@ href="http://schemas.seadatanet.org/Standards-Software/Metadata-formats/SDN2_CSR
 <gmd:MD_Identifier>
 <gmd:code>
 <gco:CharacterString>http://www.seadatanet.org/urnurl/SDN:L06</gco:CharacterString>
-</gmd:code>
-</gmd:MD_Identifier>
-</gmd:identifier>
-</gmd:CI_Citation>
-</gmd:thesaurusName>
-<gmd:type>
-<gmd:MD_KeywordTypeCode codeSpace="SeaDataNet" codeList="http://vocab.nerc.ac.uk/isoCodelists/sdnCodelists/gmxCodeLists.xml#MD_KeywordTypeCode" codeListValue="place">place</gmd:MD_KeywordTypeCode>
-</gmd:type>
-<gmd:thesaurusName>
-<gmd:CI_Citation>
-<gmd:title>
-<gco:CharacterString>SeaVoX salt and fresh water body gazetteer</gco:CharacterString>
-</gmd:title>
-<gmd:alternateTitle>
-<gco:CharacterString>C19</gco:CharacterString>
-</gmd:alternateTitle>
-<gmd:date>
-<gmd:CI_Date>
-<gmd:date>
-<gco:Date>2013-04-23</gco:Date>
-</gmd:date>
-<gmd:dateType>
-<gmd:CI_DateTypeCode codeSpace="ISOTC211/19115" codeListValue="revision" codeList="http://vocab.nerc.ac.uk/isoCodelists/sdnCodelists/gmxCodeLists.xml#CI_DateTypeCode">revision</gmd:CI_DateTypeCode>
-</gmd:dateType>
-</gmd:CI_Date>
-</gmd:date>
-<gmd:edition>
-<gco:CharacterString>14</gco:CharacterString>
-</gmd:edition>
-<gmd:identifier>
-<gmd:MD_Identifier>
-<gmd:code>
-<gco:CharacterString>http://www.seadatanet.org/urnurl/SDN:C19</gco:CharacterString>
 </gmd:code>
 </gmd:MD_Identifier>
 </gmd:identifier>
