@@ -89,7 +89,7 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
 // Set default #/people/expedition_dates/start_date based on #/start_date
 chronopicService.defineOptions({
   match(field) {
-    return field.path == "#/start_date"
+    return field.path === "#/start_date";
   },
   format: '{date}',
   onChange(elem, date) {
@@ -102,7 +102,7 @@ chronopicService.defineOptions({
 // Set default #/people/expedition_dates/end_date based on #/end_date
 chronopicService.defineOptions({
   match(field) {
-    return field.path == "#/end_date"
+    return field.path === "#/end_date";
   },
   format: '{date}',
   onChange(elem, date) {
