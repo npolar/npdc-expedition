@@ -86,10 +86,53 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, Exped
 //    return field.path.match(/^#\/activity\/\d+\/.+/);
 //  }, format: '{date}'});
 
+// Set default #/people/expedition_dates/start_date based on #/start_date
+chronopicService.defineOptions({
+  match(field) {
+    return field.path == "#/start_date"
+  },
+  format: '{date}',
+  onChange(elem, date) {
+    $scope.formula.getFieldByPath("#/people/0/expedition_dates/0/start_date").then(function(field) {
+      field.schema.default = date.toISOString();
+    });
+  }
+});
+
+// Set default #/people/expedition_dates/end_date based on #/end_date
+chronopicService.defineOptions({
+  match(field) {
+    return field.path == "#/end_date"
+  },
+  format: '{date}',
+  onChange(elem, date) {
+    $scope.formula.getFieldByPath("#/people/0/expedition_dates/0/end_date").then(function(field) {
+      field.schema.default = date.toISOString();
+    });
+  }
+});
+
 //Set chronopic view format (this does not change the internal value, i.e. ISO string date)
- chronopicService.defineOptions({ match(field) {
-    return field.path.match(/_date$/);
- }, format: '{date}'});
+chronopicService.defineOptions({
+  match(field) {
+    return field.path.match(/^#\/.+?\/.+?_date$/);
+  },
+  format: '{date}'
+});
+
+$scope.formula.getFieldByPath("#/people").then(function(field) {
+
+  // "#/people/expedition_dates/start_date"
+
+  /*
+  .getFieldByPath("#/people/expedition_dates/start_date").then(function(field) {
+    field.default = "...";
+  });
+  */
+
+  //field.fieldDefinition.items.fields[6].items.fields[0].default = "2017-03-03T00:00:00Z"; // start
+  //field.fieldDefinition.items.fields[6].items.fields[1].default = "2017-03-03T00:00:00Z"; // retur
+});
 
 }
 

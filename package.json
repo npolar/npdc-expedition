@@ -11,7 +11,7 @@
   "private": true,
   "repository": "https://github.com/npolar/npdc-expedition",
   "dependencies": {
-    "npdc-common": "npolar/npdc-common#v4.7.8"
+    "npdc-common": "npolar/npdc-common#v4.9.4"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.3.13",
