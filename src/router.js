@@ -13,7 +13,7 @@ var router = function ($routeProvider, $locationProvider) {
     template: '<npdc:formula></npdc:formula>',
     controller: 'ExpeditionEditController'
   }).when('/', {
-    template: '<npdc:search-input feed="feed"></npdc:search-input><npdc:search feed="feed"></npdc:search>',
+    templateUrl: 'search/search.html',
     controller: 'ExpeditionSearchController',
     reloadOnSearch: false
   });
