@@ -1,6 +1,6 @@
 {
   "name": "npdc-expedition",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
@@ -25,7 +25,14 @@
   },
   "browserify": {
     "transform": [
-      ["babelify",{"presets": ["es2015"]}],
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ],
       "partialify",
       "browserify-ngannotate"
     ]
