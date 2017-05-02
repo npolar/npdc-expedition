@@ -11,6 +11,7 @@
   "private": true,
   "repository": "https://github.com/npolar/npdc-expedition",
   "dependencies": {
+    "highcharts": "^5.0.10",
     "npdc-common": "npolar/npdc-common#v4.9.9"
   },
   "devDependencies": {

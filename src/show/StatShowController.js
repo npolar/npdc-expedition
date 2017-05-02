@@ -29,6 +29,36 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
           $scope.query2 = EstStats(results.data);
           console.log($scope.query2);
   });
+
+  $scope.barData =
+              [{
+                name: 'research',
+                y: 56.33
+            }, {
+                name: 'topographical mapping',
+                y: 24.03
+            }, {
+                name: 'outreach VIP',
+                y: 10.38
+            }, {
+                name: 'logistic operations',
+                y: 4.77
+            }, {
+                name: 'other',
+                y: 0.91
+            }];
+
+  // Sample data for pie chart
+  $scope.pieData = [{
+                        name: "Fieldwork",
+                        y: 56.33
+                    }, {
+                        name: "Cruise",
+                        y: 24.03,
+                        sliced: true,
+                        selected: true
+                }]
+
  };
 
 

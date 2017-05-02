@@ -4,9 +4,13 @@ var npdcCommon = require('npdc-common');
 var AutoConfig = npdcCommon.AutoConfig;
 
 var angular = require('angular');
+var Highcharts = require('highcharts');
+
+// Load module after Highcharts is loaded
+require('highcharts/modules/exporting')(Highcharts);
 require('npdc-common/src/wrappers/leaflet');
 
-var npdcExpeditionApp = angular.module('npdcExpeditionApp', ['npdcCommon', 'leaflet']);
+var npdcExpeditionApp = angular.module('npdcExpeditionApp', ['npdcCommon', 'leaflet']).value('Highcharts', Highcharts);
 
 npdcExpeditionApp.controller('ExpeditionShowController', require('./show/ExpeditionShowController'));
 npdcExpeditionApp.controller('ExpeditionSearchController', require('./search/ExpeditionSearchController'));
@@ -15,9 +19,10 @@ npdcExpeditionApp.controller('StatShowController', require('./show/StatShowContr
 npdcExpeditionApp.controller('MapShowController', require('./show/MapShowController'));
 npdcExpeditionApp.controller("ExpeditionMapController", require("./search/ExpeditionMapController"));
 npdcExpeditionApp.factory('ExpeditionSearchService', require('./show/ExpeditionSearchService'));
-npdcExpeditionApp.directive('expeditionCoverage', require('./edit/coverage/coverageDirective'));
 npdcExpeditionApp.factory('Expedition', require('./Expedition.js'));
-
+npdcExpeditionApp.directive('expeditionCoverage', require('./edit/coverage/coverageDirective'));
+npdcExpeditionApp.directive('hcPieChart', require('./show/hcPieChart'));
+npdcExpeditionApp.directive('hcBarChart', require('./show/hcBarChart'));
 
 
 

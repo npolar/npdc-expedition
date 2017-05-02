@@ -11,18 +11,6 @@ var ExpeditionShowController = function ($scope, $controller, $q, $routeParams,
   $controller('NpolarBaseController', {$scope: $scope});
   $scope.resource = Expedition;
 
- // $scope.pi = [{
- //          "first_name": "Per Inge",
- //          "last_name": "Myhre",
- //          "organisation": "Norwegian Polar Institute",
- //          "@country": "NO",
- //          "roles": [
- //              "principal investigator"
- //          ]
- //      }
- //      ];
-
-
   //Some fields should not be shown unless you are logged in
   $scope.isLoggedInAs = function() {
     return ($scope.security.getUser().email);
