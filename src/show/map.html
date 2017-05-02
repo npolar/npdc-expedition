@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<npdc:edit-button class="np-primary-control"></npdc:edit-button>
+<npdc:loader ng-if="!document"></npdc:loader>
+
+<leaflet ng-if="document && mapOptions" options="mapOptions" class="coverage-map"></leaflet>
+<div ng-if="document" class="np-padding">
+
+
+<section>
+  <h1>
+  <span class="md-display-2">{{ document.code }} </span><span style={font-size:15%}> [{{ document.type }}]</span></h1>
+</section>
+
+<section>
+ <h3>{{'Summary' | t }}</h3>
+   <md-divider></md-divider>
+  <p>{{document.summary}}<p />
+</section>
+
+<section>
+ <h3>{{'Travel' | t }}</h3>
+  <md-divider></md-divider>
+  <p><md-icon>place</md-icon>&nbsp;
+  <span ng-if="document.start_date">{{(document.start_date).substr(0,10)}}</span>
+  <span ng-if="document.end_date">- {{(document.end_date).substr(0,10)}}</span>
+  <span ng-if="document['@departure_placename']">{{document['@departure_placename']}}</span>
+  <span ng-if="document['@return_placename']">  &nbsp;&nbsp;[{{document['@return_placename']}}]</span>
+</section>
+
+
+<section ng-if="document.platforms && document.platforms.length > 0">
+  <md-divider></md-divider>
+  <h3>{{'Platforms' | t }}</h3>
+    <div ng-if="document.platforms" ng-repeat="platform in document.platforms">
+      {{platform.type}}&nbsp;&nbsp;<span ng-if="platform.name">[{{platform.name}}
+      <span ng-if="platform.sponsor">,&nbsp;{{platform.sponsor}}</span>]
+        </span>
+    </div>
+</section>
+<br />
+
+<section ng-if="document.activity && document.activity.length > 0">
+ <md-divider></md-divider>
+  <h3>{{ 'Activities' | t }}</h3>
+     <p>{{document.research_program}}</p>
+<section ng-if="document.activity && document.activity.length > 0">
+     <div  ng-repeat="activity in document.activity">
+      <span ng-if="activity.activity_title"><md-icon>label_outline</md-icon><a href="{{activity.href}}" target="_blank"> {{activity.activity_title}}</a></span>
+     <span ng-if="activity.activity_type">[ {{activity.activity_type}} ]</span>&nbsp;&nbsp;
+    <span ng-if="activity.topics"> [<span ng-repeat="topic in activity.topics">{{topic}}<span ng-if="!$last">,&nbsp; </span></span>]</span>
+</section>
+</section>
+<br />
+
+ <div ng-if="isLoggedInAs()">
+  <section ng-if="document.people && document.people.length > 0">
+     <md-divider></md-divider>
+  <h3>{{ 'People' | t }}</h3>
+  <md-list>
+    <md-list-item class="md-2-line" ng-repeat="person in document.people">
+      <md-icon class="md-avatar-icon">person</md-icon>
+        <div class="md-list-item-text">
+          <h3> {{ person.first_name }} {{ person.last_name }} </h3>
+          <p ng-if="person.organisation">{{ person.organisation }},&nbsp;{{ person['@country'] }}</p>
+          <p ng-if="person.roles"><span ng-repeat="r in person.roles">{{ r }}<span ng-if="!$last">, </span></span></p>
+          <p ng-if="person.expedition_dates"><span ng-repeat="t in person.expedition_dates">{{ (t.start_date).substr(0,10) }}&nbsp;-&nbsp;{{ (t.start_date).substr(0,10) }}</p>
+        </div>
+      </md-list-item>
+    </md-list>
+</section>
+</div>
+
+<!--if not logged in, show only expedition leader -->
+<div ng-if="!isLoggedInAs()">
+  <section>
+     <md-divider></md-divider>
+  <h3>{{ 'Expedition/cruise leader' | t }}</h3>
+  <md-list>
+    <md-list-item class="md-2-line" ng-repeat="pi2 in pi">
+      <md-icon class="md-avatar-icon">person</md-icon>
+        <div class="md-list-item-text">
+          <h3> {{ pi2.first_name }} {{ pi2.last_name }}</h3>
+
+          <p ng-if="pi2.organisation">{{ pi2.organisation }},&nbsp;{{ pi2['@country'] }}</p>
+        </div>
+      </md-list-item>
+    </md-list>
+</section>
+</div>
+
+
+<section ng-if="document.locations">
+   <md-divider></md-divider>
+   <h3>{{ 'Locations' | t }}</h3>
+    <div  ng-repeat="location in document.locations">
+        <md-icon>place</md-icon>
+
+        <span ng-if="location.start_date">{{location.start_date.substr(0,10)}} - {{location.end_date.substr(0,10)}}&nbsp;&nbsp;</span>
+        <span ng-if="location.placename">{{location.placename}}</span>
+        <span ng-if="location.predefined_area"> &nbsp;[{{location.predefined_area}}]</span>
+        <span ng-if="location.north">[({{location.north}},{{location.east}})&nbsp;-&nbsp;({{location.south}},{{location.west}})]</span>
+
+        <br />
+    </div>
+</section>
+<br />
+
+<section ng-if="document.track_information">
+   <md-divider></md-divider>
+   <h3>{{ 'Tracks' | t }}</h3>
+    <div  ng-repeat="track in document.track_information">
+        <md-icon>place</md-icon>
+
+        <span ng-if="track.start_date">{{track.start_date.substr(0,10)}} - {{track.end_date.substr(0,10)}}&nbsp;&nbsp;</span>
+        <span ng-if="track.placename">{{track.placename}}</span>
+        <span ng-if="track.predefined_area"> &nbsp;[{{track.predefined_area}}]</span>
+
+        <br />
+    </div>
+</section>
+<br />
+
+ <section ng-if="document.attachments">
+ <!-- FIXME @todo
+    If license was set after uploading, the files are restricted and therefore not available unless logged in and authorized
+    Once this is fixed, append this to the ng-if: || document.license
+    -->
+     <md-divider></md-divider>
+  <h3>{{'Files' | t }}</h3>
+      <div ng-repeat="file in document.attachments">
+        <md-icon>file_download</md-icon> <a ng-href="{{file.href+'?key='+key()}}">{{ file.filename}}</a> ({{ file.type }} {{ file.length | bytes }})
+      </div>
+</section>
+<br />
+
+
+<!-- <section ng-if="alternate">
+        <md-divider></md-divider>
+        <h3>Machine-readable metadata</h3> -->
+        <!-- @todo CC0 for metadata? <p></p> -->
+      <!--  <p>
+          <div ng-repeat="link in alternate">
+            <a ng-href="{{link.href}}" title="{{link.type}}">{{ link.title || link.href }}</a>
+            </div>
+        </p>
+</section> -->
+
+<section>
+        <npdc:document-meta></npdc:document-meta>
+</section>
+
+
+</div>

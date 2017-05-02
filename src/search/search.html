@@ -1,3 +1,11 @@
+<span class="npdc-crumbs-container">
+    <span ng-if="!$last">
+      <a ng-href="{{ stat_path }}" title="{{ 'statistics' | t}}"> {{ 'statistics' | t }} </a>&nbsp;&nbsp;
+       <a ng-href="{{ map_path }}" title="{{ 'map' | t}}"> {{ 'map' | t }} </a>
+    </span>
+</span>
+
+
 <npdc:search-input feed="feed"></npdc:search-input>
 
   <section class="app-section" layout="column" ng-controller="ExpeditionMapController">

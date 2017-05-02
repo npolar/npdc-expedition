@@ -10,11 +10,14 @@ var npdcExpeditionApp = angular.module('npdcExpeditionApp', ['npdcCommon', 'leaf
 
 npdcExpeditionApp.controller('ExpeditionShowController', require('./show/ExpeditionShowController'));
 npdcExpeditionApp.controller('ExpeditionSearchController', require('./search/ExpeditionSearchController'));
-npdcExpeditionApp.controller("ExpeditionMapController", require("./search/ExpeditionMapController"));
-
 npdcExpeditionApp.controller('ExpeditionEditController', require('./edit/ExpeditionEditController'));
+npdcExpeditionApp.controller('StatShowController', require('./show/StatShowController'));
+npdcExpeditionApp.controller('MapShowController', require('./show/MapShowController'));
+npdcExpeditionApp.controller("ExpeditionMapController", require("./search/ExpeditionMapController"));
+npdcExpeditionApp.factory('ExpeditionSearchService', require('./show/ExpeditionSearchService'));
 npdcExpeditionApp.directive('expeditionCoverage', require('./edit/coverage/coverageDirective'));
 npdcExpeditionApp.factory('Expedition', require('./Expedition.js'));
+
 
 
 
@@ -27,7 +30,7 @@ var resources = [
   {'path': '/project', 'resource': 'Project' },
   {'path': '/inventory', 'resource': 'Inventory'},
   {'path': '/expedition', 'resource': 'ExpeditionResource'},
-  { path: '/expedition/track', 'resource': 'ExpeditionTrack', cache: true, base: '//api.npolar.no' },
+  {'path': '/expedition/track', 'resource': 'ExpeditionTrack', cache: true, base: '//api.npolar.no' },
 ];
 
 resources.forEach(service => {

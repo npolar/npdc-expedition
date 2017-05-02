@@ -15,6 +15,10 @@ var ExpeditionSearchController = function ($filter, $scope, $location, $controll
      return r+` ${$filter('date')(entry.updated)}`;
  };
 
+  //define link path
+  var href = window.location.href;
+  $scope.stat_path = href + 'stat';
+  $scope.map_path = href + 'map';
 
   npdcAppConfig.cardTitle = "Expedition Archive";
   npdcAppConfig.search.local.results.subtitle = "type";
