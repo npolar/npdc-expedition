@@ -5,18 +5,11 @@
  * @ngInject
  */
 var StatShowController = function ($scope, $controller, $q, $routeParams,
-  Expedition, npdcAppConfig, ExpeditionSearchService, chronopicService) {
+  Expedition, npdcAppConfig, ExpeditionSearchService, ExpeditionJSONService, chronopicService) {
    'ngInject';
 
   $controller('NpolarBaseController', {$scope: $scope});
   $scope.resource = Expedition;
-
-
-
-  new Chronopic('input[type="datetime"][lang="nb"]', { locale: 'nb', format: "{datetime}"  });
-
-   console.log($scope);
-   console.log("--------");
 
   //Define link path
   var href = window.location.href;
@@ -24,59 +17,52 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
   var href1 = href.split('/stat');
   $scope.root_path = href1[0];
 
-  //Search the API
-  var link =  'https://api.npolar.no/expedition/?q=';
+  new Chronopic('input[type="datetime"][lang="nb"]', { locale: 'nb', format: "{datetime}"  });
 
-  var obj = {};
-
+  //Get submitted dates, search for entries, extract values, push to service
   $scope.submit = function() {
-         console.log("hei");
+         console.log("vvvvvvvvv");
          console.log($scope);
-  };
+
+         //Search the API
+        var link =  'https://api.npolar.no/expedition/?q=';
+
+         //Fetch search result
+        ExpeditionSearchService.getValues(link).then(
+              function(results) {
+                  // on success
+                  console.log(results.data);
+                  $scope.query2 = EstStats(results.data);
+                  console.log("-------");
+                  var doc = [{
+                        name: "Microsoft Internet Explorer",
+                        y: 56.33
+                    }, {
+                        name: "Chrome",
+                        y: 24.03,
+                        sliced: true,
+                        selected: true
+                    }, {
+                        name: "Firefox",
+                        y: 10.38
+                    }, {
+                        name: "Safari",
+                        y: 4.77
+                    }, {
+                        name: "Opera",
+                        y: 0.91
+                    }, {
+                        name: "Proprietary or Undetectable",
+                        y: 0.2
+                }]
+                  ExpeditionJSONService.entryObject = doc;
+                  console.log(ExpeditionJSONService.entryObject);
+                  console.log("Getjson");
+        });
+  }; //Submit
 
 
-  //Fetch search result
-  ExpeditionSearchService.getValues(link).then(
-       function(results) {
-          // on success
-          $scope.pieData = [results.data];
-          // Sample data for pie chart
-          $scope.obj = obj;
-          $scope.query2 = EstStats(results.data);
-          console.log($scope);
-          console.log("-------");
-  });
 
-  // Sample data for pie chart
-  obj.pieData = [{
-             name: "Fieldwork",
-             y: 4564
-        }, {
-             name: "Cruise",
-             y: 5432,
-             sliced: true,
-             selected: true
-  }];
-
-  $scope.obj = obj;
-
-
-  $scope.barData = [{
-                name: 'research',
-                y: 56.33
-            }, {
-                name: 'topographical mapping',
-                y: 24.03
-            }, {
-                name: 'outreach VIP',
-                y: 10.38
-            }, {
-                name: 'logistic operations',
-                y: 4.77
-            }, {
-                name: 'other',
-                y: 0.91
-            }];
  };
 
 

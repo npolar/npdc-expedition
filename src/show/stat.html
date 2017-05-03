@@ -9,17 +9,21 @@
 
 <form name="npdcExpeditionApp" ng-controller="StatShowController">
     <label>
-       &nbsp;&nbsp;Startdate:
+       &nbsp;&nbsp;Start date:
        <input type="datetime" lang="nb"  name="ti.start_date" ng-model="ti.start_date" required/>
     </label>
     <label>
-       Enddate:
+       End date:
        <input type="datetime" name="endDate" ng-model="ti.end_date" required>
     </label>
     <button ng-click="submit()">Submit</button>
     <br><br>
   </form>
 <br><br>
-     <hc-pie-chart title="Days in field" data="obj.pieData">Placeholder for pie chart</hc-pie-chart>
-     <hc-bar-chart title="Days in field" data="barData">Placeholder for bar data</hc-bar-chart>
+     <hc-pie-chart title="Days in field" data="type">Days in field</hc-pie-chart>
+     <hc-bar-chart title="Days in field per activity" data="activity_type">Days in field per activity</hc-bar-chart>
+     <hc-bar-chart title="Days in field per country" data="country">Days in field per country</hc-bar-chart>
+     <hc-bar-chart title="Days in field per role" data="role">Days in field per role</hc-bar-chart>
+     <hc-bar-chart title="Days in field per area" data="predefined_area">Days in field per area</hc-bar-chart>
+
 
