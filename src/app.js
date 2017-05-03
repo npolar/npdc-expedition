@@ -17,8 +17,10 @@ npdcExpeditionApp.controller('ExpeditionSearchController', require('./search/Exp
 npdcExpeditionApp.controller('ExpeditionEditController', require('./edit/ExpeditionEditController'));
 npdcExpeditionApp.controller('StatShowController', require('./show/StatShowController'));
 npdcExpeditionApp.controller('MapShowController', require('./show/MapShowController'));
+npdcExpeditionApp.controller('StatCSVController', require('./show/StatCSVController'));
 npdcExpeditionApp.controller("ExpeditionMapController", require("./search/ExpeditionMapController"));
 npdcExpeditionApp.factory('ExpeditionSearchService', require('./show/ExpeditionSearchService'));
+npdcExpeditionApp.factory('ExpeditionJSONService', require('./show/ExpeditionJSONService'));
 npdcExpeditionApp.factory('Expedition', require('./Expedition.js'));
 npdcExpeditionApp.directive('expeditionCoverage', require('./edit/coverage/coverageDirective'));
 npdcExpeditionApp.directive('hcPieChart', require('./show/hcPieChart'));

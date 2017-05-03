@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <span class="npdc-crumbs-container">
     <span ng-if="!$last">
-      <a ng-href="/expedition" title="{{ 'back' | t}}"> {{ 'back' | t }} </a>
+      <a ng-href="/expedition" title="{{ 'back' | t}}"> {{ 'back' | t }} </a> &nbsp;&nbsp;
+        <a ng-href="/expedition/stat/csv" title="{{ 'csv' | t}}"> {{ 'csv' | t }} </a>
     </span>
 </span>
 <br /><br />
 
-     <hc-pie-chart title="Browser usage" data="pieData">Placeholder for pie chart</hc-pie-chart>
-     <hc-bar-chart title="Browser usage" data="barData">Placeholder for bar data</hc-bar-chart>
+<form name="npdcExpeditionApp" ng-controller="StatShowController">
+    <label>
+       &nbsp;&nbsp;Startdate:
+       <input type="datetime" lang="nb"  name="ti.start_date" ng-model="ti.start_date" required/>
+    </label>
+    <label>
+       Enddate:
+       <input type="datetime" name="endDate" ng-model="ti.end_date" required>
+    </label>
+    <button ng-click="submit()">Submit</button>
+    <br><br>
+  </form>
+<br><br>
+     <hc-pie-chart title="Days in field" data="obj.pieData">Placeholder for pie chart</hc-pie-chart>
+     <hc-bar-chart title="Days in field" data="barData">Placeholder for bar data</hc-bar-chart>
 
-<section>
-  oooo
-</section>

@@ -5,11 +5,18 @@
  * @ngInject
  */
 var StatShowController = function ($scope, $controller, $q, $routeParams,
-  Expedition, Inventory, Dataset, Project, Publication, npdcAppConfig, ExpeditionSearchService) {
+  Expedition, npdcAppConfig, ExpeditionSearchService, chronopicService) {
    'ngInject';
 
   $controller('NpolarBaseController', {$scope: $scope});
   $scope.resource = Expedition;
+
+
+
+  new Chronopic('input[type="datetime"][lang="nb"]', { locale: 'nb', format: "{datetime}"  });
+
+   console.log($scope);
+   console.log("--------");
 
   //Define link path
   var href = window.location.href;
@@ -20,18 +27,41 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
   //Search the API
   var link =  'https://api.npolar.no/expedition/?q=';
 
+  var obj = {};
+
+  $scope.submit = function() {
+         console.log("hei");
+         console.log($scope);
+  };
+
+
   //Fetch search result
   ExpeditionSearchService.getValues(link).then(
        function(results) {
           // on success
-          $scope.query = results.data;
-          console.log($scope.query);
+          $scope.pieData = [results.data];
+          // Sample data for pie chart
+          $scope.obj = obj;
           $scope.query2 = EstStats(results.data);
-          console.log($scope.query2);
+          console.log($scope);
+          console.log("-------");
   });
 
-  $scope.barData =
-              [{
+  // Sample data for pie chart
+  obj.pieData = [{
+             name: "Fieldwork",
+             y: 4564
+        }, {
+             name: "Cruise",
+             y: 5432,
+             sliced: true,
+             selected: true
+  }];
+
+  $scope.obj = obj;
+
+
+  $scope.barData = [{
                 name: 'research',
                 y: 56.33
             }, {
@@ -47,18 +77,6 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
                 name: 'other',
                 y: 0.91
             }];
-
-  // Sample data for pie chart
-  $scope.pieData = [{
-                        name: "Fieldwork",
-                        y: 56.33
-                    }, {
-                        name: "Cruise",
-                        y: 24.03,
-                        sliced: true,
-                        selected: true
-                }]
-
  };
 
 

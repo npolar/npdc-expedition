@@ -12,6 +12,9 @@ var router = function ($routeProvider, $locationProvider) {
   }).when('/map', {
     templateUrl: 'show/map.html',
     controller: 'MapShowController'
+  }).when('/stat/csv', {
+    templateUrl: 'show/csv.html',
+    controller: 'StatCSVController'
   }).when('/:id', {
     templateUrl: 'show/show.html',
     controller: 'ExpeditionShowController'
