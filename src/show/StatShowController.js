@@ -17,45 +17,64 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
   var href1 = href.split('/stat');
   $scope.root_path = href1[0];
 
-  new Chronopic('input[type="datetime"][lang="nb"]', { locale: 'nb', format: "{datetime}"  });
+  //Chronopic input values
+  $scope.start_date = null;
+  $scope.end_date = null;
 
-  //Get submitted dates, search for entries, extract values, push to service
-  $scope.submit = function() {
-         console.log("vvvvvvvvv");
-         console.log($scope);
+   // Invoke Chronopic on all datetime input fields using the material css extension
+  new Chronopic('#start_date', {
+    className: '.chronopic.chronopic-ext-md',
+    format: '{date}',
+    onChange: function(element, value) {
+      $scope.start_date = value.toISOString();
+    }
+  });
 
-         //Search the API
-        var link =  'https://api.npolar.no/expedition/?q=';
+  new Chronopic('#end_date', {
+    className: '.chronopic.chronopic-ext-md',
+    format: '{date}',
+    onChange: function(element, value) {
+      $scope.end_date = value.toISOString();
+    }
+  });
 
-         //Fetch search result
-        ExpeditionSearchService.getValues(link).then(
-              function(results) {
-                  // on success
-                  console.log(results.data);
-                  $scope.query2 = EstStats(results.data);
-                  console.log("-------");
-                  var doc = [{
-                        name: "Microsoft Internet Explorer",
+   // Sample data for pie chart
+                $scope.type = [{
+                        name: "Fieldwork",
                         y: 56.33
                     }, {
-                        name: "Chrome",
+                        name: "Cruise",
                         y: 24.03,
                         sliced: true,
                         selected: true
-                    }, {
-                        name: "Firefox",
-                        y: 10.38
-                    }, {
-                        name: "Safari",
-                        y: 4.77
-                    }, {
-                        name: "Opera",
-                        y: 0.91
-                    }, {
-                        name: "Proprietary or Undetectable",
-                        y: 0.2
-                }]
-                  ExpeditionJSONService.entryObject = doc;
+}]
+
+  //Get submitted dates, search for entries, extract values, push to service
+  $scope.submit = function() {
+
+        //Search the API
+        var link = 'https://api.npolar.no/expedition/?q=&fields=start_date,end_date,people,locations&sort=';
+        var link2 = '&filter-start_date=' + $scope.start_date + '..' + $scope.end_date;
+        var link3 = '&filter-end_date=' + $scope.start_date + '..' + $scope.end_date;
+
+        //Fetch search result
+        ExpeditionSearchService.getValues(link+link2+link3).then(
+              function(results) {
+                  // on success
+                  console.log(results.data);
+                  var query = EstStats(results.data);
+                  console.log(query);
+                  var type = [{ name: "fieldwork",
+                                y:query[0]
+                              }, {
+                                name: "cruise",
+                                y:query[1],
+                                sliced: true,
+                                selected: true
+                              }];
+                  console.log("-------");
+
+                  ExpeditionJSONService.entryObject = type;
                   console.log(ExpeditionJSONService.entryObject);
                   console.log("Getjson");
         });

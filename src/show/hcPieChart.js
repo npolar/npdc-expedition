@@ -1,8 +1,7 @@
 "use strict";
-var hcPieChart = function (Highcharts, ExpeditionJSONService) {
 
+var hcPieChart = function (Highcharts) {
  // Directive for pie charts, pass in title and data only
-
                 return {
                     restrict: 'E',
                     template: '<div></div>',
@@ -29,13 +28,13 @@ var hcPieChart = function (Highcharts, ExpeditionJSONService) {
                                 }
                             },
                             series: [{
-                                data: ExpeditionJSONService.getJSON  //scope.data
+                                data: scope.data
                             }]
                         });
                     }
                 };
 };
 
-hcPieChart.$inject = ['Highcharts','ExpeditionJSONService'];
+hcPieChart.$inject = ['Highcharts'];
 
 module.exports = hcPieChart;
