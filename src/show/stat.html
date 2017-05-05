@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <span class="npdc-crumbs-container">
     <span ng-if="!$last">
       <a ng-href="/expedition" title="{{ 'back' | t}}"> {{ 'back' | t }} </a> &nbsp;&nbsp;
@@ -7,19 +8,18 @@
 </span>
 <br /><br />
 
-<form name="npdcExpeditionApp" ng-controller="StatShowController">
-    <label>
-       &nbsp;&nbsp;Startdate:
-       <input type="datetime" lang="nb"  name="ti.start_date" ng-model="ti.start_date" required/>
-    </label>
-    <label>
-       Enddate:
-       <input type="datetime" name="endDate" ng-model="ti.end_date" required>
-    </label>
+
+    <label for="start_date">&nbsp;&nbsp;Start date:</label>
+    <input id="start_date" type="text" required/>
+    <input id="end_date" type="text" required/>
     <button ng-click="submit()">Submit</button>
-    <br><br>
-  </form>
+
 <br><br>
-     <hc-pie-chart title="Days in field" data="obj.pieData">Placeholder for pie chart</hc-pie-chart>
-     <hc-bar-chart title="Days in field" data="barData">Placeholder for bar data</hc-bar-chart>
+    <hc-pie-chart title="Days in field" data="pieData">Days in field</hc-pie-chart>
+<!--
+     <hc-bar-chart title="Days in field per activity" data="activity_type">Days in field per activity</hc-bar-chart>
+     <hc-bar-chart title="Days in field per country" data="country">Days in field per country</hc-bar-chart>
+     <hc-bar-chart title="Days in field per role" data="role">Days in field per role</hc-bar-chart>
+     <hc-bar-chart title="Days in field per area" data="predefined_area">Days in field per area</hc-bar-chart>  -->
+
 

@@ -15,10 +15,7 @@ var hcBarChart = function (Highcharts) {
         type: 'column'
     },
     title: {
-        text: 'Browser market shares. January, 2015 to May, 2015'
-    },
-    subtitle: {
-        text: 'Click the columns to view versions. Source: <a href="http://netmarketshare.com">netmarketshare.com</a>.'
+        text: 'Days in field'
     },
     xAxis: {
         type: 'category'

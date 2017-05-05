@@ -5,18 +5,11 @@
  * @ngInject
  */
 var StatShowController = function ($scope, $controller, $q, $routeParams,
-  Expedition, npdcAppConfig, ExpeditionSearchService, chronopicService) {
+  Expedition, npdcAppConfig, ExpeditionSearchService, ExpeditionJSONService, chronopicService) {
    'ngInject';
 
   $controller('NpolarBaseController', {$scope: $scope});
   $scope.resource = Expedition;
-
-
-
-  new Chronopic('input[type="datetime"][lang="nb"]', { locale: 'nb', format: "{datetime}"  });
-
-   console.log($scope);
-   console.log("--------");
 
   //Define link path
   var href = window.location.href;
@@ -24,59 +17,85 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
   var href1 = href.split('/stat');
   $scope.root_path = href1[0];
 
-  //Search the API
-  var link =  'https://api.npolar.no/expedition/?q=';
-
-  var obj = {};
-
-  $scope.submit = function() {
-         console.log("hei");
-         console.log($scope);
-  };
+  //Chronopic input values
+  $scope.start_date = null;
+  $scope.end_date = null;
 
 
-  //Fetch search result
-  ExpeditionSearchService.getValues(link).then(
-       function(results) {
-          // on success
-          $scope.pieData = [results.data];
-          // Sample data for pie chart
-          $scope.obj = obj;
-          $scope.query2 = EstStats(results.data);
-          console.log($scope);
-          console.log("-------");
+    // Sample data for pie chart
+                $scope.pieData = [{
+                        name: "Fieldwork",
+                        y: 56.33
+                    }, {
+                        name: "Cruise",
+                        y: 24.03,
+                        sliced: true,
+                        selected: true
+                }]
+
+
+
+   // Invoke Chronopic on all datetime input fields using the material css extension
+  new Chronopic('#start_date', {
+    className: '.chronopic.chronopic-ext-md',
+    format: '{date}',
+    onChange: function(element, value) {
+      $scope.start_date = value.toISOString();
+    }
   });
 
-  // Sample data for pie chart
-  obj.pieData = [{
-             name: "Fieldwork",
-             y: 4564
-        }, {
-             name: "Cruise",
-             y: 5432,
-             sliced: true,
-             selected: true
-  }];
-
-  $scope.obj = obj;
+  new Chronopic('#end_date', {
+    className: '.chronopic.chronopic-ext-md',
+    format: '{date}',
+    onChange: function(element, value) {
+      $scope.end_date = value.toISOString();
+    }
+  });
 
 
-  $scope.barData = [{
-                name: 'research',
-                y: 56.33
-            }, {
-                name: 'topographical mapping',
-                y: 24.03
-            }, {
-                name: 'outreach VIP',
-                y: 10.38
-            }, {
-                name: 'logistic operations',
-                y: 4.77
-            }, {
-                name: 'other',
-                y: 0.91
-            }];
+  //Get submitted dates, search for entries, extract values, push to service
+  $scope.submit = function() {
+
+        //Search the API
+        var link = 'https://api.npolar.no/expedition/?q=&fields=start_date,end_date,people,locations&sort=';
+        var link2 = '&filter-start_date=' + $scope.start_date + '..' + $scope.end_date;
+        var link3 = '&filter-end_date=' + $scope.start_date + '..' + $scope.end_date;
+
+         //Fetch search result
+        ExpeditionSearchService.getValues(link+link2+link3).then(
+              function(results) {
+                  // on success
+                  $scope.query2 = EstStats(results.data);
+                  console.log("-------");
+                  var doc = [{
+                        name: "Microsoft Internet Explorer",
+                        y: 56.33
+                    }, {
+                        name: "Chrome",
+                        y: 24.03,
+                        sliced: true,
+                        selected: true
+                    }, {
+                        name: "Firefox",
+                        y: 10.38
+                    }, {
+                        name: "Safari",
+                        y: 4.77
+                    }, {
+                        name: "Opera",
+                        y: 0.91
+                    }, {
+                        name: "Proprietary or Undetectable",
+                        y: 0.2
+                }];
+                  ExpeditionJSONService.entryObject = doc;
+                  console.log(ExpeditionJSONService.entryObject);
+                  console.log("Getjson");
+        });
+  }; //Submit
+
+
+
  };
 
 
