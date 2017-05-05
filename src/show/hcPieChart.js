@@ -1,8 +1,7 @@
 "use strict";
-var hcPieChart = function (Highcharts, ExpeditionJSONService) {
 
+var hcPieChart = function (Highcharts) {
  // Directive for pie charts, pass in title and data only
-
                 return {
                     restrict: 'E',
                     template: '<div></div>',

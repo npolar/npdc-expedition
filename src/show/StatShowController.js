@@ -22,17 +22,34 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
   $scope.end_date = null;
 
 
-    // Sample data for pie chart
-                $scope.pieData = [{
-                        name: "Fieldwork",
-                        y: 56.33
-                    }, {
-                        name: "Cruise",
-                        y: 24.03,
-                        sliced: true,
-                        selected: true
-                }]
+  // Sample data for pie chart
+  $scope.pieData = [{
+            name: "Fieldwork",
+            y: 56.33
+       }, {
+            name: "Cruise",
+            y: 24.03,
+            sliced: true,
+            selected: true
+  }];
 
+
+   // Invoke Chronopic on all datetime input fields using the material css extension
+  new Chronopic('#start_date', {
+    className: '.chronopic.chronopic-ext-md',
+    format: '{date}',
+    onChange: function(element, value) {
+      $scope.start_date = value.toISOString();
+    }
+  });
+
+  new Chronopic('#end_date', {
+    className: '.chronopic.chronopic-ext-md',
+    format: '{date}',
+    onChange: function(element, value) {
+      $scope.end_date = value.toISOString();
+    }
+  });
 
 
    // Invoke Chronopic on all datetime input fields using the material css extension
