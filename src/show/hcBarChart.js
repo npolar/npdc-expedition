@@ -17,6 +17,9 @@ var hcBarChart = function (Highcharts) {
     title: {
         text: 'Days in field'
     },
+    subtitle: {
+        text: 'Click the columns to view versions. Source: <a href="http://netmarketshare.com">netmarketshare.com</a>.'
+   },
     xAxis: {
         type: 'category'
     },

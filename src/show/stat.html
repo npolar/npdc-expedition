@@ -13,12 +13,18 @@
 
     <label for="start_date">&nbsp;&nbsp;Start date:</label>
     <input id="start_date" type="text" required/>
+
+      <label for="end_date">&nbsp;&nbsp;End date:</label>
     <input id="end_date" type="text" required/>
-    <button ng-click="submit()">Submit</button>
+
+  <button name="submit" ng-click="submit()">Submit</button>
+
 </section>
 
 <br><br>
-    <hc-pie-chart title="Days in field" data="pieData">Days in field</hc-pie-chart>
+<div ng-if="show()">
+    <hc-pie-chart title="Days in field" data="type">Days in field</hc-pie-chart>
+</div>
 <!--
      <hc-bar-chart title="Days in field per activity" data="activity_type">Days in field per activity</hc-bar-chart>
      <hc-bar-chart title="Days in field per country" data="country">Days in field per country</hc-bar-chart>

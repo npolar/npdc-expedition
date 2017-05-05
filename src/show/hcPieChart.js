@@ -10,6 +10,7 @@ var hcPieChart = function (Highcharts) {
                         data: '='
                     },
                     link: function (scope, element) {
+
                         Highcharts.chart(element[0], {
                             chart: {
                                 type: 'pie'
@@ -35,6 +36,6 @@ var hcPieChart = function (Highcharts) {
                 };
 };
 
-hcPieChart.$inject = ['Highcharts','ExpeditionJSONService'];
+hcPieChart.$inject = ['Highcharts'];
 
 module.exports = hcPieChart;

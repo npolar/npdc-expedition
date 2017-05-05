@@ -22,56 +22,33 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
   $scope.end_date = null;
 
 
-  // Sample data for pie chart
-  $scope.pieData = [{
-            name: "Fieldwork",
-            y: 56.33
-       }, {
-            name: "Cruise",
-            y: 24.03,
-            sliced: true,
-            selected: true
-  }];
-
-
-   // Invoke Chronopic on all datetime input fields using the material css extension
+    // Invoke Chronopic on all datetime input fields using the material css extension
   new Chronopic('#start_date', {
     className: '.chronopic.chronopic-ext-md',
     format: '{date}',
     onChange: function(element, value) {
+      console.log("start_date");
       $scope.start_date = value.toISOString();
-    }
-  });
-
-  new Chronopic('#end_date', {
-    className: '.chronopic.chronopic-ext-md',
-    format: '{date}',
-    onChange: function(element, value) {
-      $scope.end_date = value.toISOString();
     }
   });
 
 
    // Invoke Chronopic on all datetime input fields using the material css extension
-  new Chronopic('#start_date', {
-    className: '.chronopic.chronopic-ext-md',
-    format: '{date}',
-    onChange: function(element, value) {
-      $scope.start_date = value.toISOString();
-    }
-  });
-
   new Chronopic('#end_date', {
     className: '.chronopic.chronopic-ext-md',
     format: '{date}',
     onChange: function(element, value) {
+        console.log("end_date");
       $scope.end_date = value.toISOString();
     }
   });
+
 
 
   //Get submitted dates, search for entries, extract values, push to service
   $scope.submit = function() {
+
+      if ($scope.start_date && $scope.end_date) {
 
         //Search the API
         var link = 'https://api.npolar.no/expedition/?q=&fields=start_date,end_date,people,locations&sort=';
@@ -82,36 +59,58 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
         ExpeditionSearchService.getValues(link+link2+link3).then(
               function(results) {
                   // on success
-                  $scope.query2 = EstStats(results.data);
-                  console.log("-------");
-                  var doc = [{
-                        name: "Microsoft Internet Explorer",
+                  var query = EstStats(results.data);
+                  console.log(query);
+                  var tot = 100/(query[0] + query[1]);
+
+                  // Sample data for pie chart
+                  var activity_type = [{
+                        name: "research",
                         y: 56.33
-                    }, {
-                        name: "Chrome",
-                        y: 24.03,
-                        sliced: true,
-                        selected: true
-                    }, {
-                        name: "Firefox",
+                      }, {
+                        name: "topographical mapping",
+                        y: 24.03
+                      }, {
+                        name: "outreach VIP",
                         y: 10.38
-                    }, {
-                        name: "Safari",
+                      }, {
+                        name: "logistic operations",
                         y: 4.77
-                    }, {
-                        name: "Opera",
+                      }, {
+                        name: "other",
                         y: 0.91
-                    }, {
-                        name: "Proprietary or Undetectable",
-                        y: 0.2
-                }];
-                  ExpeditionJSONService.entryObject = doc;
-                  console.log(ExpeditionJSONService.entryObject);
-                  console.log("Getjson");
+                   }];
+                  var type = [{
+                              name: "Fieldwork",
+                              y: query[0] *tot
+                       }, {
+                            name: "Cruise",
+                            y: query[1] * tot,
+                            sliced: true,
+                            selected: true
+                  }];
+
+                  //Put together the full object
+                  var inputData = {activity_type,type};
+                  //Push object to service
+                  ExpeditionJSONService.entryObject = inputData;
         });
-  }; //Submit
+      }
+  };  //Submit
 
+   //If show is true, show highslide charts
+   $scope.show = function(){
+      if ((ExpeditionJSONService.entryObject).data !== null) {
+           console.log("show");
+          $scope.type = (ExpeditionJSONService.entryObject).type;
+           console.log((ExpeditionJSONService.entryObject).type);
+          return true;
+      } else {
+         console.log("hide");
+           return false;
+      }
 
+   };
 
  };
 

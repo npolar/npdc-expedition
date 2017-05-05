@@ -9,7 +9,6 @@ var ExpeditionSearchService = function($resource, $http){
     return $http.get(Inputlink);
   };
 
-
   return {
     getValues: getValues
   };
