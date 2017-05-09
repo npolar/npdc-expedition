@@ -22,6 +22,16 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
   $scope.end_date = null;
 
 
+  //define link path
+  var href = window.location.href;
+  var trunk = href.split('expedition');
+  $scope.stat_path = trunk[0] + 'expedition/?=stat';
+  console.log(trunk[1]);
+  trunk[1] === '/?=stat' ?  $scope.stat = true : $scope.stat = false;
+  console.log($scope.stat);
+  console.log("StatShowController");
+
+
     // Invoke Chronopic on all datetime input fields using the material css extension
   new Chronopic('#start_date', {
     className: '.chronopic.chronopic-ext-md',

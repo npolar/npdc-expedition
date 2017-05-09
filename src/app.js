@@ -15,16 +15,15 @@ var npdcExpeditionApp = angular.module('npdcExpeditionApp', ['npdcCommon', 'leaf
 npdcExpeditionApp.controller('ExpeditionShowController', require('./show/ExpeditionShowController'));
 npdcExpeditionApp.controller('ExpeditionSearchController', require('./search/ExpeditionSearchController'));
 npdcExpeditionApp.controller('ExpeditionEditController', require('./edit/ExpeditionEditController'));
-npdcExpeditionApp.controller('StatShowController', require('./show/StatShowController'));
-npdcExpeditionApp.controller('MapShowController', require('./show/MapShowController'));
-npdcExpeditionApp.controller('StatCSVController', require('./show/StatCSVController'));
-npdcExpeditionApp.controller("ExpeditionMapController", require("./search/ExpeditionMapController"));
-npdcExpeditionApp.factory('ExpeditionSearchService', require('./show/ExpeditionSearchService'));
-npdcExpeditionApp.factory('ExpeditionJSONService', require('./show/ExpeditionJSONService'));
+npdcExpeditionApp.controller('StatShowController', require('./search/StatShowController'));
+npdcExpeditionApp.controller('StatCSVController', require('./search/StatCSVController'));
+npdcExpeditionApp.controller('ExpeditionMapController', require('./search/ExpeditionMapController'));
+npdcExpeditionApp.factory('ExpeditionSearchService', require('./search/ExpeditionSearchService'));
+npdcExpeditionApp.factory('ExpeditionJSONService', require('./search/ExpeditionJSONService'));
 npdcExpeditionApp.factory('Expedition', require('./Expedition.js'));
 npdcExpeditionApp.directive('expeditionCoverage', require('./edit/coverage/coverageDirective'));
-npdcExpeditionApp.directive('hcPieChart', require('./show/hcPieChart'));
-npdcExpeditionApp.directive('hcBarChart', require('./show/hcBarChart'));
+npdcExpeditionApp.directive('hcPieChart', require('./search/hcPieChart'));
+npdcExpeditionApp.directive('hcBarChart', require('./search/hcBarChart'));
 
 
 

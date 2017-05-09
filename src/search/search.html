@@ -1,10 +1,11 @@
+
+<!-- <div ng-show = "feed && feed.entries && feed.entries.length > 0"> -->
+<div ng-hide="{{stat}}">
 <span class="npdc-crumbs-container">
     <span ng-if="!$last">
       <a ng-href="{{ stat_path }}" title="{{ 'statistics' | t}}"> {{ 'statistics' | t }} </a>&nbsp;&nbsp;
-       <a ng-href="{{ map_path }}" title="{{ 'map' | t}}"> {{ 'map' | t }} </a>
     </span>
 </span>
-
 
 <npdc:search-input feed="feed"></npdc:search-input>
 
@@ -14,3 +15,43 @@
   </section>
 
 <npdc:search feed="feed"></npdc:search>
+</div>
+
+
+<div ng-show ="{{stat}}" ng-controller="StatShowController">
+
+<span class="npdc-crumbs-container">
+    <span ng-if="!$last">
+      <a ng-href="/expedition" title="{{ 'back' | t}}"> {{ 'back' | t }} </a> &nbsp;&nbsp;
+        <a ng-href="/expedition/stat/csv" title="{{ 'csv' | t}}"> {{ 'csv' | t }} </a>
+    </span>
+</span>
+<br /><br />
+
+
+<section>
+
+    <label for="start_date">&nbsp;&nbsp;Start date:</label>
+    <input id="start_date" type="text" required/>
+
+      <label for="end_date">&nbsp;&nbsp;End date:</label>
+    <input id="end_date" type="text" required/>
+
+  <button name="submit" ng-click="submit()">Submit</button>
+
+</section>
+
+<br><br>
+<div ng-if="show()">
+    <hc-pie-chart title="Days in field" data="type">Days in field</hc-pie-chart>
+</div>
+<!--
+     <hc-bar-chart title="Days in field per activity" data="activity_type">Days in field per activity</hc-bar-chart>
+     <hc-bar-chart title="Days in field per country" data="country">Days in field per country</hc-bar-chart>
+     <hc-bar-chart title="Days in field per role" data="role">Days in field per role</hc-bar-chart>
+     <hc-bar-chart title="Days in field per area" data="predefined_area">Days in field per area</hc-bar-chart>  -->
+
+
+</div>
+
+
