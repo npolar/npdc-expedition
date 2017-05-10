@@ -3,9 +3,10 @@
 <div ng-hide="{{stat}}">
 <span class="npdc-crumbs-container">
     <span ng-if="!$last">
-      <a ng-href="{{ stat_path }}" title="{{ 'statistics' | t}}"> {{ 'statistics' | t }} </a>&nbsp;&nbsp;
+      <a href="#stat" ng-click="submit();">Statistics</a>
     </span>
 </span>
+
 
 <npdc:search-input feed="feed"></npdc:search-input>
 
@@ -15,30 +16,35 @@
   </section>
 
 <npdc:search feed="feed"></npdc:search>
+
 </div>
+
 
 
 <div ng-show ="{{stat}}" ng-controller="StatShowController">
 
-<span class="npdc-crumbs-container">
-    <span ng-if="!$last">
-      <a ng-href="/expedition" title="{{ 'back' | t}}"> {{ 'back' | t }} </a> &nbsp;&nbsp;
-        <a ng-href="/expedition/stat/csv" title="{{ 'csv' | t}}"> {{ 'csv' | t }} </a>
-    </span>
-</span>
-<br /><br />
+<!--<span class="npdc-crumbs-container">
+    <span ng-if="!$last"> -->
 
+ <!--     <a ng-href="/expedition" title="{{ 'back' | t}}"> {{ 'back2' | t }} </a> &nbsp;&nbsp;
+        <a ng-href="/expedition/stat/csv" title="{{ 'csv' | t}}"> {{ 'csv' | t }} </a>  -->
+ <!--   </span>
+</span>
+<br /><br /> -->
+
+ <a href="/expedition" ng-click="submit2();">Back</a>
+ <a href="/expedition#CSV" ng-click="submit3();">CSV</a>
 
 <section>
-
+<form>
     <label for="start_date">&nbsp;&nbsp;Start date:</label>
     <input id="start_date" type="text" required/>
 
       <label for="end_date">&nbsp;&nbsp;End date:</label>
     <input id="end_date" type="text" required/>
 
-  <button name="submit" ng-click="submit()">Submit</button>
-
+ <button name="submit" ng-click="submit()">Submit</button>
+</form>
 </section>
 
 <br><br>

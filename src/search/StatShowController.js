@@ -10,29 +10,41 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
 
   $controller('NpolarBaseController', {$scope: $scope});
   $scope.resource = Expedition;
+  console.log('StatShow');
+
+  $scope.submit2 = function() {
+     //window.location.href = '/expedition#test';
+     window.location.reload();
+     window.location.href = '/expedition';
+  };
+
+  $scope.submit3 = function() {
+     window.location.reload();
+      window.location.href = '/expedition/#CSV';
+  };
+
+   //define link path
+  var href = window.location.href;
+  var trunk = href.split('expedition');
+   if (trunk[1] === '/#stat') {
+          $scope.stat = true;
+  } else {
+          $scope.stat = false;
+  }
+
 
   //Define link path
-  var href = window.location.href;
+ // var href = window.location.href;
   //Remove last part of link
-  var href1 = href.split('/stat');
-  $scope.root_path = href1[0];
+ // var href1 = href.split('/stat');
+  //$scope.root_path = href1[0];
 
   //Chronopic input values
   $scope.start_date = null;
   $scope.end_date = null;
 
 
-  //define link path
-  var href = window.location.href;
-  var trunk = href.split('expedition');
-  $scope.stat_path = trunk[0] + 'expedition/?=stat';
-  console.log(trunk[1]);
-  trunk[1] === '/?=stat' ?  $scope.stat = true : $scope.stat = false;
-  console.log($scope.stat);
-  console.log("StatShowController");
-
-
-    // Invoke Chronopic on all datetime input fields using the material css extension
+  // Invoke Chronopic on all datetime input fields using the material css extension
   new Chronopic('#start_date', {
     className: '.chronopic.chronopic-ext-md',
     format: '{date}',
@@ -54,10 +66,8 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
   });
 
 
-
   //Get submitted dates, search for entries, extract values, push to service
   $scope.submit = function() {
-
       if ($scope.start_date && $scope.end_date) {
 
         //Search the API
@@ -113,10 +123,10 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
       if ((ExpeditionJSONService.entryObject).data !== null) {
            console.log("show");
           $scope.type = (ExpeditionJSONService.entryObject).type;
-           console.log((ExpeditionJSONService.entryObject).type);
+          // console.log((ExpeditionJSONService.entryObject).type);
           return true;
       } else {
-         console.log("hide");
+         //console.log("hide");
            return false;
       }
 
