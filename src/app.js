@@ -4,13 +4,11 @@ var npdcCommon = require('npdc-common');
 var AutoConfig = npdcCommon.AutoConfig;
 
 var angular = require('angular');
-var Highcharts = require('highcharts');
 
 // Load module after Highcharts is loaded
-require('highcharts/modules/exporting')(Highcharts);
 require('npdc-common/src/wrappers/leaflet');
 
-var npdcExpeditionApp = angular.module('npdcExpeditionApp', ['npdcCommon', 'leaflet']).value('Highcharts', Highcharts);
+var npdcExpeditionApp = angular.module('npdcExpeditionApp', ['npdcCommon', 'leaflet']);
 
 npdcExpeditionApp.controller('ExpeditionShowController', require('./show/ExpeditionShowController'));
 npdcExpeditionApp.controller('ExpeditionSearchController', require('./search/ExpeditionSearchController'));
@@ -22,9 +20,6 @@ npdcExpeditionApp.factory('ExpeditionSearchService', require('./search/Expeditio
 npdcExpeditionApp.factory('ExpeditionJSONService', require('./search/ExpeditionJSONService'));
 npdcExpeditionApp.factory('Expedition', require('./Expedition.js'));
 npdcExpeditionApp.directive('expeditionCoverage', require('./edit/coverage/coverageDirective'));
-npdcExpeditionApp.directive('hcPieChart', require('./search/hcPieChart'));
-npdcExpeditionApp.directive('hcBarChart', require('./search/hcBarChart'));
-
 
 
 // Bootstrap ngResource models using NpolarApiResource
