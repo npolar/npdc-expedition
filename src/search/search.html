@@ -10,10 +10,10 @@
 
 <npdc:search-input feed="feed"></npdc:search-input>
 
-  <section class="app-section" layout="column" ng-controller="ExpeditionMapController">
+  <!--<section class="app-section" layout="column" ng-controller="ExpeditionMapController">
     <h1>Expeditions ({{interval}} average positions)</h1>
     <div id="npolar-esri-leaflet-map" style="height:600px;" class="leaflet-map"></div>
-  </section>
+  </section> -->
 
 <npdc:search feed="feed"></npdc:search>
 
@@ -32,32 +32,78 @@
 </span>
 <br /><br /> -->
 
- <a href="/expedition" ng-click="submit2();">Back</a>
- <a href="/expedition#CSV" ng-click="submit3();">CSV</a>
+ <a href="/expedition" ng-click="submit2('back');">Back</a>
+ <a href="/expedition#CSV" ng-click="submit2('csv');">CSV</a>
 
 <section>
-<form>
     <label for="start_date">&nbsp;&nbsp;Start date:</label>
-    <input id="start_date" type="text" required/>
+    <input type="text" id="start_date" ng-model="start_date" required>
 
-      <label for="end_date">&nbsp;&nbsp;End date:</label>
-    <input id="end_date" type="text" required/>
+    <label for="end_date">&nbsp;&nbsp;End date:</label>
+    <input id="end_date" type="text" ng-model="end_date" required/>
 
- <button name="submit" ng-click="submit()">Submit</button>
-</form>
+    <button name="submit" ng-click="submit()">Submit</button>
 </section>
 
 <br><br>
-<div ng-if="show()">
-    <hc-pie-chart title="Days in field" data="type">Days in field</hc-pie-chart>
-</div>
-<!--
-     <hc-bar-chart title="Days in field per activity" data="activity_type">Days in field per activity</hc-bar-chart>
-     <hc-bar-chart title="Days in field per country" data="country">Days in field per country</hc-bar-chart>
-     <hc-bar-chart title="Days in field per role" data="role">Days in field per role</hc-bar-chart>
-     <hc-bar-chart title="Days in field per area" data="predefined_area">Days in field per area</hc-bar-chart>  -->
+<!--<div ng-if="show()"> -->
+  <h2> Days in field, total {{total}}</h2>
+  <table>
+  <tr>
+    <th>Fieldwork</th>
+    <th>Cruise</th>
+  </tr>
+  <tr>
+    <td>{{type_arr[0]}}</td>
+    <td>{{type_arr[1]}}</td>
+  </tr>
+</table><br /><br />
 
-
+ <table>
+  <tr>
+    <th>Research</th>
+    <th>Topographical mapping</th>
+    <th>Outreach/VIP</th>
+    <th>Logistic operations</th>
+    <th>Other</th>
+  </tr>
+  <tr>
+    <td>{{activity_type_arr[0]}}</td>
+    <td>{{activity_type_arr[1]}}</td>
+    <td>{{activity_type_arr[2]}}</td>
+    <td>{{activity_type_arr[3]}}</td>
+    <td>{{activity_type_arr[4]}}</td>
+  </tr>
+</table><br /><br />
+<table>
+  <tr>
+    <th>Expedition/cruise leader</th>
+    <th>Field assistant</th>
+    <th>Guest</th>
+    <th>Investigator</th>
+    <th>Technician</th>
+    <th>Other</th>
+  </tr>
+  <tr>
+    <td>{{query[0]}}</td>
+    <td>{{query[1]}}</td>
+    <td>{{query[2]}}</td>
+    <td>{{query[1]}}</td>
+    <td>{{query[2]}}</td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th>Country</th>
+    <th>Days in field</th>
+  </tr>
+  <tr>
+    <td>{{query[0]}}</td>
+    <td>{{query[1]}}</td>
+  </tr>
+</table>
 </div>
+
+<!--</div> -->
 
 

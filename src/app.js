@@ -6,9 +6,10 @@ var AutoConfig = npdcCommon.AutoConfig;
 var angular = require('angular');
 
 // Load module after Highcharts is loaded
-require('npdc-common/src/wrappers/leaflet');
+//require('npdc-common/src/wrappers/leaflet');
 
-var npdcExpeditionApp = angular.module('npdcExpeditionApp', ['npdcCommon', 'leaflet']);
+//var npdcExpeditionApp = angular.module('npdcExpeditionApp', ['npdcCommon', 'leaflet']);
+var npdcExpeditionApp = angular.module('npdcExpeditionApp', ['npdcCommon']);
 
 npdcExpeditionApp.controller('ExpeditionShowController', require('./show/ExpeditionShowController'));
 npdcExpeditionApp.controller('ExpeditionSearchController', require('./search/ExpeditionSearchController'));

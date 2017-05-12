@@ -12,15 +12,14 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
   $scope.resource = Expedition;
   console.log('StatShow');
 
-  $scope.submit2 = function() {
+  $scope.submit2 = function(input) {
      //window.location.href = '/expedition#test';
      window.location.reload();
-     window.location.href = '/expedition';
-  };
-
-  $scope.submit3 = function() {
-     window.location.reload();
-      window.location.href = '/expedition/#CSV';
+     if (input === 'back'){
+        window.location.href = '/expedition';
+     } else {
+        window.location.href = '/expedition#csv';
+     }
   };
 
    //define link path
@@ -40,80 +39,59 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
   //$scope.root_path = href1[0];
 
   //Chronopic input values
-  $scope.start_date = null;
-  $scope.end_date = null;
+ // $scope.start_date = null;
+ // $scope.end_date = null;
 
 
   // Invoke Chronopic on all datetime input fields using the material css extension
-  new Chronopic('#start_date', {
+/*  new Chronopic('#start_date', {
     className: '.chronopic.chronopic-ext-md',
     format: '{date}',
     onChange: function(element, value) {
       console.log("start_date");
       $scope.start_date = value.toISOString();
     }
-  });
+  }); */
 
 
    // Invoke Chronopic on all datetime input fields using the material css extension
-  new Chronopic('#end_date', {
+  /* new Chronopic('#end_date', {
     className: '.chronopic.chronopic-ext-md',
     format: '{date}',
     onChange: function(element, value) {
         console.log("end_date");
       $scope.end_date = value.toISOString();
     }
-  });
+  }); */
 
 
   //Get submitted dates, search for entries, extract values, push to service
   $scope.submit = function() {
+
+      $scope.start_date = '2017-01-01T13:00:00Z';
+      $scope.end_date = '2017-06-01T13:00:00Z';
+
       if ($scope.start_date && $scope.end_date) {
 
         //Search the API
-        var link = 'https://api.npolar.no/expedition/?q=&fields=start_date,end_date,people,locations&sort=';
+        var link = 'https://api.npolar.no/expedition/?q=&fields=start_date,end_date,people,locations,type,activity_type&sort=';
         var link2 = '&filter-start_date=' + $scope.start_date + '..' + $scope.end_date;
         var link3 = '&filter-end_date=' + $scope.start_date + '..' + $scope.end_date;
 
          //Fetch search result
         ExpeditionSearchService.getValues(link+link2+link3).then(
               function(results) {
-                  // on success
-                  var query = EstStats(results.data);
-                  console.log(query);
-                  var tot = 100/(query[0] + query[1]);
-
-                  // Sample data for pie chart
-                  var activity_type = [{
-                        name: "research",
-                        y: 56.33
-                      }, {
-                        name: "topographical mapping",
-                        y: 24.03
-                      }, {
-                        name: "outreach VIP",
-                        y: 10.38
-                      }, {
-                        name: "logistic operations",
-                        y: 4.77
-                      }, {
-                        name: "other",
-                        y: 0.91
-                   }];
-                  var type = [{
-                              name: "Fieldwork",
-                              y: query[0] *tot
-                       }, {
-                            name: "Cruise",
-                            y: query[1] * tot,
-                            sliced: true,
-                            selected: true
-                  }];
+                   // on success
+                   console.log(results.data);
+                   var all = EstStats(results.data);
+                   $scope.total = (all.type_arr[0] + all.type_arr[1]);
+                   $scope.type_arr = all.type_arr;
+                   $scope.activity_type_arr = all.activity_type_arr;
 
                   //Put together the full object
-                  var inputData = {activity_type,type};
+                //  var inputData = {activity_type_arr,type_arr};
                   //Push object to service
-                  ExpeditionJSONService.entryObject = inputData;
+                // ExpeditionJSONService.entryObject = inputData;
         });
       }
   };  //Submit
@@ -144,26 +122,71 @@ function EstStats(data) {
 
            //type_arr holds all dates for type (cruise or fieldwork)
            var type_arr = Array.apply(null, Array(2)).map(Number.prototype.valueOf,0);
+           //Array to hold all dates per roles
+           var roles_arr = Array.apply(null, Array(6)).map(Number.prototype.valueOf,0);
+           //Array to hold all dates per activity_type
+           var activity_type_arr = Array.apply(null, Array(5)).map(Number.prototype.valueOf,0);
+           //Country - array of hashes
+           var country_arr = [];
+
+           //Go across all date entries
+           var persons = 0;
 
            for (var i = 0; i < num; i++) {
               var entry = data.feed.entries[i];
 
-              // var activity_arr = [];
+              //cruise or fieldwork?
               let t_arr = entry.type === 'cruise' ?  0 : 1;
+              //What kind of activity_type?
+              let activity_type = {'research':0,'topographical mapping':1,'outreach VIP':2,'logistic operations':3,'other':4};
+              //What kind of role?
+              let roles = { 'expedition/cruise leader':0,'field assistant':1,'guest':2,'investigator':3,'other':4,'technician':5};
 
-              //Find date diff between start and end date
+              //Find date diff between start and end date - this is cruise start and end
               var diff =  Math.floor( ((Date.parse(entry.end_date)) - (Date.parse(entry.start_date))) / 86400000);
+
+              //Extract country
+              var country = {};
+
+              //Extract number of persons in field
+              var persons = entry.people.length + persons;
 
               //If people listed
               if (typeof entry.people !== 'undefined') {
                 //Traverse through people
-                for (var j = 0; j < entry.people.length; j++) {
-                  type_arr[t_arr] =  type_arr[t_arr] + diff;
+                for (var j = 0; j < entry.people.length-1; j++) {
+
+                  //check if dates exists => if yes, count them, if no, use diff
+                  if (typeof entry.people[j].expedition_dates !== 'undefined') {
+                      var diff_people = 0;
+                      //Traverse over til people dates
+                      for (var k = 0; k < entry.people[k].expedition_dates.length-1; k++) {
+                            //Find date diff between start and end date - this is cruise start and end
+                            var diff2 =  Math.floor( ((Date.parse(entry.people[k].expedition_dates[k].end_date)) - (Date.parse(entry.people[k].expedition_dates[k].start_date))) / 86400000);
+                            diff_people = diff_people + diff2;
+                      } //for k
+                      //Use people dates if filled in
+                      if (diff_people > 0) { diff = diff_people; }
+
+                      //type
+                      type_arr[t_arr] =  type_arr[t_arr] + diff;
+                      //activity_type
+                      activity_type_arr[activity_type[entry.activity_type]] = activity_type_arr[activity_type[entry.activity_type]] + diff;
+
+                  } //if
+                  //check if person has country, get country, match country => if yes, add diff_person, if no, add diff
+                  //check roles, if yes, split roles, add one by one and add days per role
+
+                  //country
+
                 } //for j
               }
 
           } //for i
-        return type_arr;
+          console.log(type_arr);
+          console.log(activity_type_arr);
+          console.log("------------");
+        return {type_arr, activity_type_arr, persons};
 }
 
 
