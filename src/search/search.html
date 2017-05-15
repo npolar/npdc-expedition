@@ -47,59 +47,60 @@
 
 <br><br>
 <!--<div ng-if="show()"> -->
-  <h2> Days in field, total {{total}}</h2>
+  <h2> Days in field, days total {{total}}, number of persons {{persons}}</h2>
   <table>
   <tr>
-    <th>Fieldwork</th>
+    <th>Fieldwork | </th>
     <th>Cruise</th>
   </tr>
   <tr>
-    <td>{{type_arr[0]}}</td>
-    <td>{{type_arr[1]}}</td>
+    <td>{{all.type_arr[1]}} | </td>
+    <td>{{all.type_arr[0]}}</td>
   </tr>
 </table><br /><br />
 
  <table>
   <tr>
-    <th>Research</th>
-    <th>Topographical mapping</th>
-    <th>Outreach/VIP</th>
-    <th>Logistic operations</th>
+    <th>Research |</th>
+    <th>Topographical mapping |</th>
+    <th>Outreach/VIP |</th>
+    <th>Logistic operations |</th>
     <th>Other</th>
   </tr>
   <tr>
-    <td>{{activity_type_arr[0]}}</td>
-    <td>{{activity_type_arr[1]}}</td>
-    <td>{{activity_type_arr[2]}}</td>
-    <td>{{activity_type_arr[3]}}</td>
-    <td>{{activity_type_arr[4]}}</td>
+    <td>{{all.activity_type_arr[0]}} |</td>
+    <td>{{all.activity_type_arr[1]}} |</td>
+    <td>{{all.activity_type_arr[2]}} |</td>
+    <td>{{all.activity_type_arr[3]}} |</td>
+    <td>{{all.activity_type_arr[4]}}</td>
   </tr>
 </table><br /><br />
 <table>
   <tr>
-    <th>Expedition/cruise leader</th>
-    <th>Field assistant</th>
-    <th>Guest</th>
-    <th>Investigator</th>
-    <th>Technician</th>
+    <th>Expedition/cruise leader |</th>
+    <th>Field assistant |</th>
+    <th>Guest |</th>
+    <th>Investigator |</th>
+    <th>Technician |</th>
     <th>Other</th>
   </tr>
   <tr>
-    <td>{{query[0]}}</td>
-    <td>{{query[1]}}</td>
-    <td>{{query[2]}}</td>
-    <td>{{query[1]}}</td>
-    <td>{{query[2]}}</td>
+    <td>{{all.roles_arr[0]}} |</td>
+    <td>{{all.roles_arr[1]}} |</td>
+    <td>{{all.roles_arr[2]}} |</td>
+    <td>{{all.roles_arr[3]}} |</td>
+    <td>{{all.roles_arr[4]}}</td>
+    <td>{{all.roles_arr[5]}}</td>
   </tr>
 </table>
 <table>
   <tr>
-    <th>Country</th>
+    <th>Country |</th>
     <th>Days in field</th>
   </tr>
-  <tr>
-    <td>{{query[0]}}</td>
-    <td>{{query[1]}}</td>
+  <tr ng-repeat="entry in all.country_arr">
+    <td>{{entry.country}} |</td>
+    <td>{{entry.days}}</td>
   </tr>
 </table>
 </div>

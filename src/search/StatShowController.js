@@ -10,7 +10,6 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
 
   $controller('NpolarBaseController', {$scope: $scope});
   $scope.resource = Expedition;
-  console.log('StatShow');
 
   $scope.submit2 = function(input) {
      //window.location.href = '/expedition#test';
@@ -68,13 +67,13 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
   //Get submitted dates, search for entries, extract values, push to service
   $scope.submit = function() {
 
-      $scope.start_date = '2017-01-01T13:00:00Z';
+      $scope.start_date = '2016-05-01T13:00:00Z';
       $scope.end_date = '2017-06-01T13:00:00Z';
 
       if ($scope.start_date && $scope.end_date) {
 
         //Search the API
-        var link = 'https://api.npolar.no/expedition/?q=&fields=start_date,end_date,people,locations,type,activity_type&sort=';
+        var link = 'https://api.npolar.no/expedition/?q=&fields=start_date,end_date,people,draft,locations,id,type,activity_type&sort=';
         var link2 = '&filter-start_date=' + $scope.start_date + '..' + $scope.end_date;
         var link3 = '&filter-end_date=' + $scope.start_date + '..' + $scope.end_date;
 
@@ -83,10 +82,13 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
               function(results) {
                    // on success
                    console.log(results.data);
-                   var all = EstStats(results.data);
-                   $scope.total = (all.type_arr[0] + all.type_arr[1]);
-                   $scope.type_arr = all.type_arr;
-                   $scope.activity_type_arr = all.activity_type_arr;
+                  $scope.all = EstStats(results.data);
+
+                //   $scope.persons = all.persons;
+                 //  $scope.total = (all.type_arr[0] + all.type_arr[1]);
+                //  $scope.type_arr = all.type_arr;
+                 //  $scope.roles_arr = all.roles_arr;
+                //   $scope.activity_type_arr = all.activity_type_arr;
 
                   //Put together the full object
                 //  var inputData = {activity_type_arr,type_arr};
@@ -132,39 +134,40 @@ function EstStats(data) {
            //Go across all date entries
            var persons = 0;
 
+           //What kind of activity_type?
+           let activity_type = {'research':0,'topographical mapping':1,'outreach VIP':2,'logistic operations':3,'other':4};
+
+           //What kind of role?
+           let roles = { 'expedition/cruise leader':0,'field assistant':1,'guest':2,'investigator':3,'technician':4, 'other':5};
+
+
            for (var i = 0; i < num; i++) {
               var entry = data.feed.entries[i];
 
               //cruise or fieldwork?
               let t_arr = entry.type === 'cruise' ?  0 : 1;
-              //What kind of activity_type?
-              let activity_type = {'research':0,'topographical mapping':1,'outreach VIP':2,'logistic operations':3,'other':4};
-              //What kind of role?
-              let roles = { 'expedition/cruise leader':0,'field assistant':1,'guest':2,'investigator':3,'other':4,'technician':5};
 
               //Find date diff between start and end date - this is cruise start and end
               var diff =  Math.floor( ((Date.parse(entry.end_date)) - (Date.parse(entry.start_date))) / 86400000);
 
-              //Extract country
-              var country = {};
-
-              //Extract number of persons in field
-              var persons = entry.people.length + persons;
-
               //If people listed
               if (typeof entry.people !== 'undefined') {
+                //Extract number of persons in field
+                persons = entry.people.length + persons;
+
                 //Traverse through people
-                for (var j = 0; j < entry.people.length-1; j++) {
+                for (var j = 0; j < entry.people.length; j++) {
+                   var diff_people = 0;
 
                   //check if dates exists => if yes, count them, if no, use diff
                   if (typeof entry.people[j].expedition_dates !== 'undefined') {
-                      var diff_people = 0;
                       //Traverse over til people dates
-                      for (var k = 0; k < entry.people[k].expedition_dates.length-1; k++) {
+                      for (var k = 0; k < entry.people[j].expedition_dates.length; k++) {
                             //Find date diff between start and end date - this is cruise start and end
-                            var diff2 =  Math.floor( ((Date.parse(entry.people[k].expedition_dates[k].end_date)) - (Date.parse(entry.people[k].expedition_dates[k].start_date))) / 86400000);
+                            var diff2 =  Math.floor( ((Date.parse(entry.people[j].expedition_dates[k].end_date)) - (Date.parse(entry.people[j].expedition_dates[k].start_date))) / 86400000);
                             diff_people = diff_people + diff2;
-                      } //for k
+                       } //for k
+                      } //if
                       //Use people dates if filled in
                       if (diff_people > 0) { diff = diff_people; }
 
@@ -173,20 +176,39 @@ function EstStats(data) {
                       //activity_type
                       activity_type_arr[activity_type[entry.activity_type]] = activity_type_arr[activity_type[entry.activity_type]] + diff;
 
-                  } //if
+
                   //check if person has country, get country, match country => if yes, add diff_person, if no, add diff
+                  if (typeof entry.people[j]['@country'] !== 'undefined') {
+                     var obj = {country:"", days:""};
+                     obj.country = entry.people[j]['@country'];
+                     obj.days = diff;
+                     console.log(entry.people[j]['@country']);
+                     console.log(country_arr[entry.people[j]['@country']]);
+                     country_arr.push(obj);
+                  }
+
                   //check roles, if yes, split roles, add one by one and add days per role
-
-                  //country
-
+                  if (typeof entry.people[j].roles !== 'undefined') {
+                     console.log(entry.people[j].roles[0]);
+                     console.log(roles_arr[roles[entry.people[j].roles[0]]]);
+                     roles_arr[roles[entry.people[j].roles[0]]] = roles_arr[roles[entry.people[j].roles[0]]] + diff;
+                  }
                 } //for j
               }
 
           } //for i
           console.log(type_arr);
           console.log(activity_type_arr);
+          console.log(roles_arr);
+          console.log(country_arr);
           console.log("------------");
-        return {type_arr, activity_type_arr, persons};
+
+          //Sort country array, sum up all
+          for (var m = 0; m < country_arr.length; m++) {
+             country_arr[m].country ===
+          }
+
+        return {type_arr, activity_type_arr, persons, roles_arr, country_arr};
 }
 
 

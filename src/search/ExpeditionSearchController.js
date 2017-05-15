@@ -7,8 +7,6 @@ var ExpeditionSearchController = function ($filter, $scope, $route, $location, $
   $controller('NpolarBaseController', { $scope: $scope });
   $scope.resource = Expedition;
 
-  console.log('ExpeditionSearch');
-
   $scope.submit = function() {
      window.location.href = '#stat';
      window.location.reload();
