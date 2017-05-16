@@ -5,7 +5,7 @@
  * @ngInject
  */
 var StatShowController = function ($scope, $controller, $q, $routeParams,
-  Expedition, npdcAppConfig, ExpeditionSearchService, ExpeditionJSONService, chronopicService) {
+  Expedition, npdcAppConfig, ExpeditionSearchService, chronopicService) {
    'ngInject';
 
   $controller('NpolarBaseController', {$scope: $scope});
@@ -14,11 +14,7 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
   $scope.submit2 = function(input) {
      //window.location.href = '/expedition#test';
      window.location.reload();
-     if (input === 'back'){
-        window.location.href = '/expedition';
-     } else {
-        window.location.href = '/expedition#csv';
-     }
+     window.location.href = '/expedition';
   };
 
    //define link path
@@ -67,8 +63,8 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
   //Get submitted dates, search for entries, extract values, push to service
   $scope.submit = function() {
 
-      $scope.start_date = '2016-05-01T13:00:00Z';
-      $scope.end_date = '2017-06-01T13:00:00Z';
+      $scope.start_date = '2016-01-01T13:00:00Z';
+      $scope.end_date = '2016-12-01T13:00:00Z';
 
       if ($scope.start_date && $scope.end_date) {
 
@@ -81,36 +77,11 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
         ExpeditionSearchService.getValues(link+link2+link3).then(
               function(results) {
                    // on success
-                   console.log(results.data);
                   $scope.all = EstStats(results.data);
 
-                //   $scope.persons = all.persons;
-                 //  $scope.total = (all.type_arr[0] + all.type_arr[1]);
-                //  $scope.type_arr = all.type_arr;
-                 //  $scope.roles_arr = all.roles_arr;
-                //   $scope.activity_type_arr = all.activity_type_arr;
-
-                  //Put together the full object
-                //  var inputData = {activity_type_arr,type_arr};
-                  //Push object to service
-                // ExpeditionJSONService.entryObject = inputData;
         });
       }
   };  //Submit
-
-   //If show is true, show highslide charts
-   $scope.show = function(){
-      if ((ExpeditionJSONService.entryObject).data !== null) {
-           console.log("show");
-          $scope.type = (ExpeditionJSONService.entryObject).type;
-          // console.log((ExpeditionJSONService.entryObject).type);
-          return true;
-      } else {
-         //console.log("hide");
-           return false;
-      }
-
-   };
 
  };
 
@@ -128,11 +99,15 @@ function EstStats(data) {
            var roles_arr = Array.apply(null, Array(6)).map(Number.prototype.valueOf,0);
            //Array to hold all dates per activity_type
            var activity_type_arr = Array.apply(null, Array(5)).map(Number.prototype.valueOf,0);
+           //Array to holde locations
+           var locations_arr = Array.apply(null, Array(18)).map(Number.prototype.valueOf,0);
            //Country - array of hashes
            var country_arr = [];
 
            //Go across all date entries
            var persons = 0;
+           //Total number of days
+           var total = 0;
 
            //What kind of activity_type?
            let activity_type = {'research':0,'topographical mapping':1,'outreach VIP':2,'logistic operations':3,'other':4};
@@ -140,6 +115,10 @@ function EstStats(data) {
            //What kind of role?
            let roles = { 'expedition/cruise leader':0,'field assistant':1,'guest':2,'investigator':3,'technician':4, 'other':5};
 
+           let locations = { "Sverdrup Research Station":0,"Zeppelin Research Station":1,"Ny-Ålesund":2,"Svalbard":3,
+                          "Frans Josefs land":4,"Bjørnøya":5,"Jan Mayen":6,"Hopen":7,"Bouvetøya":8,"Troll":9,"Tor":10,
+                          "Dronning Maud Land":11,"Antarctica":12,"Fram Strait":13,"Arctic Ocean":14,"Barents Sea North":15,
+                          "Southern Ocean":16,"other":17 };
 
            for (var i = 0; i < num; i++) {
               var entry = data.feed.entries[i];
@@ -149,6 +128,28 @@ function EstStats(data) {
 
               //Find date diff between start and end date - this is cruise start and end
               var diff =  Math.floor( ((Date.parse(entry.end_date)) - (Date.parse(entry.start_date))) / 86400000);
+              total = total + diff;
+
+
+               //If people listed
+              if (typeof entry.locations !== 'undefined') {
+                   for (var n = 0; n < entry.locations.length; n++) {
+                       if (typeof entry.locations[n].places !== 'undefined') {
+                         var loc_obj = {};
+                         for (var p = 0; p < entry.locations[n].places.length; p++) {
+                            if (typeof entry.locations[n].places[p].predefined_area !== 'undefined') {
+                              loc_obj.predefined_area = entry.locations[n].places[p].predefined_area;
+                            if ((typeof entry.locations[n].places[p].end_date !== 'undefined') && (typeof entry.locations[n].places[p].start_date !== 'undefined')) {
+                               loc_obj.days =  Math.floor( ((Date.parse(entry.locations[n].places[p].end_date)) - (Date.parse(entry.locations[n].places[p].start_date))) / 86400000);
+                            } else {
+                               loc_obj.days = diff;
+                            }
+                               locations_arr[locations[loc_obj.predefined_area]] = locations_arr[locations[loc_obj.predefined_area]] + loc_obj.days;
+                            } //if predefined area
+                         }
+                       }
+                   }
+              }
 
               //If people listed
               if (typeof entry.people !== 'undefined') {
@@ -177,38 +178,47 @@ function EstStats(data) {
                       activity_type_arr[activity_type[entry.activity_type]] = activity_type_arr[activity_type[entry.activity_type]] + diff;
 
 
+
                   //check if person has country, get country, match country => if yes, add diff_person, if no, add diff
                   if (typeof entry.people[j]['@country'] !== 'undefined') {
                      var obj = {country:"", days:""};
                      obj.country = entry.people[j]['@country'];
                      obj.days = diff;
-                     console.log(entry.people[j]['@country']);
-                     console.log(country_arr[entry.people[j]['@country']]);
                      country_arr.push(obj);
                   }
 
                   //check roles, if yes, split roles, add one by one and add days per role
                   if (typeof entry.people[j].roles !== 'undefined') {
-                     console.log(entry.people[j].roles[0]);
-                     console.log(roles_arr[roles[entry.people[j].roles[0]]]);
                      roles_arr[roles[entry.people[j].roles[0]]] = roles_arr[roles[entry.people[j].roles[0]]] + diff;
                   }
                 } //for j
               }
 
           } //for i
-          console.log(type_arr);
-          console.log(activity_type_arr);
-          console.log(roles_arr);
-          console.log(country_arr);
-          console.log("------------");
 
-          //Sort country array, sum up all
-          for (var m = 0; m < country_arr.length; m++) {
-             country_arr[m].country ===
+          //Sort country array
+          country_arr.sort(function(a,b){
+                var countryA = a.country.toUpperCase(); // uppercase only
+                var countryB = b.country.toUpperCase();
+                if (countryA < countryB) { return -1; }
+                if (countryA > countryB) { return 1; }
+                // names are equal
+                return 0;
+          });
+
+          //Collapse array and sum values
+          for (var m = 0; m < country_arr.length-1;) {
+             if (country_arr[m].country === country_arr[m+1].country) {
+                //sum up in m
+                country_arr[m].days = country_arr[m].days + country_arr[m+1].days;
+                //remove now additional entry m+1
+                country_arr.splice(m+1, 1);
+             } else {
+                m++;
+             }
           }
 
-        return {type_arr, activity_type_arr, persons, roles_arr, country_arr};
+        return {type_arr, activity_type_arr, persons, total, roles_arr, country_arr, locations_arr};
 }
 
 

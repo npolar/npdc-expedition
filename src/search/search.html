@@ -9,12 +9,6 @@
 
 
 <npdc:search-input feed="feed"></npdc:search-input>
-
-  <!--<section class="app-section" layout="column" ng-controller="ExpeditionMapController">
-    <h1>Expeditions ({{interval}} average positions)</h1>
-    <div id="npolar-esri-leaflet-map" style="height:600px;" class="leaflet-map"></div>
-  </section> -->
-
 <npdc:search feed="feed"></npdc:search>
 
 </div>
@@ -23,17 +17,7 @@
 
 <div ng-show ="{{stat}}" ng-controller="StatShowController">
 
-<!--<span class="npdc-crumbs-container">
-    <span ng-if="!$last"> -->
-
- <!--     <a ng-href="/expedition" title="{{ 'back' | t}}"> {{ 'back2' | t }} </a> &nbsp;&nbsp;
-        <a ng-href="/expedition/stat/csv" title="{{ 'csv' | t}}"> {{ 'csv' | t }} </a>  -->
- <!--   </span>
-</span>
-<br /><br /> -->
-
  <a href="/expedition" ng-click="submit2('back');">Back</a>
- <a href="/expedition#CSV" ng-click="submit2('csv');">CSV</a>
 
 <section>
     <label for="start_date">&nbsp;&nbsp;Start date:</label>
@@ -46,65 +30,60 @@
 </section>
 
 <br><br>
-<!--<div ng-if="show()"> -->
-  <h2> Days in field, days total {{total}}, number of persons {{persons}}</h2>
-  <table>
-  <tr>
-    <th>Fieldwork | </th>
-    <th>Cruise</th>
-  </tr>
-  <tr>
-    <td>{{all.type_arr[1]}} | </td>
-    <td>{{all.type_arr[0]}}</td>
-  </tr>
-</table><br /><br />
 
+  <h2> Days in field, total days per expedition {{all.total}}, number of persons participating {{all.persons}}</h2>
+
+  <table>
+    <tr><th align="left">Role </th><th>|</th><th align="left">Days in field</th></tr>
+    <tr><td align="left">Fieldwork </td><td>|</td><td align="left">{{all.type_arr[1]}}</td></tr>
+    <tr><td align="left">Cruise </td><td>|</td><td align="left">{{all.type_arr[0]}}</td></tr>
+ </table><br /><br />
  <table>
-  <tr>
-    <th>Research |</th>
-    <th>Topographical mapping |</th>
-    <th>Outreach/VIP |</th>
-    <th>Logistic operations |</th>
-    <th>Other</th>
-  </tr>
-  <tr>
-    <td>{{all.activity_type_arr[0]}} |</td>
-    <td>{{all.activity_type_arr[1]}} |</td>
-    <td>{{all.activity_type_arr[2]}} |</td>
-    <td>{{all.activity_type_arr[3]}} |</td>
-    <td>{{all.activity_type_arr[4]}}</td>
-  </tr>
+    <tr><th align="left">Role</th><th>|</th><th align="left">Days in field</th></tr>
+    <tr><td align="left">Research</td><td>|</td><td align="left">{{all.activity_type_arr[0]}}</td></tr>
+    <tr><td align="left">Topographical mapping</td><td>|</td><td align="left">{{all.activity_type_arr[1]}}</td></tr>
+    <tr><td align="left">Outreach/VIP </td><td>|</td><td align="left">{{all.activity_type_arr[2]}}</td></tr>
+    <tr><td align="left">Logistic operations</td><td>|</td><td align="left">{{all.activity_type_arr[3]}}</td></tr>
+    <tr><td align="left">Other</td><td>|</td><td align="left">{{all.activity_type_arr[4]}}</td></tr>
 </table><br /><br />
 <table>
-  <tr>
-    <th>Expedition/cruise leader |</th>
-    <th>Field assistant |</th>
-    <th>Guest |</th>
-    <th>Investigator |</th>
-    <th>Technician |</th>
-    <th>Other</th>
-  </tr>
-  <tr>
-    <td>{{all.roles_arr[0]}} |</td>
-    <td>{{all.roles_arr[1]}} |</td>
-    <td>{{all.roles_arr[2]}} |</td>
-    <td>{{all.roles_arr[3]}} |</td>
-    <td>{{all.roles_arr[4]}}</td>
-    <td>{{all.roles_arr[5]}}</td>
-  </tr>
-</table>
+  <tr><th align="left">Place </th><th>|</th><th align="left"> Days in field </th></tr>
+  <tr><td align="left">Sverdrup Research Station</td><td> |</td><td align="left">{{all.locations_arr[0]}}</td></tr>
+  <tr><td align="left">Zeppelin Research Station</td><td> |</td><td align="left">{{all.locations_arr[1]}}</td></tr>
+  <tr><td align="left">Ny-Ålesund</td><td> |</td><td align="left"> {{all.locations_arr[2]}}</td></tr>
+  <tr><td align="left">Svalbard</td><td> |</td><td align="left"> {{all.locations_arr[3]}}</td></tr>
+  <tr><td align="left">Frans Josefs land </td><td> |</td><td align="left"> {{all.locations_arr[4]}}</td></tr>
+  <tr><td align="left">Bjørnøya </td><td> |</td><td align="left"> {{all.locations_arr[5]}}</td></tr>
+  <tr><td align="left">Jan Mayen </td><td> |</td><td align="left">{{all.locations_arr[6]}}</td></tr>
+  <tr><td align="left">Hopen </td><td> |</td><td align="left">{{all.locations_arr[7]}}</td></tr>
+  <tr><td align="left">Bouvetøya </td><td> |</td><td align="left">{{all.locations_arr[8]}}</td></tr>
+  <tr><td align="left">Troll </td><td> |</td><td align="left"> {{all.locations_arr[9]}}</td></tr>
+  <tr><td align="left">Tor </td><td> |</td><td align="left">{{all.locations_arr[10]}}</td></tr>
+  <tr><td align="left">Dronning Maud Land </td><td> |</td><td align="left">{{all.locations_arr[11]}}</td></tr>
+  <tr><td align="left">Antarctica </td><td> |</td><td align="left">{{all.locations_arr[12]}}</td></tr>
+  <tr><td align="left">Fram Strait </td><td> |</td><td align="left">{{all.locations_arr[13]}}</td></tr>
+  <tr><td align="left">Arctic Ocean </td><td> |</td><td align="left">{{all.locations_arr[14]}}</td></tr>
+  <tr><td align="left">Barents Sea North </td><td> |</td><td align="left">{{all.locations_arr[15]}}</td></tr>
+  <tr><td align="left">Southern Ocean </td><td> |</td><td align="left">{{all.locations_arr[16]}}</td></tr>
+  <tr><td align="left">other </td><td> |</td><td align="left">{{all.locations_arr[17]}}</td></tr>
+</table><br /><br />
 <table>
-  <tr>
-    <th>Country |</th>
-    <th>Days in field</th>
-  </tr>
+  <tr><th align="left">Role </th><th>|</th><th>Days in field</th></tr>
+  <tr><td align="left">Expedition/cruise leader </td><td> |</td><td align="left">{{all.roles_arr[0]}} </td></tr>
+  <tr><td align="left">Field assistant </td><td> |</td><td align="left">{{all.roles_arr[1]}} </td></tr>
+  <tr><td align="left">Guest </td><td> |</td><td align="left">{{all.roles_arr[2]}} </td></tr>
+  <tr><td align="left">Investigator </td><td> |</td><td align="left">{{all.roles_arr[3]}} </td></tr>
+  <tr><td align="left">Technician </td><td> |</td><td align="left">{{all.roles_arr[4]}} </td></tr>
+  <tr><td align="left">Other </td><td> |</td><td align="left">{{all.roles_arr[5]}} </td></tr>
+</table><br /><br />
+<table>
+  <tr><th align="left">Country </th><th>|</th><th> Days in field</th></tr>
   <tr ng-repeat="entry in all.country_arr">
-    <td>{{entry.country}} |</td>
-    <td>{{entry.days}}</td>
+    <td align="left">{{entry.country}} </td><td> |</td><td align="left"><td>{{entry.days}}</td>
   </tr>
 </table>
 </div>
 
-<!--</div> -->
+
 
 
