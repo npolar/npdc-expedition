@@ -21,25 +21,27 @@
 
 <section>
     <label for="start_date">&nbsp;&nbsp;Start date:</label>
-    <input type="text" id="start_date" ng-model="start_date" required>
+    <input type="text" ng-model="start_date" required xchronopic />
 
     <label for="end_date">&nbsp;&nbsp;End date:</label>
-    <input id="end_date" type="text" ng-model="end_date" required/>
+    <input type="text" ng-model="end_date" required xchronopic />
 
-    <button name="submit" ng-click="submit()">Submit</button>
+    <button name="submit" type="button" ng-click="update()">Submit</button>
 </section>
 
-<br><br>
+<br /><br />
+
+<section>
 
   <h2> Days in field, total days per expedition {{all.total}}, number of persons participating {{all.persons}}</h2>
 
   <table>
-    <tr><th align="left">Role </th><th>|</th><th align="left">Days in field</th></tr>
+    <tr><th align="left">Type </th><th>|</th><th align="left">Days in field</th></tr>
     <tr><td align="left">Fieldwork </td><td>|</td><td align="left">{{all.type_arr[1]}}</td></tr>
     <tr><td align="left">Cruise </td><td>|</td><td align="left">{{all.type_arr[0]}}</td></tr>
  </table><br /><br />
  <table>
-    <tr><th align="left">Role</th><th>|</th><th align="left">Days in field</th></tr>
+    <tr><th align="left">Activity</th><th>|</th><th align="left">Days in field</th></tr>
     <tr><td align="left">Research</td><td>|</td><td align="left">{{all.activity_type_arr[0]}}</td></tr>
     <tr><td align="left">Topographical mapping</td><td>|</td><td align="left">{{all.activity_type_arr[1]}}</td></tr>
     <tr><td align="left">Outreach/VIP </td><td>|</td><td align="left">{{all.activity_type_arr[2]}}</td></tr>
@@ -79,9 +81,10 @@
 <table>
   <tr><th align="left">Country </th><th>|</th><th> Days in field</th></tr>
   <tr ng-repeat="entry in all.country_arr">
-    <td align="left">{{entry.country}} </td><td> |</td><td align="left"><td>{{entry.days}}</td>
+    <td align="left">{{entry.country}} </td><td> |</td><td align="left">{{entry.days}}</td>
   </tr>
 </table>
+</section>
 </div>
 
 

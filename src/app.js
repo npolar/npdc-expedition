@@ -15,10 +15,32 @@ npdcExpeditionApp.controller('ExpeditionShowController', require('./show/Expedit
 npdcExpeditionApp.controller('ExpeditionSearchController', require('./search/ExpeditionSearchController'));
 npdcExpeditionApp.controller('ExpeditionEditController', require('./edit/ExpeditionEditController'));
 npdcExpeditionApp.controller('StatShowController', require('./search/StatShowController'));
-npdcExpeditionApp.factory('ExpeditionSearchService', require('./search/ExpeditionSearchService'));;
+npdcExpeditionApp.factory('ExpeditionSearchService', require('./search/ExpeditionSearchService'));
 npdcExpeditionApp.factory('Expedition', require('./Expedition.js'));
 npdcExpeditionApp.directive('expeditionCoverage', require('./edit/coverage/coverageDirective'));
 
+npdcExpeditionApp.directive('xchronopic', function($timeout) {
+  return {
+    restrict: 'A',
+    require: '?ngModel',
+    link: function(scope, elem, attrs, model) {
+      var cp = new Chronopic(elem[0], {
+        className: '.chronopic.chronopic-ext-md',
+        format: '{date}',
+        onChange: function(element, value) {
+          $timeout(() => {
+            var isoDate = value.toISOString();
+            model.$viewValue = scope[attrs.ngModel] = isoDate;
+          });
+        }
+      });
+
+      scope.$on('npolar-lang', (e, lang) => {
+        cp.locale = lang.lang;
+      });
+    }
+  };
+});
 
 // Bootstrap ngResource models using NpolarApiResource
 var resources = [

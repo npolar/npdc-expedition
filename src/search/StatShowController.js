@@ -5,7 +5,7 @@
  * @ngInject
  */
 var StatShowController = function ($scope, $controller, $q, $routeParams,
-  Expedition, npdcAppConfig, ExpeditionSearchService, chronopicService) {
+  Expedition, npdcAppConfig, ExpeditionSearchService) {
    'ngInject';
 
   $controller('NpolarBaseController', {$scope: $scope});
@@ -26,45 +26,20 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
           $scope.stat = false;
   }
 
-
-  //Define link path
- // var href = window.location.href;
-  //Remove last part of link
- // var href1 = href.split('/stat');
-  //$scope.root_path = href1[0];
-
   //Chronopic input values
- // $scope.start_date = null;
- // $scope.end_date = null;
+  $scope.start_date = null;
+  $scope.end_date = null;
 
+  $scope.update = function() {
+      console.log($scope);
+  };
 
-  // Invoke Chronopic on all datetime input fields using the material css extension
-/*  new Chronopic('#start_date', {
-    className: '.chronopic.chronopic-ext-md',
-    format: '{date}',
-    onChange: function(element, value) {
-      console.log("start_date");
-      $scope.start_date = value.toISOString();
-    }
-  }); */
-
-
-   // Invoke Chronopic on all datetime input fields using the material css extension
-  /* new Chronopic('#end_date', {
-    className: '.chronopic.chronopic-ext-md',
-    format: '{date}',
-    onChange: function(element, value) {
-        console.log("end_date");
-      $scope.end_date = value.toISOString();
-    }
-  }); */
 
 
   //Get submitted dates, search for entries, extract values, push to service
-  $scope.submit = function() {
+  $scope.update = function() {
 
-      $scope.start_date = '2016-01-01T13:00:00Z';
-      $scope.end_date = '2016-12-01T13:00:00Z';
+      console.log($scope);
 
       if ($scope.start_date && $scope.end_date) {
 
@@ -84,6 +59,7 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
   };  //Submit
 
  };
+
 
 
 
