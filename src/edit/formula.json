@@ -11,8 +11,12 @@
           "id": "type",
           "title": "type of expedition"
         },
+        {
+              "id": "activity_type",
+              "title": "activity type (required)"
+        },
         "summary",
-      {
+        {
           "id": "start_date",
           "title": "departure date"
         },
@@ -50,17 +54,9 @@
       "title": "Activities",
       "fields": [
       {
-          "id": "research_program",
-          "title": "part of research program (if applicable)"
-      },
-      {
         "id": "activity",
         "items": {
           "fields": [
-           {
-              "id": "activity_type",
-              "title": "activity type (required)"
-            },
             {
               "id": "activity_title",
               "title": "activity title (required)"

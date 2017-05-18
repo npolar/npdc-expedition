@@ -5,7 +5,7 @@
  * @ngInject
  */
 var StatShowController = function ($scope, $controller, $q, $routeParams,
-  Expedition, npdcAppConfig, ExpeditionSearchService, PageService) {
+  Expedition, npdcAppConfig, ExpeditionSearchService) {
    'ngInject';
 
   $controller('NpolarBaseController', {$scope: $scope});

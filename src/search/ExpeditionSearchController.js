@@ -2,7 +2,7 @@
 /**
  * @ngInject
  */
-var ExpeditionSearchController = function ($filter, $scope, $route, $location, $controller, Expedition, npdcAppConfig, PageService) {
+var ExpeditionSearchController = function ($filter, $scope, $route, $location, $controller, Expedition, npdcAppConfig) {
 
   $controller('NpolarBaseController', { $scope: $scope });
   $scope.resource = Expedition;

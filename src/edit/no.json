@@ -18,6 +18,20 @@
 		    "feltarbeid"
 		 ]
          },
+           "activity_type": {
+			        "title": "type aktivitet (påkrevd)",
+						"values": [
+						    "",
+							"forskning",
+							"monitorering",
+							"kartlegging",
+							"formidling VIP",
+							"undervisning",
+							"logistikk operasjoner",
+							"annet"
+						]
+					},
+
          "summary": {
          "title": "kort beskrivelse"
          },
@@ -61,9 +75,6 @@
               }
 			}
 		},
-		"research_program": {
-        			"title": "forskningsprogram (hvis passende)"
-         		    },
 		"activity": {
 			"title": "aktivitet",
 			"description": "Oppgi type aktivitet",
@@ -110,20 +121,7 @@
          		    },
                     "href": {
                     "title": "lenke til aktivitet (inkludere også protokoll f.eks. http:// som i  http://www.npolar.no)"
-                    },
-	                "activity_type": {
-			        "title": "type aktivitet (påkrevd)",
-						"values": [
-						    "",
-							"forskning",
-							"monitorering",
-							"kartlegging",
-							"formidling VIP",
-							"undervisning",
-							"logistikk operasjoner",
-							"annet"
-						]
-					}
+                    }
               }
 			}
 		},
