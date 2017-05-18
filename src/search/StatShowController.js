@@ -5,26 +5,20 @@
  * @ngInject
  */
 var StatShowController = function ($scope, $controller, $q, $routeParams,
-  Expedition, npdcAppConfig, ExpeditionSearchService) {
+  Expedition, npdcAppConfig, ExpeditionSearchService, PageService) {
    'ngInject';
 
   $controller('NpolarBaseController', {$scope: $scope});
   $scope.resource = Expedition;
 
-  $scope.submit2 = function(input) {
-     //window.location.href = '/expedition#test';
-     window.location.reload();
-     window.location.href = '/expedition';
-  };
 
-   //define link path
-  var href = window.location.href;
-  var trunk = href.split('expedition');
-   if (trunk[1] === '/#stat') {
-          $scope.stat = true;
-  } else {
-          $scope.stat = false;
-  }
+  $scope.stat = localStorage.getItem("stat");
+
+
+  $scope.submit2 = function(input) {
+     window.location.reload();
+     localStorage.setItem("stat",false);
+  };
 
   //Chronopic input values
   $scope.start_date = null;

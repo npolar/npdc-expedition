@@ -2,13 +2,16 @@
 /**
  * @ngInject
  */
-var ExpeditionSearchController = function ($filter, $scope, $route, $location, $controller, Expedition, npdcAppConfig) {
+var ExpeditionSearchController = function ($filter, $scope, $route, $location, $controller, Expedition, npdcAppConfig, PageService) {
 
   $controller('NpolarBaseController', { $scope: $scope });
   $scope.resource = Expedition;
 
+  $scope.stat = localStorage.getItem("stat");
+
+
   $scope.submit = function() {
-     window.location.href = '#stat';
+     localStorage.setItem("stat", true);
      window.location.reload();
   };
 
@@ -17,15 +20,6 @@ var ExpeditionSearchController = function ($filter, $scope, $route, $location, $
      return r+` ${$filter('date')(entry.updated)}`;
   };
 
-
- //define link path
-  var href = window.location.href;
-  var trunk = href.split('expedition');
-  if (trunk[1] === '/#stat') {
-          $scope.stat = true;
-  } else {
-          $scope.stat = false;
-  }
 
 
   npdcAppConfig.cardTitle = "Expedition Archive";
