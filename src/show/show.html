@@ -8,7 +8,7 @@
 
 <section>
   <h1>
-  <span class="md-display-2">{{ document.code }} </span><span style={font-size:15%}> [{{document.activity_type}}/{{ document.type }}]</span></h1>
+  <span class="md-display-2">{{ document.code }} </span><span style={font-size:15%}> [{{document.activity_type}}/{{ document.type | t }}]</span></h1>
 </section>
 
 <section>
@@ -47,7 +47,6 @@
 <section ng-if="document.activity && document.activity.length > 0">
      <div  ng-repeat="activity in document.activity">
       <span ng-if="activity.activity_title"><md-icon>label_outline</md-icon><a href="{{activity.href}}" target="_blank"> {{activity.activity_title}}</a></span>
-     <span ng-if="activity.activity_type">[ {{activity.activity_type}} ]</span>&nbsp;&nbsp;
     <span ng-if="activity.topics"> [<span ng-repeat="topic in activity.topics">{{topic}}<span ng-if="!$last">,&nbsp; </span></span>]</span>
 </section>
 </section>

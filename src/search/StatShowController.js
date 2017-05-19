@@ -158,8 +158,8 @@ function EstStats(data) {
                   }
 
                   //check roles, if yes, split roles, add one by one and add days per role
-                  if (typeof entry.people[j].roles !== 'undefined') {
-                     roles_arr[roles[entry.people[j].roles[0]]] = roles_arr[roles[entry.people[j].roles[0]]] + diff;
+                  if (typeof entry.people[j].role !== 'undefined') {
+                     roles_arr[roles[entry.people[j].role]] = roles_arr[roles[entry.people[j].role]] + diff;
                   }
                 } //for j
               }

@@ -3,7 +3,7 @@
 <div ng-hide="{{stat}}">
 <span class="npdc-crumbs-container">
     <span ng-if="!$last">
-      <a href="#stat" ng-click="submit();">Statistics</a>
+      <a href="#stat" ng-click="submit();">{{'Statistics' | t }}</a>
     </span>
 </span>
 
@@ -17,23 +17,23 @@
 
 <div ng-show ="{{stat}}" ng-controller="StatShowController">
 
- <a href="/expedition" ng-click="submit2('back');">Back</a>
+ <a href="/expedition" ng-click="submit2('back');">{{'Back' | t }}</a>
 
 <section>
-    <label for="start_date">&nbsp;&nbsp;Start date:</label>
+    <label for="start_date">&nbsp;&nbsp;{{'Start date' | t}}</label>
     <input type="text" ng-model="start_date" required xchronopic />
 
-    <label for="end_date">&nbsp;&nbsp;End date:</label>
+    <label for="end_date">&nbsp;&nbsp;{{'End date' | t }}</label>
     <input type="text" ng-model="end_date" required xchronopic />
 
-    <button name="submit" type="button" ng-click="update()">Submit</button>
+    <button name="submit" type="button" ng-click="update()">{{'Search' | t }}</button>
 </section>
 
 <br /><br />
 
 <section>
 
-  <h2> Days in field, total days per expedition {{all.total}}, number of persons participating {{all.persons}}</h2>
+  <h2> {{'Days in field, total days for expeditions' | t }} {{all.total}}, {{ 'number of persons participating' | t }} {{all.persons}}</h2>
 
   <table>
     <tr><th align="left">Type </th><th>|</th><th align="left">Days in field</th></tr>
@@ -41,7 +41,7 @@
     <tr><td align="left">Cruise </td><td>|</td><td align="left">{{all.type_arr[0]}}</td></tr>
  </table><br /><br />
  <table>
-    <tr><th align="left">Activity</th><th>|</th><th align="left">Days in field</th></tr>
+    <tr><th align="left">Activity</th><th>|</th><th align="left">{{'Days in field' | t }}</th></tr>
     <tr><td align="left">Research</td><td>|</td><td align="left">{{all.activity_type_arr[0]}}</td></tr>
     <tr><td align="left">Topographical mapping</td><td>|</td><td align="left">{{all.activity_type_arr[1]}}</td></tr>
     <tr><td align="left">Outreach/VIP </td><td>|</td><td align="left">{{all.activity_type_arr[2]}}</td></tr>
