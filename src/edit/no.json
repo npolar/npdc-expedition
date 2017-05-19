@@ -142,8 +142,8 @@
    					 "@country":{
         				"title": "land (påkrevd)"
    					 },
-					"roles": {
-						"title": "roller (påkrevd)",
+					"role": {
+						"title": "rolle (påkrevd)",
 						"values": [
 							"ekspedisjonsleder",
 							"feltassistent",

@@ -97,8 +97,8 @@
           "title": "country (required)"
         },
          {
-          "id": "roles",
-          "title": "roles (required)"
+          "id": "role",
+          "title": "role (required)"
         },
         {
         "id": "expedition_dates",
