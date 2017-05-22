@@ -187,10 +187,6 @@
     {
       "title": "Edits",
       "fields": [
-       {
-          "id": "draft",
-          "title": "draft (not visible to Internet users)"
-        },
         {
          "id": "created",
          "disabled": true

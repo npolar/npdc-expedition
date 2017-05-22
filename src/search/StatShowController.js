@@ -33,14 +33,17 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
   //Get submitted dates, search for entries, extract values, push to service
   $scope.update = function() {
 
-      console.log($scope);
+      //Search the API
+      var link = 'https://api.npolar.no/expedition/?q=&fields=start_date,end_date,people,locations,id,type,activity_type&sort=';
+      var link2 = "";
+      var link3 = "";
+
 
       if ($scope.start_date && $scope.end_date) {
+          link2 = '&filter-start_date=' + $scope.start_date + '..' + $scope.end_date;
+          link3 = '&filter-end_date=' + $scope.start_date + '..' + $scope.end_date;
+      }
 
-        //Search the API
-        var link = 'https://api.npolar.no/expedition/?q=&fields=start_date,end_date,people,draft,locations,id,type,activity_type&sort=';
-        var link2 = '&filter-start_date=' + $scope.start_date + '..' + $scope.end_date;
-        var link3 = '&filter-end_date=' + $scope.start_date + '..' + $scope.end_date;
 
          //Fetch search result
         ExpeditionSearchService.getValues(link+link2+link3).then(
@@ -49,7 +52,7 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
                   $scope.all = EstStats(results.data);
 
         });
-      }
+
   };  //Submit
 
  };
@@ -70,7 +73,7 @@ function EstStats(data) {
            //Array to hold all dates per activity_type
            var activity_type_arr = Array.apply(null, Array(5)).map(Number.prototype.valueOf,0);
            //Array to holde locations
-           var locations_arr = Array.apply(null, Array(18)).map(Number.prototype.valueOf,0);
+           var locations_arr = Array.apply(null, Array(15)).map(Number.prototype.valueOf,0);
            //Country - array of hashes
            var country_arr = [];
 
