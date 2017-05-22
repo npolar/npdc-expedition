@@ -33,22 +33,20 @@ var StatShowController = function ($scope, $controller, $q, $routeParams,
   //Get submitted dates, search for entries, extract values, push to service
   $scope.update = function() {
 
-      //Search the API
+       //Search the API
       var link = 'https://api.npolar.no/expedition/?q=&fields=start_date,end_date,people,locations,id,type,activity_type&sort=';
-      var link2 = "";
-      var link3 = "";
-
 
       if ($scope.start_date && $scope.end_date) {
-          link2 = '&filter-start_date=' + $scope.start_date + '..' + $scope.end_date;
-          link3 = '&filter-end_date=' + $scope.start_date + '..' + $scope.end_date;
+          var link2 = '&filter-start_date=' + $scope.start_date + '..' + $scope.end_date;
+          var link3 = '&filter-end_date=' + $scope.start_date + '..' + $scope.end_date;
+          link = link + link2 + link3;
       }
 
-
          //Fetch search result
-        ExpeditionSearchService.getValues(link+link2+link3).then(
+        ExpeditionSearchService.getValues(link).then(
               function(results) {
                    // on success
+                  console.log(results.data);
                   $scope.all = EstStats(results.data);
 
         });
@@ -88,10 +86,10 @@ function EstStats(data) {
            //What kind of role?
            let roles = { 'expedition/cruise leader':0,'field assistant':1,'guest':2,'investigator':3,'technician':4, 'other':5};
 
-           let locations = { "Sverdrup Research Station":0,"Zeppelin Research Station":1,"Ny-Ålesund":2,"Svalbard":3,
-                          "Frans Josefs land":4,"Bjørnøya":5,"Jan Mayen":6,"Hopen":7,"Bouvetøya":8,"Troll":9,"Tor":10,
-                          "Dronning Maud Land":11,"Antarctica":12,"Fram Strait":13,"Arctic Ocean":14,"Barents Sea North":15,
-                          "Southern Ocean":16,"other":17 };
+           let locations = { "Ny-Ålesund":0,"Svalbard":1,
+                          "Frans Josefs land":2,"Bjørnøya":3,"Jan Mayen":4,"Hopen":5,"Bouvetøya":6,"Troll":7,"Tor":8,
+                          "Dronning Maud Land":9,"Antarctica":10,"Fram Strait":11,"Arctic Ocean":12,"Barents Sea North":13,
+                          "Southern Ocean":14,"other":15 };
 
            for (var i = 0; i < num; i++) {
               var entry = data.feed.entries[i];
@@ -102,27 +100,6 @@ function EstStats(data) {
               //Find date diff between start and end date - this is cruise start and end
               var diff =  Math.floor( ((Date.parse(entry.end_date)) - (Date.parse(entry.start_date))) / 86400000);
               total = total + diff;
-
-
-               //If people listed
-              if (typeof entry.locations !== 'undefined') {
-                   for (var n = 0; n < entry.locations.length; n++) {
-                       if (typeof entry.locations[n].places !== 'undefined') {
-                         var loc_obj = {};
-                         for (var p = 0; p < entry.locations[n].places.length; p++) {
-                            if (typeof entry.locations[n].places[p].predefined_area !== 'undefined') {
-                              loc_obj.predefined_area = entry.locations[n].places[p].predefined_area;
-                            if ((typeof entry.locations[n].places[p].end_date !== 'undefined') && (typeof entry.locations[n].places[p].start_date !== 'undefined')) {
-                               loc_obj.days =  Math.floor( ((Date.parse(entry.locations[n].places[p].end_date)) - (Date.parse(entry.locations[n].places[p].start_date))) / 86400000);
-                            } else {
-                               loc_obj.days = diff;
-                            }
-                               locations_arr[locations[loc_obj.predefined_area]] = locations_arr[locations[loc_obj.predefined_area]] + loc_obj.days;
-                            } //if predefined area
-                         }
-                       }
-                   }
-              }
 
               //If people listed
               if (typeof entry.people !== 'undefined') {
@@ -164,6 +141,50 @@ function EstStats(data) {
                   if (typeof entry.people[j].role !== 'undefined') {
                      roles_arr[roles[entry.people[j].role]] = roles_arr[roles[entry.people[j].role]] + diff;
                   }
+
+                   //locations
+                  if (typeof entry.locations !== 'undefined') {
+                   for (var n = 0; n < entry.locations.length; n++) {
+                       if (typeof entry.locations[n].places !== 'undefined') {
+                         var loc_obj = {};
+                         for (var p = 0; p < entry.locations[n].places.length; p++) {
+                            if (typeof entry.locations[n].places[p].predefined_area !== 'undefined') {
+                              loc_obj.predefined_area = entry.locations[n].places[p].predefined_area;
+
+                            //Location dates undefined - forget it
+                            //If defined and diff_people => compare dates
+                            if ((typeof entry.locations[n].places[p].end_date !== 'undefined') && (typeof entry.locations[n].places[p].start_date !== 'undefined')) {
+                               if (diff_people>0) {
+                                  //Traverse people dates and compare to places dates.
+                                  //If places dates is within people dates, add date to sum.
+                                  var cur_date = Date.parse(entry.locations[n].places[p].end_date);
+                                  var pp = Date.parse(entry.locations[n].places[p].start_date);
+                                  while (cur_date > (Date.parse(entry.locations[n].places[p].start_date))) {
+                                    for (var h = 0; h < entry.people[j].expedition_dates.length; h++) {
+                                            if ((cur_date <= (Date.parse(entry.people[j].expedition_dates[h].end_date))) && (cur_date >= (Date.parse(entry.people[j].expedition_dates[h].start_date)))) {
+                                                // loc_date = loc_date + 1;  //Dates within place borders
+                                                locations_arr[locations[loc_obj.predefined_area]] = locations_arr[locations[loc_obj.predefined_area]] + 1;
+                                            }
+
+                                    } //for h
+                                     //Go back one day
+                                     cur_date = cur_date - 86400000;
+                                     console.log(new Date(cur_date).toUTCString());
+                                    // console.log(cur_date);
+                                  } //While
+                               } else {  //If not diff_people, use all places.dates
+                                 loc_obj.days =  Math.floor( ((Date.parse(entry.locations[n].places[p].end_date)) - (Date.parse(entry.locations[n].places[p].start_date))) / 86400000);
+                               } //diff_people
+                            } //if
+                              // locations_arr[locations[loc_obj.predefined_area]] = locations_arr[locations[loc_obj.predefined_area]] + loc_obj.days;
+                            }
+                            } //locations.predefined_area
+                         } //if locations.places
+                    }
+                   }
+
+
+
                 } //for j
               }
 
@@ -197,5 +218,3 @@ function EstStats(data) {
 
 
 module.exports = StatShowController;
-
-
