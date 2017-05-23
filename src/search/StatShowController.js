@@ -99,7 +99,7 @@ function EstStats(data) {
 
               //Find date diff between start and end date - this is cruise start and end
               var diff =  Math.floor( ((Date.parse(entry.end_date)) - (Date.parse(entry.start_date))) / 86400000);
-              total = total + diff;
+              total = diff;
 
               //If people listed
               if (typeof entry.people !== 'undefined') {
@@ -146,10 +146,9 @@ function EstStats(data) {
                   if (typeof entry.locations !== 'undefined') {
                    for (var n = 0; n < entry.locations.length; n++) {
                        if (typeof entry.locations[n].places !== 'undefined') {
-                         var loc_obj = {};
                          for (var p = 0; p < entry.locations[n].places.length; p++) {
                             if (typeof entry.locations[n].places[p].predefined_area !== 'undefined') {
-                              loc_obj.predefined_area = entry.locations[n].places[p].predefined_area;
+                              var predefined_area = entry.locations[n].places[p].predefined_area;
 
                             //Location dates undefined - forget it
                             //If defined and diff_people => compare dates
@@ -158,25 +157,23 @@ function EstStats(data) {
                                   //Traverse people dates and compare to places dates.
                                   //If places dates is within people dates, add date to sum.
                                   var cur_date = Date.parse(entry.locations[n].places[p].end_date);
-                                  var pp = Date.parse(entry.locations[n].places[p].start_date);
                                   while (cur_date > (Date.parse(entry.locations[n].places[p].start_date))) {
                                     for (var h = 0; h < entry.people[j].expedition_dates.length; h++) {
                                             if ((cur_date <= (Date.parse(entry.people[j].expedition_dates[h].end_date))) && (cur_date >= (Date.parse(entry.people[j].expedition_dates[h].start_date)))) {
                                                 // loc_date = loc_date + 1;  //Dates within place borders
-                                                locations_arr[locations[loc_obj.predefined_area]] = locations_arr[locations[loc_obj.predefined_area]] + 1;
+                                                locations_arr[locations[predefined_area]] = locations_arr[locations[predefined_area]] + 1;
                                             }
 
                                     } //for h
                                      //Go back one day
                                      cur_date = cur_date - 86400000;
-                                     console.log(new Date(cur_date).toUTCString());
-                                    // console.log(cur_date);
+
                                   } //While
-                               } else {  //If not diff_people, use all places.dates
-                                 loc_obj.days =  Math.floor( ((Date.parse(entry.locations[n].places[p].end_date)) - (Date.parse(entry.locations[n].places[p].start_date))) / 86400000);
+                               } else {  //If not people dates, use all places.dates
+                                 var days =  Math.floor( ((Date.parse(entry.locations[n].places[p].end_date)) - (Date.parse(entry.locations[n].places[p].start_date))) / 86400000);
+                                 locations_arr[locations[predefined_area]] = locations_arr[locations[predefined_area]] + days;
                                } //diff_people
                             } //if
-                              // locations_arr[locations[loc_obj.predefined_area]] = locations_arr[locations[loc_obj.predefined_area]] + loc_obj.days;
                             }
                             } //locations.predefined_area
                          } //if locations.places
