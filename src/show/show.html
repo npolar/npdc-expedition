@@ -40,17 +40,6 @@
 </section>
 <br />
 
-<section ng-if="document.activity && document.activity.length > 0">
- <md-divider></md-divider>
-  <h3>{{ 'Activities' | t }}</h3>
-     <p>{{document.research_program}}</p>
-<section ng-if="document.activity && document.activity.length > 0">
-     <div  ng-repeat="activity in document.activity">
-      <span ng-if="activity.activity_title"><md-icon>label_outline</md-icon><a href="{{activity.href}}" target="_blank"> {{activity.activity_title}}</a></span>
-    <span ng-if="activity.topics"> [<span ng-repeat="topic in activity.topics">{{topic}}<span ng-if="!$last">,&nbsp; </span></span>]</span>
-</section>
-</section>
-<br />
 
  <div ng-if="isLoggedInAs()">
   <section ng-if="document.people && document.people.length > 0">
@@ -63,7 +52,7 @@
           <h3> {{ person.first_name }} {{ person.last_name }} </h3>
           <p ng-if="person.organisation">{{ person.organisation }},&nbsp;{{ person['@country'] }}</p>
           <p ng-if="person.role">{{ person.role }}</p>
-          <p ng-if="person.expedition_dates"><span ng-repeat="t in person.expedition_dates">{{ (t.start_date).substr(0,10) }}&nbsp;-&nbsp;{{ (t.start_date).substr(0,10) }}</p>
+          <p ng-if="person.expedition_dates"><span ng-repeat="t in person.expedition_dates">{{ (t.start_date).substr(0,10) }}&nbsp;-&nbsp;{{ (t.start_date).substr(0,10) }}&nbsp;&nbsp;</p>
         </div>
       </md-list-item>
     </md-list>
@@ -102,6 +91,19 @@
 
         <br />
     </div>
+</section>
+<br />
+
+
+<section ng-if="document.activity && document.activity.length > 0">
+ <md-divider></md-divider>
+  <h3>{{ 'Activities' | t }}</h3>
+     <p>{{document.research_program}}</p>
+<section ng-if="document.activity && document.activity.length > 0">
+     <div  ng-repeat="activity in document.activity">
+      <span ng-if="activity.activity_title"><md-icon>label_outline</md-icon><a href="{{activity.href}}" target="_blank"> {{activity.activity_title}}</a></span>
+    <span ng-if="activity.topics"> [<span ng-repeat="topic in activity.topics">{{topic}}<span ng-if="!$last">,&nbsp; </span></span>]</span>
+</section>
 </section>
 <br />
 

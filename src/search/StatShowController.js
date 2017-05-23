@@ -117,15 +117,15 @@ function EstStats(data) {
                             //Find date diff between start and end date - this is cruise start and end
                             var diff2 =  Math.floor( ((Date.parse(entry.people[j].expedition_dates[k].end_date)) - (Date.parse(entry.people[j].expedition_dates[k].start_date))) / 86400000);
                             diff_people = diff_people + diff2;
-                       } //for k
-                      } //if
-                      //Use people dates if filled in
-                      if (diff_people > 0) { diff = diff_people; }
+                      } //for k
+                  } //if
+                  //Use people dates if filled in
+                  if (diff_people > 0) { diff = diff_people; }
 
-                      //type
-                      type_arr[t_arr] =  type_arr[t_arr] + diff;
-                      //activity_type
-                      activity_type_arr[activity_type[entry.activity_type]] = activity_type_arr[activity_type[entry.activity_type]] + diff;
+                  //type
+                  type_arr[t_arr] =  type_arr[t_arr] + diff;
+                  //activity_type
+                  activity_type_arr[activity_type[entry.activity_type]] = activity_type_arr[activity_type[entry.activity_type]] + diff;
 
 
 
