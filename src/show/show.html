@@ -52,7 +52,7 @@
           <h3> {{ person.first_name }} {{ person.last_name }} </h3>
           <p ng-if="person.organisation">{{ person.organisation }},&nbsp;{{ person['@country'] }}</p>
           <p ng-if="person.role">{{ person.role }}</p>
-          <p ng-if="person.expedition_dates"><span ng-repeat="t in person.expedition_dates">{{ (t.start_date).substr(0,10) }}&nbsp;-&nbsp;{{ (t.start_date).substr(0,10) }}&nbsp;&nbsp;</p>
+          <p ng-if="person.expedition_dates"><span ng-repeat="t in person.expedition_dates">{{ (t.start_date).substr(0,10) }}&nbsp;-&nbsp;{{ (t.end_date).substr(0,10) }}&nbsp;&nbsp;</p>
         </div>
       </md-list-item>
     </md-list>
@@ -85,8 +85,10 @@
         <md-icon>place</md-icon>
 
         <span ng-if="location.start_date">{{location.start_date.substr(0,10)}} - {{location.end_date.substr(0,10)}}&nbsp;&nbsp;</span>
-        <span ng-if="location.placename">{{location.placename}}</span>
-        <span ng-if="location.predefined_area"> &nbsp;[{{location.predefined_area}}]</span>
+        <div  ng-repeat="loc in location.places">
+        <span ng-if="loc.placename">{{loc.placename}}</span>
+        <span ng-if="loc.predefined_area"> &nbsp;[{{loc.predefined_area}}]</span>
+        </div>
         <span ng-if="location.north">[({{location.north}},{{location.east}})&nbsp;-&nbsp;({{location.south}},{{location.west}})]</span>
 
         <br />
