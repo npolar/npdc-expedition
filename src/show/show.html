@@ -124,15 +124,19 @@
 </section>
 <br />
 
- <section ng-if="document.attachments">
+
+
+
+
+ <section ng-if="document.files">
  <!-- FIXME @todo
     If license was set after uploading, the files are restricted and therefore not available unless logged in and authorized
     Once this is fixed, append this to the ng-if: || document.license
     -->
      <md-divider></md-divider>
   <h3>{{'Files' | t }}</h3>
-      <div ng-repeat="file in document.attachments">
-        <md-icon>file_download</md-icon> <a ng-href="{{file.href+'?key='+key()}}">{{ file.filename}}</a> ({{ file.type }} {{ file.length | bytes }})
+      <div ng-repeat="file in document.files">
+        <md-icon>file_download</md-icon> <a ng-href="{{file.uri + '?key='+ key }}">{{ file.filename}}</a> ({{ file.type }} {{ file.length | bytes }})
       </div>
 </section>
 <br />
