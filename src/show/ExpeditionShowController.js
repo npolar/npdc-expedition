@@ -5,7 +5,7 @@
  * @ngInject
  */
 var ExpeditionShowController = function ($scope, $controller, $q, $routeParams,
-  Expedition, Inventory, Dataset, Project, Publication, npdcAppConfig) {
+  Expedition, Inventory, Dataset, Project, Publication, npdcAppConfig, NpolarApiSecurity) {
    'ngInject';
 
   $controller('NpolarBaseController', {$scope: $scope});
@@ -16,11 +16,20 @@ var ExpeditionShowController = function ($scope, $controller, $q, $routeParams,
     return ($scope.security.getUser().email);
   };
 
+      //need key for file upload
+      let system = NpolarApiSecurity.getSystem('read', $scope.resource.path);
+      if (system && system['key']) {
+         $scope.key = system['key'];
+      }
+
 
   $scope.mapOptions = {};
 
   let show = function() {
     $scope.show().$promise.then((expedition) => {
+
+
+
 
 
       if (expedition.locations) {
