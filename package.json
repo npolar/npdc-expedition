@@ -11,7 +11,13 @@
   "private": true,
   "repository": "https://github.com/npolar/npdc-expedition",
   "dependencies": {
-    "npdc-common": "github:npolar/npdc-common#v4.10.9"
+    "npdc-common": "github:npolar/npdc-common#v4.10.10",
+    "leaflet": "^0",
+    "leaflet-draw": "^0",
+    "leaflet-fullscreen": "^1",
+    "esri-leaflet": "^1",
+    "proj4": "^2",
+    "proj4leaflet": "^0"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.3.13",
