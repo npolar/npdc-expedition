@@ -18,8 +18,8 @@ var ExpeditionShowController = function ($scope, $controller, $q, $routeParams,
 
       //need key for file upload
       let system = NpolarApiSecurity.getSystem('read', $scope.resource.path);
-      if (system && system['key']) {
-         $scope.key = system['key'];
+      if (system && system.key) {
+         $scope.key = system.key;
       }
 
 
