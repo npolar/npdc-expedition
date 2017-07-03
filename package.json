@@ -11,7 +11,7 @@
   "private": true,
   "repository": "https://github.com/npolar/npdc-expedition",
   "dependencies": {
-    "npdc-common": "github:npolar/npdc-common#v4.10.10",
+    "npdc-common": "github:npolar/npdc-common#v4.10.12",
     "leaflet": "^0",
     "leaflet-draw": "^0",
     "leaflet-fullscreen": "^1",
