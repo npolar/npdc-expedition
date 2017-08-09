@@ -40,25 +40,6 @@
 </section>
 <br />
 
-
- <div ng-if="isLoggedInAs()">
-  <section ng-if="document.people && document.people.length > 0">
-     <md-divider></md-divider>
-  <h3>{{ 'People' | t }}</h3>
-  <md-list>
-    <md-list-item class="md-2-line" ng-repeat="person in document.people">
-      <md-icon class="md-avatar-icon">person</md-icon>
-        <div class="md-list-item-text">
-          <h3> {{ person.first_name }} {{ person.last_name }} </h3>
-          <p ng-if="person.organisation">{{ person.organisation }},&nbsp;{{ person['@country'] }}</p>
-          <p ng-if="person.role">{{ person.role }}</p>
-          <p ng-if="person.expedition_dates"><span ng-repeat="t in person.expedition_dates">{{ (t.start_date).substr(0,10) }}&nbsp;-&nbsp;{{ (t.end_date).substr(0,10) }}&nbsp;&nbsp;</p>
-        </div>
-      </md-list-item>
-    </md-list>
-</section>
-</div>
-
 <!--if not logged in, show only expedition leader -->
 <div ng-if="!isLoggedInAs()">
   <section>
@@ -76,6 +57,28 @@
     </md-list>
 </section>
 </div>
+
+
+ <div ng-if="isLoggedInAs()">
+  <section ng-if="document.people && document.people.length > 0">
+     <md-divider></md-divider>
+  <h3>{{ 'People' | t }}</h3>
+  <md-list>
+    <md-list-item class="md-2-line" ng-repeat="person in document.people">
+      <md-icon class="md-avatar-icon">person</md-icon>
+        <div class="md-list-item-text">
+          <h3> {{ person.first_name }} {{ person.last_name }} </h3>
+          <p ng-if="person.organisation">{{ person.organisation }},&nbsp;{{ person['@country'] }}</p>
+
+          <p ng-if="person.role">{{ person.roles }}</p>
+          <p ng-if="person.expedition_dates"><span ng-repeat="t in person.expedition_dates">{{ (t.start_date).substr(0,10) }}&nbsp;-&nbsp;{{ (t.end_date).substr(0,10) }}&nbsp;&nbsp;</p>
+        </div>
+      </md-list-item>
+    </md-list>
+</section>
+</div>
+
+
 
 
 <section ng-if="document.locations">

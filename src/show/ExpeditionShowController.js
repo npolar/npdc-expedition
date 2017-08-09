@@ -41,10 +41,9 @@ var ExpeditionShowController = function ($scope, $controller, $q, $routeParams,
       var pi = [];
        //Convert from camelCase to human readable
       for(var a=0; a<($scope.document.people).length; a++){
-         for(var b=0; b<($scope.document.people[a].roles).length; b++){
-            if ($scope.document.people[a].roles[b] === 'expedition/cruise leader'){
+            if ($scope.document.people[a].role === 'expedition/cruise leader'){
                              pi.push($scope.document.people[a]);
-            }
+
       }}
       $scope.pi = pi;
 
