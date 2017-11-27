@@ -16,8 +16,8 @@ var ExpeditionSearchController = function ($filter, $scope, $route, $location, $
   };
 
   npdcAppConfig.search.local.results.detail = (entry) => {
-     let r = "Last updated: ";
-     return r+` ${$filter('date')(entry.updated)}`;
+     let r = "Start date: ";
+     return r+` ${$filter('date')(entry.start_date)}`;
   };
 
 
@@ -34,8 +34,8 @@ var ExpeditionSearchController = function ($filter, $scope, $route, $location, $
   };
 
   let query = function() {
-    let defaults = { limit: "all", sort: "-updated", fields: 'code,id,updated,type,activity.departed',
-      'date-year': 'activity.departed', facets: 'tags,people.email,updated,locations.area' };
+    let defaults = { limit: "all", sort: "-updated", fields: 'code,id,start_date,type,activity.departed',
+      'date-year': 'activity.departed', facets: 'tags,people.email,start_date,locations.area' };
     let invariants = $scope.security.isAuthenticated() ? {} : {} ;
     return Object.assign({}, defaults, invariants);
   };
