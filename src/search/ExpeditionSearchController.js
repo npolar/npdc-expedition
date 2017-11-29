@@ -20,22 +20,22 @@ var ExpeditionSearchController = function ($filter, $scope, $route, $location, $
      return r+` ${$filter('date')(entry.start_date)}`;
   };
 
-
-
   npdcAppConfig.cardTitle = "Expedition Archive";
   npdcAppConfig.search.local.results.subtitle = "type";
   npdcAppConfig.search.local.filterUi = {
-    'year-activity.departed': {
+    'start_date': {
       type: 'range'
-    },
-    'updated': {
-      type: 'hidden'
     }
   };
 
+
   let query = function() {
-    let defaults = { limit: "all", sort: "-updated", fields: 'code,id,start_date,type,activity.departed',
-      'date-year': 'activity.departed', facets: 'tags,people.email,start_date,locations.area' };
+    let defaults = {
+      limit: "all",
+      sort: "-start_date",
+      fields: 'code,id,start_date,type,activity_type',
+      facets: 'activity_type,type'
+    };
     let invariants = $scope.security.isAuthenticated() ? {} : {} ;
     return Object.assign({}, defaults, invariants);
   };
