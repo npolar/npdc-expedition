@@ -23,7 +23,7 @@ var ExpeditionSearchController = function ($filter, $scope, $route, $location, $
   npdcAppConfig.cardTitle = "Expedition Archive";
   npdcAppConfig.search.local.results.subtitle = "type";
   npdcAppConfig.search.local.filterUi = {
-    'start_date': {
+    'year-start_date': {
       type: 'range'
     }
   };
@@ -34,13 +34,14 @@ var ExpeditionSearchController = function ($filter, $scope, $route, $location, $
       limit: "all",
       sort: "-start_date",
       fields: 'code,id,start_date,type,activity_type',
-      facets: 'activity_type,type'
+      facets: 'type,activity_type',"date-year":"start_date"
     };
     let invariants = $scope.security.isAuthenticated() ? {} : {} ;
     return Object.assign({}, defaults, invariants);
   };
 
   $scope.search(query());
+
 
   $scope.$on('$locationChangeSuccess', (event, data) => {
     $scope.search(query());
