@@ -3,8 +3,10 @@
 
 var ExpeditionEditController = function($scope, $controller, $routeParams, Expedition, formula,
   formulaAutoCompleteService, npdcAppConfig, chronopicService, fileFunnelService, NpolarLang,
-  npolarApiConfig, NpolarApiSecurity, NpolarMessage, npolarCountryService) {
+  npolarApiConfig, NpolarApiSecurity, NpolarMessage, expeditionGetRIS, npolarCountryService) {
   'ngInject';
+
+
 
   function init() {
 
@@ -163,9 +165,35 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
      // edit (or new) action
      $scope.edit();
 
+
+
   } catch (e) {
     NpolarMessage.error(e);
   }
+
+  $scope.$watch('formula.getModel().ris', function(ris) {
+
+  let p = $scope.formula.getModel();
+
+  if ((/^[0-9]{3,5}$/).test(p.ris)) { //if it is a ris project number
+
+      let url = encodeURI(p.ris + '.json');
+
+      let pp = expeditionGetRIS.get({search:url}, function(){
+
+              if (!p.id) {
+                 p = Object.assign({}, Expedition.create(),p);
+                 //Do the assignments with RiS
+                 console.log(p);
+
+              }
+      });
+
+
+
+  }
+
+  }); //end $watch
 
 };
 

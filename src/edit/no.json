@@ -8,6 +8,9 @@
     "Endringer"
     ],
 	"fields": {
+		"ris": {
+        "title": "RiS project nr (hvis det eksisterer)"
+         },
 		"code": {
         "title": "tokt eller felt navn"
          },

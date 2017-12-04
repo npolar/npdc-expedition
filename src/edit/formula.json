@@ -4,6 +4,10 @@
       "title": "Expedition",
       "fields": [
         {
+          "id": "ris",
+          "title": "RiS project number (if existing)"
+        },
+        {
           "id": "code",
           "title": "expedition name"
         },

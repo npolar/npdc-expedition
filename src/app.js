@@ -17,6 +17,7 @@ npdcExpeditionApp.controller('StatShowController', require('./search/StatShowCon
 npdcExpeditionApp.factory('ExpeditionSearchService', require('./search/ExpeditionSearchService'));
 npdcExpeditionApp.factory('Expedition', require('./Expedition.js'));
 npdcExpeditionApp.directive('expeditionCoverage', require('./edit/coverage/coverageDirective'));
+npdcExpeditionApp.service('expeditionGetRIS', require('./ExpeditionGetRIS'));
 
 npdcExpeditionApp.directive('xchronopic', function($timeout) {
   return {
@@ -72,7 +73,7 @@ npdcExpeditionApp.config(require('./router'));
 npdcExpeditionApp.config(($httpProvider, npolarApiConfig) => {
   //var autoconfig = new AutoConfig("production");
   var autoconfig = new AutoConfig("test");
-  angular.extend(npolarApiConfig, autoconfig, { resources });
+  Object.assign(npolarApiConfig, autoconfig, { resources });
   console.debug("npolarApiConfig", npolarApiConfig);
 
   $httpProvider.interceptors.push('npolarApiInterceptor');
