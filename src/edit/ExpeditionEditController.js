@@ -214,8 +214,20 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
         if ((data.persons).length > 0) {
            //Traverse through all persons objects
            for (let k=0;k<(data.persons).length; k++){
-             p.people[k] = Object.assign(data.persons[k]);
-           }
+             let boss = {};
+             p.people[k] = (({ givenName, surName, role }) => ({ givenName, surName, role }))(data.persons[k]);
+             p.people[k].first_name = p.people[k].givenName; delete p.people[k].givenName;
+             p.people[k].last_name = p.people[k].surName; delete p.people[k].surName;
+             //New names for project owner
+             if (p.people[k].role === 'Project Owner') {
+                 p.people[k].role = 'expedition/cruise leader';
+                 boss = (({ givenName, surName }) => ({ givenName, surName }))(data.persons[k]);
+             } else {
+                  p.people[k].role = 'other';
+                  let other = (({ givenName, surName }) => ({ givenName, surName }))(data.persons[l]);
+                  if (JSON.stringify(other) === JSON.stringify(boss)) { delete p.people[l]; }
+             }
+          }
         }
         //Fieldworks could be more than one, we select the last fieldwork
         if ((data.fieldworks).length > 0) {
