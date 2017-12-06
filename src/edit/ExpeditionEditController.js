@@ -182,7 +182,12 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
       headers: {'Accept': 'application/json'}
 
      }).success(function(data){
+
+        p = get_RIS(p,data);
+        console.log("---------------");
+        console.log(p);
         console.log(data);
+
 
     }).error(function(data, status, headers, config) {
         console.log("Calling Research in SValbard failed.");
@@ -190,8 +195,43 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
     });
 
   } //if
-
   }); //end $watch
+
+
+ //Move RIS values to formula object
+ function get_RIS(p,data) {
+      //Create a new object if not already existing
+      if (!p.id) {
+            p = Object.assign({}, Expedition.create(),p);
+      }
+
+      console.log(p);
+      console.log(data);
+
+     //Do the assignments with RiS
+        p.type = "fieldwork";
+        p.activity_type = "research";
+        p.ris = data.risId;
+        if (data.summary !== undefined) { p.summary = data.summary; }
+        if (data.title !== undefined) { p.code = data.title; }
+        if ((data.persons).length > 0) {
+           //Traverse through all persons objects
+           for (let k=0;k<(data.persons).length; k++){
+             p.people[k] = Object.assign(data.persons[k]);
+           }
+        }
+        //Fieldworks could be more than one, we select the first always
+        if ((data.fieldworks).length !== 0) {
+          if (data.fieldworks[0].startDate) {
+            p.start_date = data.fieldworks[0].startDate + 'T12:00:00Z';
+          }
+          if (data.fieldworks[0].endDate) {
+            p.end_date = data.fieldworks[0].endDate + 'T12:00:00Z';
+          }
+          //Need location also - goes here - use proj4
+        }
+    return p;
+ }
 
 };
 
