@@ -205,9 +205,6 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
             p = Object.assign({}, Expedition.create(),p);
       }
 
-      console.log(p);
-      console.log(data);
-
      //Do the assignments with RiS
         p.type = "fieldwork";
         p.activity_type = "research";
@@ -220,13 +217,14 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
              p.people[k] = Object.assign(data.persons[k]);
            }
         }
-        //Fieldworks could be more than one, we select the first always
-        if ((data.fieldworks).length !== 0) {
-          if (data.fieldworks[0].startDate) {
-            p.start_date = data.fieldworks[0].startDate + 'T12:00:00Z';
+        //Fieldworks could be more than one, we select the last fieldwork
+        if ((data.fieldworks).length > 0) {
+           let count = ((data.fieldworks).length)-1;
+          if (data.fieldworks[count].startDate) {
+            p.start_date = data.fieldworks[count].startDate + 'T12:00:00Z';
           }
-          if (data.fieldworks[0].endDate) {
-            p.end_date = data.fieldworks[0].endDate + 'T12:00:00Z';
+          if (data.fieldworks[count].endDate) {
+            p.end_date = data.fieldworks[count].endDate + 'T12:00:00Z';
           }
           //Need location also - goes here - use proj4
         }
