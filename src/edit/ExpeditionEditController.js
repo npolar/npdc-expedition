@@ -1,12 +1,11 @@
 
 'use strict';
 
-var ExpeditionEditController = function($scope, $controller, $routeParams, Expedition, formula,
+// @ngInject
+
+var ExpeditionEditController = function($scope, $controller, $routeParams, $http, $sce, Expedition, formula,
   formulaAutoCompleteService, npdcAppConfig, chronopicService, fileFunnelService, NpolarLang,
-  npolarApiConfig, NpolarApiSecurity, NpolarMessage, expeditionGetRIS, npolarCountryService) {
-  'ngInject';
-
-
+  npolarApiConfig, NpolarApiSecurity, NpolarMessage, npolarCountryService) {
 
   function init() {
 
@@ -175,23 +174,22 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
 
   let p = $scope.formula.getModel();
 
-  if ((/^[0-9]{3,5}$/).test(p.ris)) { //if it is a ris project number
+  //if it is a ris project number, that is a number with 3-5 digits
+  if ((/^[0-9]{3,5}$/).test(p.ris)) {
 
-      let url = encodeURI(p.ris + '.json');
+    //Do call to RiS and use results
+    $http.get('https://cors-anywhere.herokuapp.com/https://www.researchinsvalbard.no/api/project/'+p.ris+'.json',{
+      headers: {'Accept': 'application/json'}
 
-      let pp = expeditionGetRIS.get({search:url}, function(){
+     }).success(function(data){
+        console.log(data);
 
-              if (!p.id) {
-                 p = Object.assign({}, Expedition.create(),p);
-                 //Do the assignments with RiS
-                 console.log(p);
+    }).error(function(data, status, headers, config) {
+        console.log("Calling Research in SValbard failed.");
+        console.log(data, status, headers, config);
+    });
 
-              }
-      });
-
-
-
-  }
+  } //if
 
   }); //end $watch
 

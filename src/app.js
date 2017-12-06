@@ -17,7 +17,6 @@ npdcExpeditionApp.controller('StatShowController', require('./search/StatShowCon
 npdcExpeditionApp.factory('ExpeditionSearchService', require('./search/ExpeditionSearchService'));
 npdcExpeditionApp.factory('Expedition', require('./Expedition.js'));
 npdcExpeditionApp.directive('expeditionCoverage', require('./edit/coverage/coverageDirective'));
-npdcExpeditionApp.service('expeditionGetRIS', require('./ExpeditionGetRIS'));
 
 npdcExpeditionApp.directive('xchronopic', function($timeout) {
   return {
