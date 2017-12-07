@@ -184,9 +184,6 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
      }).success(function(data){
 
         p = get_RIS(p,data);
-        console.log("---------------");
-        console.log(p);
-        console.log(data);
 
 
     }).error(function(data, status, headers, config) {
@@ -211,26 +208,44 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
         p.ris = data.risId;
         if (data.summary !== undefined) { p.summary = data.summary; }
         if (data.title !== undefined) { p.code = data.title; }
-        if ((data.persons).length > 0) {
+         let temp_arr = [];
+        if ((data.persons) && ((data.persons).length > 0)) {
            //Traverse through all persons objects
            for (let k=0;k<(data.persons).length; k++){
-             let boss = {};
-             p.people[k] = (({ givenName, surName, role }) => ({ givenName, surName, role }))(data.persons[k]);
-             p.people[k].first_name = p.people[k].givenName; delete p.people[k].givenName;
-             p.people[k].last_name = p.people[k].surName; delete p.people[k].surName;
+             temp_arr[k] = (({ givenName, surName, role }) => ({ givenName, surName, role }))(data.persons[k]);
+             temp_arr[k].first_name = temp_arr[k].givenName; delete temp_arr[k].givenName;
+             temp_arr[k].last_name = temp_arr[k].surName; delete temp_arr[k].surName;
              //New names for project owner
-             if (p.people[k].role === 'Project Owner') {
-                 p.people[k].role = 'expedition/cruise leader';
-                 boss = (({ givenName, surName }) => ({ givenName, surName }))(data.persons[k]);
+             if (temp_arr[k].role === 'Project Owner') {
+                 temp_arr[k].role = 'expedition/cruise leader';
+                 temp_arr.splice(temp_arr[k], 0, temp_arr.splice(temp_arr[k], 1)[0]);
+                 temp_arr.splice(0, 0, temp_arr[k]); //Insert elem at the start
+                 temp_arr.splice(k+1,1); //Remove elem from place K
              } else {
-                  p.people[k].role = 'other';
-                  let other = (({ givenName, surName }) => ({ givenName, surName }))(data.persons[l]);
-                  if (JSON.stringify(other) === JSON.stringify(boss)) { delete p.people[l]; }
+                  temp_arr[k].role = 'other';
              }
           }
+
+       }
+
+
+        //Clean temp_arr for name duplicates
+        let m = 0;
+        while (m < temp_arr.length) {
+          for (let l=(m+1);l<(temp_arr.length); l++){
+                 let inner = (({last_name,first_name }) => ({ last_name,first_name }))(temp_arr[l]);
+                 let outer = (({last_name,first_name }) => ({ last_name,first_name }))(temp_arr[m]);
+                 if (JSON.stringify(inner) === JSON.stringify(outer)) {
+                   temp_arr.splice(l,1); l=l-1; }
+          }
+          m++;
         }
+
+        //Copy result to p.people
+        p.people = temp_arr;
+
         //Fieldworks could be more than one, we select the last fieldwork
-        if ((data.fieldworks).length > 0) {
+        if ((data.fieldworks) && ((data.fieldworks).length > 0)) {
            let count = ((data.fieldworks).length)-1;
           if (data.fieldworks[count].startDate) {
             p.start_date = data.fieldworks[count].startDate + 'T12:00:00Z';
