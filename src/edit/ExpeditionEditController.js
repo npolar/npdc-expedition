@@ -177,7 +177,7 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
   let p = $scope.formula.getModel();
 
   //if it is a ris project number, that is a number with 3-5 digits
-  if ((/^[0-9]{3,5}$/).test(p.ris)) {
+  if (((/^[0-9]{3,5}$/).test(p.ris))&&(!p.id)&&(p.activity_type==='')) {
 
     //Do call to RiS and use results
     $http.get('https://cors-anywhere.herokuapp.com/https://www.researchinsvalbard.no/api/project/'+p.ris+'.json',{
@@ -185,9 +185,12 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
 
      }).success(function(data){
 
+
         p = get_RIS(p,data);
-        console.log("p",p);
-        console.log("data", data);
+        //console.log("p",p);
+        //console.log("data", data);
+        $scope.formula.setModel(p);
+
 
 
     }).error(function(data, status, headers, config) {
