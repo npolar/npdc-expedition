@@ -5,6 +5,7 @@ var AutoConfig = npdcCommon.AutoConfig;
 
 var angular = require('angular');
 
+
 // Load module after Highcharts is loaded
 require('npdc-common/src/wrappers/leaflet');
 

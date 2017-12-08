@@ -7,6 +7,8 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, $http
   formulaAutoCompleteService, npdcAppConfig, chronopicService, fileFunnelService, NpolarLang,
   npolarApiConfig, NpolarApiSecurity, NpolarMessage, npolarCountryService) {
 
+  var proj4 = require('proj4');
+
   function init() {
 
   // EditController -> NpolarEditController
@@ -184,6 +186,8 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
      }).success(function(data){
 
         p = get_RIS(p,data);
+        console.log("p",p);
+        console.log("data", data);
 
 
     }).error(function(data, status, headers, config) {
@@ -254,7 +258,22 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
             p.end_date = data.fieldworks[count].endDate + 'T12:00:00Z';
           }
           //Need location also - goes here - use proj4
+          let loc = {};
+          let utm33 = proj4('+proj=utm +zone=33 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs');
+          let decimal_coord = proj4(utm33,'EPSG:4326').forward([data.fieldworks[count].utm33East, data.fieldworks[count].utm33North]);
+
+          if (data.fieldworks[count].utm33East) {
+             loc.east = decimal_coord[0];
+             loc.west = decimal_coord[0];
+          }
+          if (data.fieldworks[count].utm33North) {
+             loc.north = decimal_coord[1];
+             loc.south = decimal_coord[1];
+          }
+          //Insert locations from RiS into our return object
+          p.locations = [loc];
         }
+
     return p;
  }
 
