@@ -179,22 +179,19 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
   //if it is a ris project number, that is a number with 3-5 digits
   if (((/^[0-9]{3,5}$/).test(p.ris))&&(!p.id)&&(p.activity_type==='')) {
 
-    //Do call to RiS and use results
-    $http.get('https://cors-anywhere.herokuapp.com/https://www.researchinsvalbard.no/api/project/'+p.ris+'.json',{
-      headers: {'Accept': 'application/json'}
 
-     }).success(function(data){
+      $http.get('https://cors-anywhere.herokuapp.com/https://www.researchinsvalbard.no/api/project/'+p.ris+'.json',{
+       headers: {'Accept': 'application/json'} }).success(function(data){
 
 
+        console.log("Calling Research in Svalbard success.");
         p = get_RIS(p,data);
-        //console.log("p",p);
-        //console.log("data", data);
         $scope.formula.setModel(p);
 
 
 
     }).error(function(data, status, headers, config) {
-        console.log("Calling Research in SValbard failed.");
+        console.log("Calling Research in Svalbard failed.");
         console.log(data, status, headers, config);
     });
 
@@ -209,12 +206,16 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
             p = Object.assign({}, Expedition.create(),p);
       }
 
+      console.log(data);
+      console.log("---------");
+
      //Do the assignments with RiS
         p.type = "fieldwork";
         p.activity_type = "research";
-        p.ris = data.risId;
+      //  p.ris = (data.risId).toString();
+      //  console.log(data.name);
         if (data.summary !== undefined) { p.summary = data.summary; }
-        if (data.title !== undefined) { p.code = data.title; }
+        if (data.name !== undefined) { p.code = data.name; }
          let temp_arr = [];
         if ((data.persons) && ((data.persons).length > 0)) {
            //Traverse through all persons objects

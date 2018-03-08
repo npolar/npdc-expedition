@@ -16,10 +16,14 @@
           "title": "type of expedition"
         },
         {
-              "id": "activity_type",
-              "title": "activity type (required)"
+          "id": "activity_type",
+          "title": "activity type (required)"
         },
         "summary",
+         {
+          "id": "ship",
+          "title": "If any, what ship is used?"
+        },
         {
           "id": "start_date",
           "title": "departure date"
@@ -27,57 +31,9 @@
          {
           "id": "end_date",
           "title": "return date"
-        },
-      {
-          "id": "@departure_placename",
-          "title": "departure placename"
-      },
-      {
-          "id": "@return_placename",
-          "title": "return placename"
-      },
-      {
-        "id": "platforms",
-        "items": {
-          "fields": [
-            "type",
-            {
-          "id": "name",
-          "title": "vessel name"
-        },
-        {
-          "id": "sponsor",
-          "title": "responsible institution ('Kronprins Haakon' only)"
         }
-          ]
-        }
-      }
-      ]
-    },
-    {
-      "title": "Activities",
-      "fields": [
-      {
-        "id": "activity",
-        "items": {
-          "fields": [
-            {
-              "id": "activity_title",
-              "title": "activity title (required)"
-            },
-            {
-              "id": "href",
-              "title": "activity link (please include protocol f.ex. 'http://' as in link http://www.npolar.no)"
-            },
-             {
-              "id": "topics",
-              "title": "topics (required)"
-            }
-          ]
-        }
-      }]
-    },
-  {
+  ]
+},{
       "title": "People",
       "fields": [{
         "id": "people",
@@ -124,18 +80,18 @@
         }
       }]
 },
-    {
+{
       "title": "Locations",
       "fields": [{
         "id": "locations",
-        "title": "locations (draw a bounding box covering operational area)",
+        "title": "location (draw a bounding box covering operational area)(required)",
         "items": {
           "fields": [
           {
           "id": "north",
           "title": "north (required)"
           },
-          {
+           {
           "id": "east",
           "title": "east (required)"
           },
@@ -147,40 +103,15 @@
           "id": "west",
           "title": "west (required)"
           },
-        {
-          "title": "places",
-          "fields": [{
-            "id": "places",
-            "title":"places (required)",
-            "items": {
-                "fields": [
-                   {
-                "id": "placename",
-                "title": "placename (required)"
-                 },
-              {
-                "id": "predefined_area",
-                "title": "predefined area (please include larger seas for cruises) (required)"
-              },
-              {
-                "id": "start_date",
-                "title": "start date (required)"
-              },
-              {
-                "id": "end_date",
-                "title": "end date (required)"
-              }
+          {
+          "id": "placename",
+          "title": "placename (required)"
+          }
           ]
-        }
-      }
-      ]
-        }
-       ]
-        }
-      }
+        }}
       ]
     },
-    {
+ {
       "title": "file upload",
       "fields": [
       {
@@ -211,7 +142,8 @@
           "id": "comment",
           "title": "comment major changes to this entry"
         }
-      ]
-    }
-  ]
+
+        ]
+      }
+]
 }
