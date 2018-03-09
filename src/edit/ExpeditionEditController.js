@@ -205,19 +205,48 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
             p = Object.assign({}, Expedition.create(),p);
       }
 
-     //Do the assignments with RiS
-        p.type = "fieldwork";
-        p.activity_type = "research";
+      //Do the assignments with RiS
+      p.type = "fieldwork";
+      p.activity_type = "research";
+
+      //Fieldworks could be more than one, we select the last fieldwork
+      if ((data.fieldworks) && ((data.fieldworks).length > 0)) {
+           let count = ((data.fieldworks).length)-1;
+          if (data.fieldworks[count].startDate) {
+            p.start_date = data.fieldworks[count].startDate + 'T12:00:00Z';
+          }
+          if (data.fieldworks[count].endDate) {
+            p.end_date = data.fieldworks[count].endDate + 'T12:00:00Z';
+          }
+          //Need location also - goes here - use proj4
+          let loc = {};
+          let utm33 = proj4('+proj=utm +zone=33 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs');
+          let decimal_coord = proj4(utm33,'EPSG:4326').forward([data.fieldworks[count].utm33East, data.fieldworks[count].utm33North]);
+
+          if (data.fieldworks[count].utm33East) {
+             loc.east = decimal_coord[0];
+             loc.west = decimal_coord[0];
+          }
+          if (data.fieldworks[count].utm33North) {
+             loc.north = decimal_coord[1];
+             loc.south = decimal_coord[1];
+          }
+          //Insert locations from RiS into our return object
+          p.locations = [loc];
+        }
 
         let temp_arr = [];
         if ((data.persons) && ((data.persons).length > 0)) {
            //Traverse through all persons objects
            for (let k=0;k<(data.persons).length; k++){
 
+            console.log(data);
+            console.log("bbbbb");
+
              let obj = {
                 first_name:data.persons[k].givenName,
                 last_name: data.persons[k].surName,
-                expedition_dates:[{start_date: data.startDate, end_date: data.endDate}],
+                expedition_dates:[{start_date: p.start_date, end_date: p.end_date}],
                 role: data.persons[k].role };
 
             temp_arr[k] = obj;
@@ -250,31 +279,7 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
         //Copy result to p.people
         p.people = temp_arr;
 
-        //Fieldworks could be more than one, we select the last fieldwork
-        if ((data.fieldworks) && ((data.fieldworks).length > 0)) {
-           let count = ((data.fieldworks).length)-1;
-          if (data.fieldworks[count].startDate) {
-            p.start_date = data.fieldworks[count].startDate + 'T12:00:00Z';
-          }
-          if (data.fieldworks[count].endDate) {
-            p.end_date = data.fieldworks[count].endDate + 'T12:00:00Z';
-          }
-          //Need location also - goes here - use proj4
-          let loc = {};
-          let utm33 = proj4('+proj=utm +zone=33 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs');
-          let decimal_coord = proj4(utm33,'EPSG:4326').forward([data.fieldworks[count].utm33East, data.fieldworks[count].utm33North]);
 
-          if (data.fieldworks[count].utm33East) {
-             loc.east = decimal_coord[0];
-             loc.west = decimal_coord[0];
-          }
-          if (data.fieldworks[count].utm33North) {
-             loc.north = decimal_coord[1];
-             loc.south = decimal_coord[1];
-          }
-          //Insert locations from RiS into our return object
-          p.locations = [loc];
-        }
 
         if (data.summary !== undefined) { p.summary = data.summary; }
         if (data.name !== undefined) { p.code = data.name; }
