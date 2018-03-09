@@ -1,4 +1,3 @@
-
 'use strict';
 
 // @ngInject
@@ -184,7 +183,7 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
        headers: {'Accept': 'application/json'} }).success(function(data){
 
 
-        console.log("Calling Research in Svalbard success.");
+        console.log("Calling Research in Svalbard successful.");
         p = get_RIS(p,data);
         $scope.formula.setModel(p);
 
@@ -206,23 +205,23 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
             p = Object.assign({}, Expedition.create(),p);
       }
 
-      console.log(data);
-      console.log("---------");
-
      //Do the assignments with RiS
         p.type = "fieldwork";
         p.activity_type = "research";
-      //  p.ris = (data.risId).toString();
-      //  console.log(data.name);
-        if (data.summary !== undefined) { p.summary = data.summary; }
-        if (data.name !== undefined) { p.code = data.name; }
-         let temp_arr = [];
+
+        let temp_arr = [];
         if ((data.persons) && ((data.persons).length > 0)) {
            //Traverse through all persons objects
            for (let k=0;k<(data.persons).length; k++){
-             temp_arr[k] = (({ givenName, surName, role }) => ({ givenName, surName, role }))(data.persons[k]);
-             temp_arr[k].first_name = temp_arr[k].givenName; delete temp_arr[k].givenName;
-             temp_arr[k].last_name = temp_arr[k].surName; delete temp_arr[k].surName;
+
+             let obj = {
+                first_name:data.persons[k].givenName,
+                last_name: data.persons[k].surName,
+                expedition_dates:[{start_date: data.startDate, end_date: data.endDate}],
+                role: data.persons[k].role };
+
+            temp_arr[k] = obj;
+
              //New names for project owner
              if (temp_arr[k].role === 'Project Owner') {
                  temp_arr[k].role = 'expedition/cruise leader';
@@ -234,8 +233,7 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
              }
           }
 
-       }
-
+        }
 
         //Clean temp_arr for name duplicates
         let m = 0;
@@ -277,6 +275,9 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
           //Insert locations from RiS into our return object
           p.locations = [loc];
         }
+
+        if (data.summary !== undefined) { p.summary = data.summary; }
+        if (data.name !== undefined) { p.code = data.name; }
 
     return p;
  }
