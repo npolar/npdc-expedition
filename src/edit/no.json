@@ -177,62 +177,18 @@
 			"description": "Liste med lokasjoner som beskriver hvor feltarbeidet fant sted",
 			"items": {
 				"fields": {
-				    "start_date":{
-        				   "title": "ankomstdato (påkrevd)"
+
+   					 "latitude":{
+        				   "title": "breddegrad (påkrevd)"
    					},
-   					"end_date":{
-        				    "title": "avreisedato (påkrevd)"
+   					"longitude":{
+        				    "title": "lengdegrad (påkrevd)"
    					},
-   					 "north":{
-        				   "title": "nord (påkrevd)"
-   					},
-   					"south":{
-        				    "title": "sør (påkrevd)"
-   					},
-   					"east":{
-        				    "title": "øst (påkrevd)"
-   					},
-   					"west":{
-        				    "title": "vest (påkrevd)"
-   					},
-   					 "places": {
-			"title": "steder (påkrevd)",
-			"description":"Steder på ekspedisjonen",
-			"items": {
-				"fields": {
 					 "placename": {
                        "title": "stedsnavn (påkrevd)"
-                     },
-					"predefined_area": {
-						"title": "forhåndsdefinert område (alle tokter må ha med havområdene de har seilt) (påkrevd)",
-						"values": [
-						    "",
-							"Ny-Ålesund", "Svalbard", "Frans Josefs land",
-							"Bjørnøya",
-							"Jan Mayen",
-							"Hopen",
-							"Bouvetøya",
-							"Tor",
-                            "Dronning Maud Land",
-                            "Antarktis",
-                            "Framstredet",
-                            "Nordishavet",
-                            "Barentshavet, nord",
-                            "Sørishavet",
-                            "annet"
-						]
-					},
-                  "start_date": {
-                       "title": "ankomstdato (påkrevd)"
-                   },
-                  "end_date":{
-                       "title": "avreisedato (påkrevd)"
-                   }
+            }
                   }
               }
-			}
-              }
-			}
 		},
 		"draft": {
 	      "title": "Kladd (registrering holdes internt)",

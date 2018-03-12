@@ -224,12 +224,10 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
           let decimal_coord = proj4(utm33,'EPSG:4326').forward([data.fieldworks[count].utm33East, data.fieldworks[count].utm33North]);
 
           if (data.fieldworks[count].utm33East) {
-             loc.east = decimal_coord[0];
-             loc.west = decimal_coord[0];
+             loc.longitude = decimal_coord[0];
           }
           if (data.fieldworks[count].utm33North) {
-             loc.north = decimal_coord[1];
-             loc.south = decimal_coord[1];
+             loc.latitude = decimal_coord[1];
           }
           //Insert locations from RiS into our return object
           p.locations = [loc];
@@ -239,9 +237,6 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
         if ((data.persons) && ((data.persons).length > 0)) {
            //Traverse through all persons objects
            for (let k=0;k<(data.persons).length; k++){
-
-            console.log(data);
-            console.log("bbbbb");
 
              let obj = {
                 first_name:data.persons[k].givenName,
@@ -278,8 +273,6 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
 
         //Copy result to p.people
         p.people = temp_arr;
-
-
 
         if (data.summary !== undefined) { p.summary = data.summary; }
         if (data.name !== undefined) { p.code = data.name; }

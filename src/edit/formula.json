@@ -88,20 +88,12 @@
         "items": {
           "fields": [
           {
-          "id": "north",
-          "title": "north (required)"
+          "id": "latitude",
+          "title": "latitude (required)"
           },
            {
-          "id": "east",
-          "title": "east (required)"
-          },
-          {
-          "id": "south",
-          "title": "south (required)"
-          },
-          {
-          "id": "west",
-          "title": "west (required)"
+          "id": "longitude",
+          "title": "longitude (required)"
           },
           {
           "id": "placename",

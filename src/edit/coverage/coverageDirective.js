@@ -11,6 +11,7 @@ let coverageDirective = function () {
       let rectLayer;
       let changesDueToMapSelect = 0;
 
+
       let initField = function (field) {
         field.step = 0.01;
         $scope.$watch(field.id+'.value', n => {
@@ -49,10 +50,8 @@ let coverageDirective = function () {
 
       $scope.$on('mapSelect', (e, layer) => {
         changesDueToMapSelect = 4;
-        $scope.north.value = Math.round(layer._latlngs[2].lat * 100) / 100;
-        $scope.east.value = Math.round(layer._latlngs[2].lng * 100) / 100;
-        $scope.south.value = Math.round(layer._latlngs[0].lat * 100) / 100;
-        $scope.west.value = Math.round(layer._latlngs[0].lng * 100) / 100;
+        $scope.latitude.value = Math.round(layer._latlngs[2].lat * 100) / 100;
+        $scope.longitude.value = Math.round(layer._latlngs[2].lng * 100) / 100;
         rectLayer = layer;
         $timeout();
       });
