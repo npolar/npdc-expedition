@@ -19,7 +19,7 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, $http
   $scope.resource = Expedition;
 
   let formulaOptions = {
-      schema: '//api.npolar.no/schema/expedition-1',
+      schema: npolarApiConfig.base + '/schema/expedition-1',
       form: 'edit/formula.json',
       language: NpolarLang.getLang(),
       templates: npdcAppConfig.formula.templates.concat([{
@@ -78,16 +78,8 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, $http
     value: 'code'
   }, $scope.formula);
 
- // formulaAutoCompleteService.autocompleteFacets(['people.first_name',
- //   'people.last_name', 'people.organisation', 'platforms.sponsor', 'tags', 'platforms.vessel_name'], Expedition, $scope.formula);
-
   formulaAutoCompleteService.autocompleteFacets(['people.first_name',
     'people.last_name', 'platforms.sponsor', 'people.organisation', 'tags', 'platforms.vessel_name'], Expedition, $scope.formula);
-
-//  chronopicService.defineOptions({ match: 'released', format: '{date}'});
-//  chronopicService.defineOptions({ match(field) {
-//    return field.path.match(/^#\/activity\/\d+\/.+/);
-//  }, format: '{date}'});
 
 // Set default #/people/expedition_dates/start_date based on #/start_date
 chronopicService.defineOptions({
@@ -124,17 +116,6 @@ chronopicService.defineOptions({
 });
 
 $scope.formula.getFieldByPath("#/people").then(function(field) {
-
-  // "#/people/expedition_dates/start_date"
-
-  /*
-  .getFieldByPath("#/people/expedition_dates/start_date").then(function(field) {
-    field.default = "...";
-  });
-  */
-
-  //field.fieldDefinition.items.fields[6].items.fields[0].default = "2017-03-03T00:00:00Z"; // start
-  //field.fieldDefinition.items.fields[6].items.fields[1].default = "2017-03-03T00:00:00Z"; // retur
 });
 
 }
@@ -165,8 +146,6 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
      // edit (or new) action
      $scope.edit();
 
-
-
   } catch (e) {
     NpolarMessage.error(e);
   }
@@ -182,12 +161,9 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
       $http.get('https://cors-anywhere.herokuapp.com/https://www.researchinsvalbard.no/api/project/'+p.ris+'.json',{
        headers: {'Accept': 'application/json'} }).success(function(data){
 
-
         console.log("Calling Research in Svalbard successful.");
         p = get_RIS(p,data);
         $scope.formula.setModel(p);
-
-
 
     }).error(function(data, status, headers, config) {
         console.log("Calling Research in Svalbard failed.");

@@ -39,7 +39,7 @@ let coverageDirective = function () {
 
       $scope.mapOptions = {
         draw: {
-          rectangle: true
+          marker: true
         },
         edit: {
           edit: true,
