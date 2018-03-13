@@ -7,10 +7,9 @@ var angular = require('angular');
 
 
 // Load module after Highcharts is loaded
-//require('npdc-common/src/wrappers/leaflet');
+require('npdc-common/src/wrappers/leaflet');
 
-var npdcExpeditionApp = angular.module('npdcExpeditionApp', ['npdcCommon']);
-//var npdcExpeditionApp = angular.module('npdcExpeditionApp', ['npdcCommon', 'leaflet']);
+var npdcExpeditionApp = angular.module('npdcExpeditionApp', ['npdcCommon', 'leaflet']);
 
 npdcExpeditionApp.controller('ExpeditionShowController', require('./show/ExpeditionShowController'));
 npdcExpeditionApp.controller('ExpeditionSearchController', require('./search/ExpeditionSearchController'));
@@ -19,7 +18,6 @@ npdcExpeditionApp.controller('StatShowController', require('./search/StatShowCon
 npdcExpeditionApp.factory('ExpeditionSearchService', require('./search/ExpeditionSearchService'));
 npdcExpeditionApp.factory('Expedition', require('./Expedition.js'));
 npdcExpeditionApp.directive('expeditionCoverage', require('./edit/coverage/coverageDirective'));
-npdcExpeditionApp.directive('leaflet', require('./edit/coverage/leaflet.js'));
 
 npdcExpeditionApp.directive('xchronopic', function($timeout) {
   return {
@@ -70,7 +68,6 @@ npdcExpeditionApp.factory('L', function() {
 
 // Routing
 npdcExpeditionApp.config(require('./router'));
-
 
 npdcExpeditionApp.config(($httpProvider, npolarApiConfig) => {
   //var autoconfig = new AutoConfig("production");

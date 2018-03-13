@@ -33,13 +33,13 @@ let coverageDirective = function () {
 
       let coverage;
       if ($scope.field.value && $scope.field.value.north) {
-        coverage = [[[$scope.south.value, $scope.west.value],
-          [$scope.north.value, $scope.east.value]]];
+        coverage = [[[$scope.latitude.value, $scope.longitude.value]]];
       }
 
       $scope.mapOptions = {
         draw: {
-          marker: true
+          marker: true,
+          circlemarker:false
         },
         edit: {
           edit: true,
@@ -50,8 +50,8 @@ let coverageDirective = function () {
 
       $scope.$on('mapSelect', (e, layer) => {
         changesDueToMapSelect = 4;
-        $scope.latitude.value = Math.round(layer._latlngs[2].lat * 100) / 100;
-        $scope.longitude.value = Math.round(layer._latlngs[2].lng * 100) / 100;
+        $scope.latitude.value = layer._latlng.lat;
+        $scope.longitude.value = layer._latlng.lng;
         rectLayer = layer;
         $timeout();
       });
