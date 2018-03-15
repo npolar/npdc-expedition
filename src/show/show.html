@@ -8,7 +8,12 @@
 
 <section>
   <h1>
-  <span class="md-display-2">{{ document.code }} </span><span style={font-size:15%}> [{{document.activity_type}}/{{ document.type | t }}]</span></h1>
+  <span class="md-display-2">{{ document.code }} </span><span style={font-size:15%}>
+    [{{document.activity_type}}/{{ document.type | t }}]</span></h1>
+</section>
+
+<section>
+<p ng-if="document.ris">RiS no: <a href="https://www.researchinsvalbard.no/search/result/project?q={{document.ris}}&collection=project" target="_blank">{{document.ris}}</a><p />
 </section>
 
 <section>
@@ -24,23 +29,12 @@
   <p><md-icon>place</md-icon>&nbsp;
   <span ng-if="document.start_date">{{(document.start_date).substr(0,10)}}</span>
   <span ng-if="document.end_date">- {{(document.end_date).substr(0,10)}}</span>
-  <span ng-if="document['@departure_placename']">{{document['@departure_placename']}}</span>
-  <span ng-if="document['@return_placename']">  &nbsp;&nbsp;[{{document['@return_placename']}}]</span>
+    <span ng-if="document.ship">, ship: {{document.ship}}</span>
 </section>
 
-
-<section ng-if="document.platforms && document.platforms.length > 0">
-  <md-divider></md-divider>
-  <h3>{{'Platforms' | t }}</h3>
-    <div ng-if="document.platforms" ng-repeat="platform in document.platforms">
-      {{platform.type}}&nbsp;&nbsp;<span ng-if="platform.name">[{{platform.name}}
-      <span ng-if="platform.sponsor">,&nbsp;{{platform.sponsor}}</span>]
-        </span>
-    </div>
-</section>
-<br />
 
 <!--if not logged in, show only expedition leader -->
+{{isLoggedInAs}}
 <div ng-if="!isLoggedInAs()">
   <section>
      <md-divider></md-divider>
@@ -70,8 +64,9 @@
           <h3> {{ person.first_name }} {{ person.last_name }} </h3>
           <p ng-if="person.organisation">{{ person.organisation }},&nbsp;{{ person['@country'] }}</p>
 
-          <p ng-if="person.role">{{ person.roles }}</p>
+          <p ng-if="person.role=='expedition/cruise leader'">{{ person.role }}</p>
           <p ng-if="person.expedition_dates"><span ng-repeat="t in person.expedition_dates">{{ (t.start_date).substr(0,10) }}&nbsp;-&nbsp;{{ (t.end_date).substr(0,10) }}&nbsp;&nbsp;</p>
+          <br />
         </div>
       </md-list-item>
     </md-list>
@@ -87,41 +82,7 @@
     <div  ng-repeat="location in document.locations">
         <md-icon>place</md-icon>
 
-        <span ng-if="location.start_date">{{location.start_date.substr(0,10)}} - {{location.end_date.substr(0,10)}}&nbsp;&nbsp;</span>
-        <div  ng-repeat="loc in location.places">
-        <span ng-if="loc.placename">{{loc.placename}}</span>
-        <span ng-if="loc.predefined_area"> &nbsp;[{{loc.predefined_area}}]</span>
-        </div>
-        <span ng-if="location.north">[({{location.north}},{{location.east}})&nbsp;-&nbsp;({{location.south}},{{location.west}})]</span>
-
-        <br />
-    </div>
-</section>
-<br />
-
-
-<section ng-if="document.activity && document.activity.length > 0">
- <md-divider></md-divider>
-  <h3>{{ 'Activities' | t }}</h3>
-     <p>{{document.research_program}}</p>
-<section ng-if="document.activity && document.activity.length > 0">
-     <div  ng-repeat="activity in document.activity">
-      <span ng-if="activity.activity_title"><md-icon>label_outline</md-icon><a href="{{activity.href}}" target="_blank"> {{activity.activity_title}}</a></span>
-    <span ng-if="activity.topics"> [<span ng-repeat="topic in activity.topics">{{topic}}<span ng-if="!$last">,&nbsp; </span></span>]</span>
-</section>
-</section>
-<br />
-
-<section ng-if="document.track_information">
-   <md-divider></md-divider>
-   <h3>{{ 'Tracks' | t }}</h3>
-    <div  ng-repeat="track in document.track_information">
-        <md-icon>place</md-icon>
-
-        <span ng-if="track.start_date">{{track.start_date.substr(0,10)}} - {{track.end_date.substr(0,10)}}&nbsp;&nbsp;</span>
-        <span ng-if="track.placename">{{track.placename}}</span>
-        <span ng-if="track.predefined_area"> &nbsp;[{{track.predefined_area}}]</span>
-
+        <span ng-if="location.latitude">[{{location.latitude}}, {{location.longitude}}]</span><span ng-if="location.placename">{{location.placename}}</span>
         <br />
     </div>
 </section>
@@ -143,18 +104,6 @@
       </div>
 </section>
 <br />
-
-
-<!-- <section ng-if="alternate">
-        <md-divider></md-divider>
-        <h3>Machine-readable metadata</h3> -->
-        <!-- @todo CC0 for metadata? <p></p> -->
-      <!--  <p>
-          <div ng-repeat="link in alternate">
-            <a ng-href="{{link.href}}" title="{{link.type}}">{{ link.title || link.href }}</a>
-            </div>
-        </p>
-</section> -->
 
 <section>
         <npdc:document-meta></npdc:document-meta>

@@ -17,8 +17,7 @@ let coverageDirective = function () {
         $scope.$watch(field.id+'.value', n => {
           if (!changesDueToMapSelect && rectLayer) {
             let newBounds = [
-              [$scope.south.value, $scope.west.value],
-              [$scope.north.value, $scope.east.value]
+              [$scope.latitude.value, $scope.longitude.value]
             ];
             rectLayer.setBounds(newBounds);
           }
@@ -32,8 +31,10 @@ let coverageDirective = function () {
       $scope.field.fields.forEach(initField);
 
       let coverage;
-      if ($scope.field.value && $scope.field.value.north) {
+      if ($scope.field.value && $scope.field.value.latitude) {
         coverage = [[[$scope.latitude.value, $scope.longitude.value]]];
+      } else {
+        coverage = [[[78.223333, 15.646944]]]
       }
 
       $scope.mapOptions = {

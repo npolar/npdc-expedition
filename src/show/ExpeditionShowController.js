@@ -28,10 +28,6 @@ var ExpeditionShowController = function ($scope, $controller, $q, $routeParams,
   let show = function() {
     $scope.show().$promise.then((expedition) => {
 
-
-
-
-
       if (expedition.locations) {
          let bounds = (expedition.locations).map((locations) => [[locations.south, locations.west], [locations.north, locations.east]]);
          $scope.mapOptions.coverage = bounds;
@@ -46,17 +42,6 @@ var ExpeditionShowController = function ($scope, $controller, $q, $routeParams,
 
       }}
       $scope.pi = pi;
-
-      //Convert from camelCase to human readable
-      for(var j=0; j<($scope.document.activity).length; j++){
-         $scope.document.activity[j].activity_type = convert($scope.document.activity[j].activity_type);
-      }
-
-      //Convert from camelCase to human readable
-      for(var i=0; i<($scope.document.people).length; i++){
-      	 for(var k=0; k<($scope.document.people[i].roles).length; k++){
-         $scope.document.people[i].roles[k] = convert($scope.document.people[i].roles[k]);
-      }}
 
     });
 
@@ -86,5 +71,3 @@ function convert(str) {
        }
 
 module.exports = ExpeditionShowController;
-
-
