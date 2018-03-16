@@ -24,12 +24,13 @@ var ExpeditionShowController = function ($scope, $controller, $q, $routeParams,
 
 
   $scope.mapOptions = {};
+  //$scope.mapOptions.initcoord = [78.223333, 15.646944];
 
   let show = function() {
     $scope.show().$promise.then((expedition) => {
 
       if (expedition.locations) {
-         let bounds = (expedition.locations).map((locations) => [[locations.south, locations.west], [locations.north, locations.east]]);
+         let bounds = (expedition.locations).map((locations) => [[locations.latitude, locations.longitude], [locations.latitude, locations.longitude]]);
          $scope.mapOptions.coverage = bounds;
          $scope.mapOptions.geojson = "geojson";
       }

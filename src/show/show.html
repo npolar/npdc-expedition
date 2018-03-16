@@ -73,23 +73,16 @@
 </section>
 </div>
 
-
-
-
 <section ng-if="document.locations">
    <md-divider></md-divider>
    <h3>{{ 'Locations' | t }}</h3>
     <div  ng-repeat="location in document.locations">
         <md-icon>place</md-icon>
-
-        <span ng-if="location.latitude">[{{location.latitude}}, {{location.longitude}}]</span><span ng-if="location.placename">{{location.placename}}</span>
+        <span ng-if="location.latitude">[{{location.latitude}}, {{location.longitude}}]</span>&nbsp;<span ng-if="location.placename">{{location.placename}}</span>
         <br />
     </div>
 </section>
 <br />
-
-
-
 
 
  <section ng-if="document.files">

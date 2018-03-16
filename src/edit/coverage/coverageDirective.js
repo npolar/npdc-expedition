@@ -11,14 +11,15 @@ let coverageDirective = function () {
       let rectLayer;
       let changesDueToMapSelect = 0;
 
-
       let initField = function (field) {
         field.step = 0.01;
         $scope.$watch(field.id+'.value', n => {
           if (!changesDueToMapSelect && rectLayer) {
             let newBounds = [
+              [$scope.latitude.value, $scope.longitude.value],
               [$scope.latitude.value, $scope.longitude.value]
             ];
+            console.log("rectlayer", rectLayer.getBounds());
             rectLayer.setBounds(newBounds);
           }
           if (changesDueToMapSelect > 0) {
@@ -32,27 +33,28 @@ let coverageDirective = function () {
 
       let coverage;
       if ($scope.field.value && $scope.field.value.latitude) {
-        coverage = [[[$scope.latitude.value, $scope.longitude.value]]];
-      } else {
-        coverage = [[[78.223333, 15.646944]]]
+        coverage = [[[$scope.latitude.value, $scope.longitude.value],
+          [$scope.latitude.value, $scope.longitude.value]]];
       }
 
+      //mapOptions object is initiating the wrapper
       $scope.mapOptions = {
         draw: {
           marker: true,
-          circlemarker:false
+          circlemarker: false
         },
         edit: {
           edit: true,
           remove: true
         },
-        coverage: coverage
+        coverage: coverage,
+        center: [78.223333, 15.646944]
       };
 
       $scope.$on('mapSelect', (e, layer) => {
         changesDueToMapSelect = 4;
-        $scope.latitude.value = layer._latlng.lat;
-        $scope.longitude.value = layer._latlng.lng;
+        $scope.latitude.value = Math.round(layer._latlng.lat * 100) / 100;
+        $scope.longitude.value = Math.round(layer._latlng.lng * 100) / 100;
         rectLayer = layer;
         $timeout();
       });
