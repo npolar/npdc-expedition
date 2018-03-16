@@ -48,6 +48,7 @@ let coverageDirective = function () {
           remove: true
         },
         coverage: coverage,
+        color: "#FF0000",
         center: [78.223333, 15.646944]
       };
 

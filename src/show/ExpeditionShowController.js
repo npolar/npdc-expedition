@@ -24,7 +24,7 @@ var ExpeditionShowController = function ($scope, $controller, $q, $routeParams,
 
 
   $scope.mapOptions = {};
-  //$scope.mapOptions.initcoord = [78.223333, 15.646944];
+  $scope.mapOptions.color = "#FF0000";
 
   let show = function() {
     $scope.show().$promise.then((expedition) => {
