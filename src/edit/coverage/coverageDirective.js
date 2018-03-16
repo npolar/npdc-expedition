@@ -39,7 +39,8 @@ let coverageDirective = function () {
 
       var redIcon = L.Icon.extend({
           options: {
-            iconUrl:  'https://raw.githubusercontent.com/npolar/npdc-sighting/master/src/admin/img/reddot.png',
+        //    iconUrl:  'https://raw.githubusercontent.com/npolar/npdc-sighting/master/src/admin/img/reddot.png',
+            iconUrl: './edit/coverage/reddot.png',
             iconSize: [8, 8]
           }
   });
