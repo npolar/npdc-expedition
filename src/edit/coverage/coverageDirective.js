@@ -37,10 +37,18 @@ let coverageDirective = function () {
           [$scope.latitude.value, $scope.longitude.value]]];
       }
 
+      var redIcon = L.Icon.extend({
+          options: {
+            iconUrl:  'https://raw.githubusercontent.com/npolar/npdc-sighting/master/src/admin/img/reddot.png',
+            iconSize: [8, 8]
+          }
+  });
+
+
       //mapOptions object is initiating the wrapper
       $scope.mapOptions = {
-        draw: {
-          marker: true,
+        draw:{
+          marker: { icon: new redIcon()},
           circlemarker: false
         },
         edit: {
@@ -49,7 +57,7 @@ let coverageDirective = function () {
         },
         coverage: coverage,
         color: "#FF0000",
-        center: [78.223333, 15.646944]
+        initcoord: [78.223333, 15.646944]
       };
 
       $scope.$on('mapSelect', (e, layer) => {
