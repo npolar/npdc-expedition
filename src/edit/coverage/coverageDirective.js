@@ -39,7 +39,6 @@ let coverageDirective = function () {
 
       var redIcon = L.Icon.extend({
           options: {
-        //    iconUrl:  'https://raw.githubusercontent.com/npolar/npdc-sighting/master/src/admin/img/reddot.png',
             iconUrl: './edit/coverage/reddot.png',
             iconSize: [8, 8]
           }
@@ -58,7 +57,8 @@ let coverageDirective = function () {
         },
         coverage: coverage,
         color: "#FF0000",
-        initcoord: [78.223333, 15.646944]
+        initcoord: [78.223333, 15.646944],
+        fullscreenControl: false
       };
 
       $scope.$on('mapSelect', (e, layer) => {
