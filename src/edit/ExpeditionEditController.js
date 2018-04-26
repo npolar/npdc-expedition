@@ -219,7 +219,7 @@ chronopicService.defineOptions({
 
       //Fieldworks could be more than one, we select the last fieldwork
       if ((data.fieldworks) && ((data.fieldworks).length > 0)) {
-           let count = ((data.fieldworks).length)-1;
+          let count = ((data.fieldworks).length)-1;
           if (data.fieldworks[count].startDate) {
             p.start_date = data.fieldworks[count].startDate + 'T12:00:00Z';
           }
@@ -249,7 +249,7 @@ chronopicService.defineOptions({
              let obj = {
                 first_name:data.persons[k].givenName,
                 last_name: data.persons[k].surName,
-            //    expedition_dates:[{start_date: p.start_date, end_date: p.end_date}],
+                expedition_dates:[{start_date: p.start_date, end_date: p.end_date}],
                 role: data.persons[k].role };
 
             temp_arr[k] = obj;
