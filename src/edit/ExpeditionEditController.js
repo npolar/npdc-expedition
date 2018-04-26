@@ -81,18 +81,19 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, $http
   formulaAutoCompleteService.autocompleteFacets(['people.first_name',
     'people.last_name', 'platforms.sponsor', 'people.organisation', 'tags', 'platforms.vessel_name'], Expedition, $scope.formula);
 
-// Set default #/people/expedition_dates/start_date based on #/start_date
-chronopicService.defineOptions({
-  match(field) {
-    return field.path === "#/start_date";
-  },
-  format: '{date}',
-  onChange(elem, date) {
-    $scope.formula.getFieldByPath("#/people/0/expedition_dates/0/start_date").then(function(field) {
-      field.schema.default = date.toISOString();
+    // Set default #/people/expedition_dates/start_date based on #/start_date
+    chronopicService.defineOptions({
+      match(field) {
+        return field.path === "#/start_date";
+      },
+      format: '{date}',
+      onChange(elem, date) {
+        $scope.formula.getFieldByPath("#/people/0/expedition_dates/0/start_date").then(function(field) {
+          field.schema.default = date.toISOString();
+        });
+      }
     });
-  }
-});
+
 
 // Set default #/people/expedition_dates/end_date based on #/end_date
 chronopicService.defineOptions({
@@ -114,6 +115,9 @@ chronopicService.defineOptions({
   },
   format: '{date}'
 });
+
+console.log("chronopicservice",chronopicService);
+console.log("formula",$scope);
 
 $scope.formula.getFieldByPath("#/people").then(function(field) {
 });
@@ -164,6 +168,34 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
         console.log("Calling Research in Svalbard successful.");
         p = get_RIS(p,data);
         $scope.formula.setModel(p);
+
+        //This part has to be run twice - needs also to be run  after RIS to ensure date defaults
+        // Set default #/people/expedition_dates/start_date based on #/start_date
+        chronopicService.defineOptions({
+          match(field) {
+            return field.path === "#/start_date";
+          },
+          format: '{date}',
+          onChange(elem, date) {
+            $scope.formula.getFieldByPath("#/people/0/expedition_dates/0/start_date").then(function(field) {
+              field.schema.default = date.toISOString();
+            });
+          }
+        });
+
+
+// Set default #/people/expedition_dates/end_date based on #/end_date
+chronopicService.defineOptions({
+  match(field) {
+    return field.path === "#/end_date";
+  },
+  format: '{date}',
+  onChange(elem, date) {
+    $scope.formula.getFieldByPath("#/people/0/expedition_dates/0/end_date").then(function(field) {
+      field.schema.default = date.toISOString();
+    });
+  }
+});
 
     }).error(function(data, status, headers, config) {
         console.log("Calling Research in Svalbard failed.");
@@ -217,7 +249,7 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
              let obj = {
                 first_name:data.persons[k].givenName,
                 last_name: data.persons[k].surName,
-                expedition_dates:[{start_date: p.start_date, end_date: p.end_date}],
+            //    expedition_dates:[{start_date: p.start_date, end_date: p.end_date}],
                 role: data.persons[k].role };
 
             temp_arr[k] = obj;
