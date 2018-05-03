@@ -89,7 +89,7 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, $http
       format: '{date}',
       onChange(elem, date) {
         $scope.formula.getFieldByPath("#/people/0/expedition_dates/0/start_date").then(function(field) {
-          field.schema.default = date.toISOString();
+          field.schema.default = date.toString();
         });
       }
     });
@@ -103,7 +103,7 @@ chronopicService.defineOptions({
   format: '{date}',
   onChange(elem, date) {
     $scope.formula.getFieldByPath("#/people/0/expedition_dates/0/end_date").then(function(field) {
-      field.schema.default = date.toISOString();
+      field.schema.default = date.toString();
     });
   }
 });
@@ -167,7 +167,6 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
         p = get_RIS(p,data);
         $scope.formula.setModel(p);
 
-        //This part has to be run twice - needs also to be run  after RIS to ensure date defaults
         // Set default #/people/expedition_dates/start_date based on #/start_date
         chronopicService.defineOptions({
           match(field) {
@@ -176,24 +175,25 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
           format: '{date}',
           onChange(elem, date) {
             $scope.formula.getFieldByPath("#/people/0/expedition_dates/0/start_date").then(function(field) {
-              field.schema.default = date.toISOString();
+              field.schema.default = date.toString();
             });
           }
         });
 
 
-// Set default #/people/expedition_dates/end_date based on #/end_date
-chronopicService.defineOptions({
-  match(field) {
-    return field.path === "#/end_date";
-  },
-  format: '{date}',
-  onChange(elem, date) {
-    $scope.formula.getFieldByPath("#/people/0/expedition_dates/0/end_date").then(function(field) {
-      field.schema.default = date.toISOString();
+    // Set default #/people/expedition_dates/end_date based on #/end_date
+    chronopicService.defineOptions({
+      match(field) {
+        return field.path === "#/end_date";
+      },
+      format: '{date}',
+      onChange(elem, date) {
+        $scope.formula.getFieldByPath("#/people/0/expedition_dates/0/end_date").then(function(field) {
+          field.schema.default = date.toString();
+        });
+      }
     });
-  }
-});
+
 
     }).error(function(data, status, headers, config) {
         console.log("Calling Research in Svalbard failed.");
@@ -219,11 +219,13 @@ chronopicService.defineOptions({
       if ((data.fieldworks) && ((data.fieldworks).length > 0)) {
           let count = ((data.fieldworks).length)-1;
           if (data.fieldworks[count].startDate) {
-            p.start_date = data.fieldworks[count].startDate + 'T12:00:00Z';
+              p.start_date = (new Date(data.fieldworks[count].startDate)).toString();
+
           }
           if (data.fieldworks[count].endDate) {
-            p.end_date = data.fieldworks[count].endDate + 'T12:00:00Z';
+             p.end_date = (new Date(data.fieldworks[count].endDate)).toString();
           }
+
           //Need location also - goes here - use proj4
           let loc = {};
           let utm33 = proj4('+proj=utm +zone=33 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs');
