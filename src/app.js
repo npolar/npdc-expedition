@@ -49,7 +49,7 @@ var resources = [
   {'path': '/project', 'resource': 'Project' },
   {'path': '/inventory', 'resource': 'Inventory'},
   {'path': '/expedition', 'resource': 'ExpeditionResource'},
-  {'path': '/expedition/track', 'resource': 'ExpeditionTrack', cache: true, base: '//api.npolar.no' },
+  {'path': '/expedition-track/', 'resource': 'ExpeditionTrack'}
 ];
 
 resources.forEach(service => {
@@ -68,7 +68,7 @@ npdcExpeditionApp.factory('L', function() {
 npdcExpeditionApp.config(require('./router'));
 
 npdcExpeditionApp.config(($httpProvider, npolarApiConfig) => {
-  var autoconfig = new AutoConfig();
+  var autoconfig = new AutoConfig("production");
   Object.assign(npolarApiConfig, autoconfig, { resources });
   console.debug("npolarApiConfig", npolarApiConfig);
 

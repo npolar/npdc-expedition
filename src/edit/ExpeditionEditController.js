@@ -29,7 +29,7 @@ var ExpeditionEditController = function($scope, $controller, $routeParams, $http
 
           // Hide data links and system links for the ordinary links block (defined in formula as instance === 'links')
             match = ["data", "alternate", "edit", "via"].includes(field.value.rel) && field.parents[field.parents.length-1].instance === 'links';
-            console.log(match, field.id, field.path, 'value', field.value, 'instance', field.parents[field.parents.length-1].instance);
+          //  console.log(match, field.id, field.path, 'value', field.value, 'instance', field.parents[field.parents.length-1].instance);
             return match;
           }
         },
@@ -116,8 +116,6 @@ chronopicService.defineOptions({
   format: '{date}'
 });
 
-console.log("chronopicservice",chronopicService);
-console.log("formula",$scope);
 
 $scope.formula.getFieldByPath("#/people").then(function(field) {
 });
@@ -165,7 +163,7 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
       $http.get('https://cors-anywhere.herokuapp.com/https://www.researchinsvalbard.no/api/project/'+p.ris+'.json',{
        headers: {'Accept': 'application/json'} }).success(function(data){
 
-        console.log("Calling Research in Svalbard successful.");
+        //console.log("Calling Research in Svalbard successful.");
         p = get_RIS(p,data);
         $scope.formula.setModel(p);
 

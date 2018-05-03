@@ -57,7 +57,7 @@ var ExpeditionShowController = function ($scope, $controller, $q, $routeParams,
 
 
 /* convert from camelCase to lower case text*/
-function convert(str) {
+/*function convert(str) {
        var  positions = '';
 
        for(var i=0; i<(str).length; i++){
@@ -69,6 +69,6 @@ function convert(str) {
         }
       }
         return positions;
-       }
+      } */
 
 module.exports = ExpeditionShowController;
