@@ -69,6 +69,9 @@ npdcExpeditionApp.config(require('./router'));
 
 npdcExpeditionApp.config(($httpProvider, npolarApiConfig) => {
   var autoconfig = new AutoConfig("production");
+  //autoconfig.environment = 'development';
+  //autoconfig.base = "//app-test.data.npolar.no"
+
 
   Object.assign(npolarApiConfig, autoconfig, { resources });
   console.debug("npolarApiConfig", npolarApiConfig);

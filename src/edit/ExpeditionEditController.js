@@ -165,6 +165,7 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
 
         //console.log("Calling Research in Svalbard successful.");
         p = get_RIS(p,data);
+
         $scope.formula.setModel(p);
 
         // Set default #/people/expedition_dates/start_date based on #/start_date
@@ -219,11 +220,11 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
       if ((data.fieldworks) && ((data.fieldworks).length > 0)) {
           let count = ((data.fieldworks).length)-1;
           if (data.fieldworks[count].startDate) {
-              p.start_date = (new Date(data.fieldworks[count].startDate)).toString();
+              p.start_date = (new Date(data.fieldworks[count].startDate)).toISOString();
 
           }
           if (data.fieldworks[count].endDate) {
-             p.end_date = (new Date(data.fieldworks[count].endDate)).toString();
+             p.end_date = (new Date(data.fieldworks[count].endDate)).toISOString();
           }
 
           //Need location also - goes here - use proj4
@@ -242,6 +243,8 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
         }
 
         let temp_arr = [];
+
+
         if ((data.persons) && ((data.persons).length > 0)) {
            //Traverse through all persons objects
            for (let k=0;k<(data.persons).length; k++){
@@ -249,7 +252,7 @@ $scope.formula.getFieldByPath("#/people").then(function(field) {
              let obj = {
                 first_name:data.persons[k].givenName,
                 last_name: data.persons[k].surName,
-                expedition_dates:[{start_date: p.start_date, end_date: p.end_date}],
+                expedition_dates:[{start_date: (p.start_date), end_date: (p.end_date) }],
                 role: data.persons[k].role };
 
             temp_arr[k] = obj;
